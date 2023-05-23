@@ -1,0 +1,5 @@
+Format example
+[Name] - [Date dd/mm/yy]
+[What has been done]
+[What the next plan is]
+
