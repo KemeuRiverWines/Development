@@ -22,8 +22,9 @@ const WeatherComponent = () => {
 
             const data = await response.json();
             setWeather(data.weather[0]);
+            console.log(`Weather Main Successful (OpenWeatherMap Api) = https://api.openweathermap.org/data/2.5/weather?q=Auckland&appid=${API_KEY}`)
         } catch (error) {
-            console.log(error);
+            console.warn(error);
         }
     };
 

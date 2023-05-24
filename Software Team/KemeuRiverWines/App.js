@@ -8,7 +8,7 @@ import WeatherAirTemp from './Components/WeatherAirTemp';
 import WeatherWindDir from './Components/WeatherWindDir';
 import WeatherWindSpeed from './Components/WeatherWindSpeed';
 import WeatherHumid from './Components/WeatherHumid';
-import WeatherRainFall from './Components/WeatherRainFall';
+import WeatherMain from './Components/WeatherMain';
 
 export default function App() {
   const [pinEntered, setPinEntered] = useState(false);
@@ -53,7 +53,7 @@ export default function App() {
             <WeatherHumid />
           </View>
           <View>
-            <WeatherRainFall />
+            <WeatherMain />
           </View>
         </>
       )}

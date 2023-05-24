@@ -22,8 +22,7 @@ const WeatherWindDir = () => {
             const username = 'aucklanduniversityoftechnology_ali';
             const password = 'i4b8tLSu6A';
 
-            console.log(url);
-
+            
             try {
                 const encodedCredentials = encode(`${username}:${password}`);
                 const response = await axios.get(url, {
@@ -31,9 +30,11 @@ const WeatherWindDir = () => {
                         Authorization: `Basic ${encodedCredentials}`,
                     },
                 });
-
+                
                 const windDirection = response.data.data[0].coordinates[0].dates[0].value;
                 setWindDirection(windDirection);
+                
+                console.log(`Weather Wind Direction Successful (Meteomatics Weather API) = ${url}`);
             } catch (error) {
                 console.error('API Error:', error);
             }

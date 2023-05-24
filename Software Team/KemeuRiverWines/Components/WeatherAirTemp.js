@@ -22,8 +22,7 @@ const WeatherAirTemp = () => {
             const username = 'aucklanduniversityoftechnology_ali';
             const password = 'i4b8tLSu6A';
 
-            console.log(url);
-
+            
             try {
                 const encodedCredentials = encode(`${username}:${password}`);
                 const response = await axios.get(url, {
@@ -31,9 +30,11 @@ const WeatherAirTemp = () => {
                         Authorization: `Basic ${encodedCredentials}`,
                     },
                 });
-
+                
                 const temperature = response.data.data[0].coordinates[0].dates[0].value;
                 setTemperature(temperature);
+                
+                console.log(`Weather Air Temp Successful (Meteomatics Weather API) = ${url}`);
             } catch (error) {
                 console.error('API Error:', error);
             }

@@ -16,14 +16,15 @@ const WeatherComponent = () => {
                 `https://api.openweathermap.org/data/2.5/weather?q=Auckland&appid=${API_KEY}`
             );
 
-            console.log("Weather humid url = " + `https://api.openweathermap.org/data/2.5/weather?q=Auckland&appid=${API_KEY}`)
-
+            
             if (!response.ok) {
                 throw new Error('Failed to fetch weather data');
             }
-
+            
             const data = await response.json();
             setHumidity(data.main.humidity);
+            
+            console.log("Weather Humidity Successful (OpenWeatherMap Api) = " + `https://api.openweathermap.org/data/2.5/weather?q=Auckland&appid=${API_KEY}`)
         } catch (error) {
             console.log(error);
         }

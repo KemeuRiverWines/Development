@@ -22,8 +22,7 @@ const WeatherWindSpeed = () => {
             const username = 'aucklanduniversityoftechnology_ali';
             const password = 'i4b8tLSu6A';
 
-            console.log(url);
-
+            
             try {
                 const encodedCredentials = encode(`${username}:${password}`);
                 const response = await axios.get(url, {
@@ -31,9 +30,10 @@ const WeatherWindSpeed = () => {
                         Authorization: `Basic ${encodedCredentials}`,
                     },
                 });
-
+                
                 const windSpeed = response.data.data[0].coordinates[0].dates[0].value;
                 setWindSpeed(windSpeed);
+                console.log(`Weather Wind Speed Successful (Meteomatics Weather API) = ${url}`);
             } catch (error) {
                 console.error('API Error:', error);
             }
