@@ -3,3 +3,6 @@ Format example
 [What has been done]
 [What the next plan is]
 
+Salman - 24/05/23
+Have added in API Weather inputs from two different places that show the main weather, current air temp, wind direction, wind speed, humdity, main weather and description
+Planning to get the Current Values from the nodes next 

@@ -2,7 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import PinCode from 'react-native-pin-code';
 import React, { useState, useEffect } from 'react';
+
 import TestButton from './Components/TestButton';
+import WeatherAirTemp from './Components/WeatherAirTemp';
+import WeatherWindDir from './Components/WeatherWindDir';
+import WeatherWindSpeed from './Components/WeatherWindSpeed';
+import WeatherHumid from './Components/WeatherHumid';
+import WeatherRainFall from './Components/WeatherRainFall';
 
 export default function App() {
   const [pinEntered, setPinEntered] = useState(false);
@@ -34,10 +40,25 @@ export default function App() {
           <View>
             <TestButton />
           </View>
+          <View>
+            <WeatherAirTemp />
+          </View>
+          <View>
+            <WeatherWindDir />
+          </View>
+          <View>
+            <WeatherWindSpeed />
+          </View>
+          <View>
+            <WeatherHumid />
+          </View>
+          <View>
+            <WeatherRainFall />
+          </View>
         </>
       )}
     </View>
-  );
+  );  
 }
 
 const styles = StyleSheet.create({
