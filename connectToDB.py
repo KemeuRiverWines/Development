@@ -9,13 +9,10 @@ def connect():
     try:
         # connect to the PostgreSQL server
         conn = alchemyEngine.connect()
-        print("Connection successful")
-        return conn
     except SQLAlchemyError as error:
         print("Connection error:", error)
         return None
-
-# Assuming you have a 'users' table in your database
+    return conn
 
 def fetch_data():
     conn = connect()
@@ -27,16 +24,21 @@ def fetch_data():
         Session = sessionmaker(bind=conn)
         session = Session()
 
+        # Define the query
+        query = text("SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'public'")
+        
+        # Log the query
+        print("Executing query:", query)
+
         # Execute the query
-        query = text("SELECT * FROM sensor")
         result = session.execute(query)
 
         # Fetch all rows from the result
         rows = result.fetchall()
 
-        # Print the fetched data
+        # Print the fetched table names
         for row in rows:
-            print(row)
+            print(row[0])
 
     except SQLAlchemyError as error:
         print("Query execution error:", error)
@@ -46,5 +48,5 @@ def fetch_data():
         session.close()
         conn.close()
 
-# Call the fetch_data() function to retrieve data from the 'users' table
+# Call the fetch_data() function to retrieve table names from the database
 fetch_data()
