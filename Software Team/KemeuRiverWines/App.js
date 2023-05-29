@@ -9,6 +9,7 @@ import WeatherWindDir from './Components/WeatherWindDir';
 import WeatherWindSpeed from './Components/WeatherWindSpeed';
 import WeatherHumid from './Components/WeatherHumid';
 import WeatherMain from './Components/WeatherMain';
+import TestTimeDBConnection from './Components/TestTimeDBConnection';
 
 export default function App() {
   const [pinEntered, setPinEntered] = useState(false);
@@ -35,11 +36,11 @@ export default function App() {
         />
       ) : (
         <>
-          <Text>Test Update - ITS WORKKKKSSSS YESSSSS</Text>
+          {/* <Text>Test Update - ITS WORKKKKSSSS YESSSSS</Text>
           <StatusBar style="auto" />
           <View>
             <TestButton />
-          </View>
+          </View> */}
           <View>
             <WeatherAirTemp />
           </View>
@@ -54,6 +55,9 @@ export default function App() {
           </View>
           <View>
             <WeatherMain />
+          </View>
+          <View>
+            <TestTimeDBConnection />
           </View>
         </>
       )}
