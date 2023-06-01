@@ -2,10 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.sql import text
+import psycopg2
 
 def connect():
     print("Connecting to remote IP")
-    alchemyEngine = create_engine('postgresql+psycopg2://postgres:postgres@74.235.0.187/kumeudb')
+    alchemyEngine = create_engine('postgresql+psycopg2://postgres:postgres@122.58.190.10/kumeudb')
     try:
         # connect to the PostgreSQL server
         conn = alchemyEngine.connect()
