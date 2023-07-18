@@ -10,3 +10,7 @@ Planning to get the Current Values from the nodes next
 Salman - 25/05/23
 Updated the console logs that is a bit more understandable for later development
 Trying to connect and get information out of the db 
+
+Salman - 29/05/23
+Trying to get the TimescaleDB connected to the app however it seems like the db is offline.
+Will try next time
