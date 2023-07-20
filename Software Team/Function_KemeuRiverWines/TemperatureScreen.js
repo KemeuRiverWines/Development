@@ -4,12 +4,31 @@ import Swiper from 'react-native-swiper';
 import MapView, { Marker } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
-import { encode } from 'base-64';
 
-import WeatherAirTemp from './Components/WeatherAirTemp';
+//import WeatherAirTemp from './Components/WeatherAirTemp';
+import SensorComponent1 from './Components/SensorComponent1';
 
 const TemperatureScreen = () => {
+
+  //SensorComponent1 which is the first node - handles the incoming data from the node
+  const [sensorData1, setSensorData1] = useState(null);
+  const sensorComponent1Ref = useRef(null);
+  const handleDataReceived1 = (latestData) => {
+    setSensorData1(latestData);
+  };
+  // Below the the data from the node that can be displayed and how it is displayed
+  // <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
+  //           {sensorData1 && (
+  //             <View>
+  //               <Text>Sensor 1 Temp: {sensorData1.temperature}</Text>
+  //               <Text>Sensor 1 Humidity: {sensorData1.humidity}</Text>
+  //               <Text>Sensor 1 Dew Point: {sensorData1.dew_point}</Text>
+  //               <Text>Sensor 1 Wind Speed: {sensorData1.wind_speed}</Text>
+  //               <Text>Sensor 1 Leaf Wetness: {sensorData1.leaf_wetness}</Text>
+  //               <Text>Sensor 1 Rainfall: {sensorData1.rainfall}</Text>
+  //               <Text>Sensor 1 Time Stamp: {sensorData1.timestamp}</Text>
+  //               <Text>Sensor 1 Last Update: {sensorData1.timeAgo}</Text>
+  //             </View>
 
   const navigation = useNavigation();
   const categoryOptions = ['Nodes', 'Functions', 'Map'];
@@ -59,12 +78,20 @@ const TemperatureScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <Text style={styles.headerText}>Kumeu River Vineyard Temperature</Text>
+        <Text style={styles.headerText}>Kumeu River Vineyard</Text>
         <View style={styles.temperatureContainer}>
           <View style={styles.temperatureBackground}>
-            <Text style={styles.temperature}>
-              <WeatherAirTemp />
-            </Text>
+          <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
+            {sensorData1 && (
+              <View>
+                <Text style={styles.temperature}>
+                  {sensorData1.temperature !== null ? `${sensorData1.temperature}°C` : <ActivityIndicator size="large" />}
+                </Text>
+                <Text style={styles.timeAgo}>
+                  {sensorData1.timeAgo !== null ? `${sensorData1.timeAgo}` : <ActivityIndicator size="small" />}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -88,15 +115,15 @@ const TemperatureScreen = () => {
                   <>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
                       <Icon name="location" size={100} color="#900" />
-                      <Text style={{fontSize: 30}}>Node1</Text>
+                      <Text style={{ fontSize: 30 }}>Node1</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
                       <Icon name="location" size={100} color="#900" />
-                      <Text style={{fontSize: 30}}>Node2</Text>
+                      <Text style={{ fontSize: 30 }}>Node2</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
                       <Icon name="location" size={100} color="#900" />
-                      <Text style={{fontSize: 30}}>Node3</Text>
+                      <Text style={{ fontSize: 30 }}>Node3</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}></TouchableOpacity>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}></TouchableOpacity>
@@ -105,7 +132,7 @@ const TemperatureScreen = () => {
                 {index === 1 && (
                   <>
                     <View style={[styles.rectangle, { height: 150 }]}>
-                      <Text style={{fontSize: 30}}>Low Temp Alarm</Text>
+                      <Text style={{ fontSize: 30 }}>Low Temp Alarm</Text>
                       <Switch
                         trackColor={{ false: '#767577', true: '#81b0ff' }}
                         thumbColor={isSwitchOn ? '#f5dd4b' : '#f4f3f4'}
@@ -159,6 +186,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   temperatureContainer: {
     alignItems: 'center',
@@ -170,6 +199,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
+  },
+  timeAgo: {
+    fontSize: 22,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontWeight: 'bold',
   },
   temperature: {
     fontSize: 120,
