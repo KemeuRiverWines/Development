@@ -46,8 +46,6 @@ const Component = ({ onDataReceived }) => {
         return prevDate.getHours() !== currentDate.getHours();
     };
 
-    // Your JSX and component logic here
-    // You can use temperatureData and timestampData to create your line chart
 
     return (
         <View>
