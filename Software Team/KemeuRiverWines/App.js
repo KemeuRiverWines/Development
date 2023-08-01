@@ -8,6 +8,7 @@ import WeatherWindSpeed from './Components/WeatherWindSpeed';
 import WeatherHumid from './Components/WeatherHumid';
 import WeatherMain from './Components/WeatherMain';
 import SensorComponent1 from './Components/SensorComponent1';
+import TempData10Days1 from './Components/TempData10Days1';
 
 export default function App() {
   const [pinEntered, setPinEntered] = useState(false);
@@ -69,6 +70,9 @@ export default function App() {
                 <Text>Sensor 1 Last Update: {sensorData1.timeAgo}</Text>
               </View>
             )}
+          </View>
+          <View>
+              <TempData10Days1 />
           </View>
         </>
       )}
