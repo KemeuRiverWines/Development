@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 import TemperatureScreen from './TemperatureScreen';
 import WeatherPage from './WeatherPage';
@@ -9,12 +10,15 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="WeatherPage" component={WeatherPage} />
-    </Stack.Navigator>
-  </NavigationContainer>
+    <>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="WeatherPage" component={WeatherPage} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
