@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import { useNavigation } from '@react-navigation/native';
 
 const WeatherPage = () => {
   const [temperature, setTemperature] = useState(0);
   const [windSpeed, setWindSpeed] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [temperatureData, setTemperatureData] = useState([]);
+
+  const navigation = useNavigation();
 
   // 
   const fetchTemperatureData = () => {

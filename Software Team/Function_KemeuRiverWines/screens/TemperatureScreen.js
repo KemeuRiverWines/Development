@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 
 //import WeatherAirTemp from './Components/WeatherAirTemp';
-import SensorComponent1 from './Components/SensorComponent1';
+import SensorComponent1 from '../Components/SensorComponent1';
 
 const TemperatureScreen = () => {
 
@@ -16,28 +16,20 @@ const TemperatureScreen = () => {
   const handleDataReceived1 = (latestData) => {
     setSensorData1(latestData);
   };
-  // Below the the data from the node that can be displayed and how it is displayed
-  // <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
-  //           {sensorData1 && (
-  //             <View>
-  //               <Text>Sensor 1 Temp: {sensorData1.temperature}</Text>
-  //               <Text>Sensor 1 Humidity: {sensorData1.humidity}</Text>
-  //               <Text>Sensor 1 Dew Point: {sensorData1.dew_point}</Text>
-  //               <Text>Sensor 1 Wind Speed: {sensorData1.wind_speed}</Text>
-  //               <Text>Sensor 1 Leaf Wetness: {sensorData1.leaf_wetness}</Text>
-  //               <Text>Sensor 1 Rainfall: {sensorData1.rainfall}</Text>
-  //               <Text>Sensor 1 Time Stamp: {sensorData1.timestamp}</Text>
-  //               <Text>Sensor 1 Last Update: {sensorData1.timeAgo}</Text>
-  //             </View>
 
   const navigation = useNavigation();
+
   const categoryOptions = ['Nodes', 'Functions', 'Map'];
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const swiperRef = useRef(null);
   const [isSwitchOn, setSwitchOn] = useState(false);
 
   const handleNode1Press = () => {
-    navigation.navigate('WeatherPage');
+    navigation.navigate('Test Component');
+  };
+
+  const handleNode2Press = () => {
+    navigation.navigate('Weather Page');
   };
 
   const handleCategoryChange = (index) => {
@@ -117,7 +109,7 @@ const TemperatureScreen = () => {
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node1</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
+                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode2Press}>
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node2</Text>
                     </TouchableOpacity>
@@ -151,10 +143,10 @@ const TemperatureScreen = () => {
                   <>
                     <View style={[styles.rectangle, { height: 350 }]}>
                       <MapView style={styles.map} initialRegion={{
-                        latitude: -36.778051,
-                        longitude: 174.563803,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
+                        latitude: -36.774875,
+                        longitude: 174.559834,
+                        latitudeDelta: 0.0822,
+                        longitudeDelta: 0.0821,
                       }}>
                         <Marker coordinate={{ latitude: -36.778051, longitude: 174.563803 }} />
                       </MapView>
