@@ -7,11 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 
 //import WeatherAirTemp from './Components/WeatherAirTemp';
 import SensorComponent1 from '../Components/SensorComponent1';
+import GeneralTempDash from '../Components/GeneralTempDash';
 
 const TemperatureScreen = () => {
 
   //SensorComponent1 which is the first node - handles the incoming data from the node
   const [sensorData1, setSensorData1] = useState(null);
+
   const sensorComponent1Ref = useRef(null);
   const handleDataReceived1 = (latestData) => {
     setSensorData1(latestData);
@@ -71,21 +73,7 @@ const TemperatureScreen = () => {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.headerText}>Kumeu River Vineyard</Text>
-        <View style={styles.temperatureContainer}>
-          <View style={styles.temperatureBackground}>
-          <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
-            {sensorData1 && (
-              <View>
-                <Text style={styles.temperature}>
-                  {sensorData1.temperature !== null ? `${sensorData1.temperature}°C` : <ActivityIndicator size="large" />}
-                </Text>
-                <Text style={styles.timeAgo}>
-                  {sensorData1.timeAgo !== null ? `${sensorData1.timeAgo}` : <ActivityIndicator size="small" />}
-                </Text>
-              </View>
-            )}
-          </View>
-        </View>
+          <GeneralTempDash />
       </View>
       <View style={styles.optionBar}>
         <View style={styles.optionBarContent}>
@@ -188,20 +176,41 @@ const styles = StyleSheet.create({
   },
   temperatureBackground: {
     backgroundColor: '#004E7C',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    borderColor: '#FFFFFF',
+    borderBottomWidth: 5,
+    borderTopWidth: 5,
+    borderRightWidth: 5,
+    borderLeftWidth: 5,
+    paddingVertical: 70,
     borderRadius: 10,
+    paddingHorizontal: 120,
+    flexDirection: 'row', // Align children horizontally
+    //alignItems: 'center', // Align children vertically in the center
   },
   timeAgo: {
     fontSize: 22,
-    textAlign: 'center',
+    //textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: 'bold',
+
+    borderBottomWidth: 5,
+    borderTopWidth: 5,
+    borderRightWidth: 5,
+    borderLeftWidth: 5,
+    borderRadius: 10,
+
   },
   temperature: {
-    fontSize: 120,
-    textAlign: 'center',
+    fontSize: 60,
+    //textAlign: 'center',
     color: '#FFFFFF',
+
+    borderBottomWidth: 5,
+    borderTopWidth: 5,
+    borderRightWidth: 5,
+    borderLeftWidth: 5,
+    borderRadius: 10,
+
   },
   optionBar: {
     borderBottomWidth: 1,
