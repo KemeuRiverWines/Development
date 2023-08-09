@@ -169,49 +169,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  temperatureContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 16,
-  },
-  temperatureBackground: {
-    backgroundColor: '#004E7C',
-    borderColor: '#FFFFFF',
-    borderBottomWidth: 5,
-    borderTopWidth: 5,
-    borderRightWidth: 5,
-    borderLeftWidth: 5,
-    paddingVertical: 70,
-    borderRadius: 10,
-    paddingHorizontal: 120,
-    flexDirection: 'row', // Align children horizontally
-    //alignItems: 'center', // Align children vertically in the center
-  },
-  timeAgo: {
-    fontSize: 22,
-    //textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-
-    borderBottomWidth: 5,
-    borderTopWidth: 5,
-    borderRightWidth: 5,
-    borderLeftWidth: 5,
-    borderRadius: 10,
-
-  },
-  temperature: {
-    fontSize: 60,
-    //textAlign: 'center',
-    color: '#FFFFFF',
-
-    borderBottomWidth: 5,
-    borderTopWidth: 5,
-    borderRightWidth: 5,
-    borderLeftWidth: 5,
-    borderRadius: 10,
-
-  },
   optionBar: {
     borderBottomWidth: 1,
     borderBottomColor: '#8D8D8D',
@@ -256,6 +213,47 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+
+  // temperatureContainer: {
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   marginTop: 16,
+  // },
+  // temperatureBackground: {
+  //   backgroundColor: '#004E7C',
+  //   borderColor: '#FFFFFF',
+  //   borderBottomWidth: 5,
+  //   borderTopWidth: 5,
+  //   borderRightWidth: 5,
+  //   borderLeftWidth: 5,
+  //   paddingVertical: 70,
+  //   borderRadius: 10,
+  //   paddingHorizontal: 120,
+  //   flexDirection: 'row', // Align children horizontally
+  //   //alignItems: 'center', // Align children vertically in the center
+  // },
+  // timeAgo: {
+  //   fontSize: 22,
+  //   //textAlign: 'center',
+  //   color: '#FFFFFF',
+  //   fontWeight: 'bold',
+  //   borderBottomWidth: 5,
+  //   borderTopWidth: 5,
+  //   borderRightWidth: 5,
+  //   borderLeftWidth: 5,
+  //   borderRadius: 10,
+  // },
+  // temperature: {
+  //   fontSize: 60,
+  //   //textAlign: 'center',
+  //   color: '#FFFFFF',
+  //   borderBottomWidth: 5,
+  //   borderTopWidth: 5,
+  //   borderRightWidth: 5,
+  //   borderLeftWidth: 5,
+  //   borderRadius: 10,
+  // },
+
 });
 
 export default TemperatureScreen;

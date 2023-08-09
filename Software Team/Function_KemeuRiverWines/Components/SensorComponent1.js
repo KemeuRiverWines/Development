@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const API_URL = 'http://122.58.68.153:3000/api/data/all';
 
-const Component = ({ onDataReceived }) => {
+const SensorComponent1 = ({ onDataReceived }) => {
     useEffect(() => {
         fetchData();
     }, []);
@@ -22,8 +22,14 @@ const Component = ({ onDataReceived }) => {
                 const minutesAgo = Math.floor(timeDifference / (1000 * 60));
 
                 latestEntry.timeAgo = minutesAgo === 1 ? '1 Minute ago' : `${minutesAgo} Minutes ago`;
-                onDataReceived(latestEntry);
+            } else {
+                // If there's no data available, provide default values or an empty object
+                latestEntry = { temperature: null, rainfall: null, timeAgo: 'No data available' };
             }
+
+            // Ensure that onDataReceived is always called
+            onDataReceived(latestEntry);
+            //console.log(latestEntry);
 
             console.log('Sensor Request Successful = http://122.58.68.153:3000/api/data/all');
         } catch (error) {
@@ -34,7 +40,8 @@ const Component = ({ onDataReceived }) => {
     return null;
 };
 
-export default Component;
+export default SensorComponent1;
+
 
 {/* <Text>Sensor 1 Temp: {sensorData1.temperature}</Text>
 <Text>Sensor 1 Humidity: {sensorData1.humidity}</Text>

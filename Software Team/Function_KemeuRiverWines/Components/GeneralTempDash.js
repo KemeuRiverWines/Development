@@ -1,16 +1,22 @@
-import React, { Component, useRef, useState, } from "react";
+import React, { Component, useRef, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 import SensorComponent1 from '../Components/SensorComponent1';
 
-function MyComponent() {
+function GeneralTempDash() {
 
   const [sensorData1, setSensorData1] = useState(null);
-  const sensorComponent1Ref = useRef(null);
+
   const handleDataReceived1 = (latestData) => {
+    //console.log("Received data:", latestData); // Log the received data
     setSensorData1(latestData);
   };
+  
+  useEffect(() => {
+    //console.log("Console Log 1", sensorData1); // This will log the updated value of sensorData1
+  }, [sensorData1]);
 
+  
   return (
     <View style={styles.container}>
       <View style={styles.generalTempDash}>
@@ -20,13 +26,19 @@ function MyComponent() {
             <Text style={styles.rainHeader}>Rain Fall</Text>
           </View>
           <View style={styles.currentHeaderRow}>
-            <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
+            <SensorComponent1 onDataReceived={handleDataReceived1} />
             <Text style={styles.currentHeader}>Current</Text>
             <Text style={styles.tempCurrent}>
-              {sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />}
+              {/* {sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />} */}
+              {sensorData1 !== null ? (
+      sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
+    ) : null}
             </Text>
             <Text style={styles.rainCurrent}>
-              {sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />}
+              {/* {sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />} */}
+              {sensorData1 !== null ? (
+      sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
+    ) : null}
             </Text>
           </View>
           <View style={styles.next15Row}>
@@ -39,6 +51,11 @@ function MyComponent() {
             <Text style={styles.tempNext60}>00.00°c</Text>
             <Text style={styles.rainNext60}>22.00</Text>
           </View>
+          <Text style={styles.updated}>
+          {sensorData1 !== null ? (
+      sensorData1.timeAgo !== null ? `Updated ${sensorData1.timeAgo}` : <ActivityIndicator size="large" />
+    ) : null}
+          </Text>
         </View>
       </View>
     </View>
@@ -51,6 +68,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   generalTempDash: {
+    
     backgroundColor: "#004E7C"
     
   },
@@ -61,12 +79,15 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#FFFFFF",
     marginBottom: -10,
+    
   },
   rainHeader: {
+    
     fontSize: 25,
     color: "#FFFFFF",
     marginBottom: -10,
     marginLeft: 40
+    
   },
   tempHeaderRow: {
     height: 35,
@@ -149,7 +170,15 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginLeft: 40,
     marginRight: 63
+  },
+  updated: {
+    marginTop: 30,
+    marginLeft: 0,
+    fontSize: 15,
+    color: "#FFFFFF",
+    marginBottom: -50,
+    textAlign: 'center',
   }
 });
 
-export default MyComponent;
+export default GeneralTempDash;
