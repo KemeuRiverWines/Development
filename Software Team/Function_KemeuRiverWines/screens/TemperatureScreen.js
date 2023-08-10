@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 
 //import WeatherAirTemp from './Components/WeatherAirTemp';
-import SensorComponent1 from '../Components/SensorComponent1';
+// import SensorComponent1 from '../Components/SensorComponent1';
 import GeneralTempDash from '../Components/GeneralTempDash';
+import Node1Button from '../Components/Node1Button';
 
 const TemperatureScreen = () => {
 
@@ -93,6 +94,9 @@ const TemperatureScreen = () => {
               <View style={styles.slide} key={index}>
                 {index === 0 && (
                   <>
+                    <TouchableOpacity onPress={handleNode1Press}>
+                      <Node1Button />
+                    </TouchableOpacity>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node1</Text>
@@ -105,8 +109,6 @@ const TemperatureScreen = () => {
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node3</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}></TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}></TouchableOpacity>
                   </>
                 )}
                 {index === 1 && (

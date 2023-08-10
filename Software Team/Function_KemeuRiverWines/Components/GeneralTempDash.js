@@ -1,5 +1,5 @@
 import React, { Component, useRef, useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
 
 import SensorComponent1 from '../Components/SensorComponent1';
 
@@ -11,7 +11,6 @@ function GeneralTempDash() {
     //console.log("Received data:", latestData); // Log the received data
     setSensorData1(latestData);
   };
-  
   useEffect(() => {
     //console.log("Console Log 1", sensorData1); // This will log the updated value of sensorData1
   }, [sensorData1]);
