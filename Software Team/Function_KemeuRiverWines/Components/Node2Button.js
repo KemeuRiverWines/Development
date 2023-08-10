@@ -2,18 +2,18 @@ import React, { Component, useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 
-import SensorComponent1 from '../Components/SensorComponent1';
+import SensorComponent2 from './SensorComponent2';
 
 function Index(props) {
 
-    const [sensorData1, setSensorData1] = useState(null);
+    const [SensorData2, setSensorData2] = useState(null);
     const handleDataReceived1 = (latestData) => {
-        console.log("Sensor Request Done for Node1Button"); // Log the received data
-        setSensorData1(latestData);
+        console.log("Sensor Request Done for Node2Button"); // Log the received data
+        setSensorData2(latestData);
     };
     useEffect(() => {
-        //console.log("Console Log 1", sensorData1); // This will log the updated value of sensorData1
-    }, [sensorData1]);
+        //console.log("Console Log 1", SensorData2); // This will log the updated value of SensorData2
+    }, [SensorData2]);
 
 
     return (
@@ -21,50 +21,50 @@ function Index(props) {
             <View style={styles.rect1}></View>
             <View style={styles.group4}>
                 <Icon name="location-pin" style={styles.icon}></Icon>
-                <Text style={styles.buttonheader}>Node 1</Text>
+                <Text style={styles.buttonheader}>Node 2</Text>
             </View>
-            <SensorComponent1 onDataReceived={handleDataReceived1} />
+            <SensorComponent2 onDataReceived={handleDataReceived1} />
             <View style={styles.group6}>
                 <Text style={styles.temperature}>Temperature</Text>
                 <Text style={styles.temperatureData}>
-                    {sensorData1 !== null ? (
-                        sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="small" />
+                    {SensorData2 !== null ? (
+                        SensorData2.temperature !== null ? `${SensorData2.temperature}°c` : <ActivityIndicator size="small" />
                     ) : null}
                 </Text>
             </View>
             <View style={styles.group2}>
                 <Text style={styles.humidity}>Humidity</Text>
                 <Text style={styles.humitidtyData}>
-                {sensorData1 !== null ? (
-                        sensorData1.humidity !== null ? 
-                            `${sensorData1.humidity}` : <ActivityIndicator size="small" />
+                {SensorData2 !== null ? (
+                        SensorData2.humidity !== null ? 
+                            `${SensorData2.humidity}` : <ActivityIndicator size="small" />
                     ) : null}
                 </Text>
             </View>
             <View style={styles.group3}>
                 <Text style={styles.windSpeed}>Wind Speed</Text>
                 <Text style={styles.windSpeedData}>
-                {sensorData1 !== null ? (
-                        sensorData1.wind_speed !== null ? 
-                            `${sensorData1.wind_speed}` : <ActivityIndicator size="small" />
+                {SensorData2 !== null ? (
+                        SensorData2.wind_speed !== null ? 
+                            `${SensorData2.wind_speed}` : <ActivityIndicator size="small" />
                     ) : null}
                 </Text>
             </View>
             <View style={styles.group5}>
                 <Text style={styles.rainFall}>Rain Fall</Text>
                 <Text style={styles.rainFallData}>
-                    {sensorData1 !== null ? (
-                        sensorData1.rainfall !== null ? 
-                            `${sensorData1.rainfall}` : <ActivityIndicator size="small" />
+                    {SensorData2 !== null ? (
+                        SensorData2.rainfall !== null ? 
+                            `${SensorData2.rainfall}` : <ActivityIndicator size="small" />
                     ) : null}
                 </Text>
             </View>
             <View style={styles.group7}>
                 <Text style={styles.updated}>Updated</Text>
                 <Text style={styles.updatedData}>
-                {sensorData1 !== null ? (
-                        sensorData1.timeAgo !== null ? 
-                            `${sensorData1.timeAgo}` : <ActivityIndicator size="small" />
+                {SensorData2 !== null ? (
+                        SensorData2.timeAgo !== null ? 
+                            `${SensorData2.timeAgo}` : <ActivityIndicator size="small" />
                     ) : null}
                 </Text>
             </View>

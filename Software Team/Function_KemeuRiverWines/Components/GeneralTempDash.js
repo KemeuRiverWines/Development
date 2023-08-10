@@ -8,7 +8,7 @@ function GeneralTempDash() {
   const [sensorData1, setSensorData1] = useState(null);
 
   const handleDataReceived1 = (latestData) => {
-    //console.log("Received data:", latestData); // Log the received data
+    console.log("Sensor Request Done for GeneralTempDash"); // Log the received data
     setSensorData1(latestData);
   };
   useEffect(() => {
