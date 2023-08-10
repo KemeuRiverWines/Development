@@ -105,7 +105,7 @@ const TemperatureScreen = () => {
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
                       <Node3Button />
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
+                    {/* <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node1</Text>
                     </TouchableOpacity>
@@ -116,7 +116,7 @@ const TemperatureScreen = () => {
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node3</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </>
                 )}
                 {index === 1 && (
