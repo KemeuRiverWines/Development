@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 
 //import WeatherAirTemp from './Components/WeatherAirTemp';
-// import SensorComponent1 from '../Components/SensorComponent1';
+//import SensorComponent1 from '../Components/SensorComponent1';
 import GeneralTempDash from '../Components/GeneralTempDash';
 import Node1Button from '../Components/Node1Button';
 import Node2Button from '../Components/Node2Button';
