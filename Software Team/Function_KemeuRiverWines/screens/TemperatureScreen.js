@@ -11,6 +11,7 @@ import GeneralTempDash from '../Components/GeneralTempDash';
 import Node1Button from '../Components/Node1Button';
 import Node2Button from '../Components/Node2Button';
 import Node3Button from '../Components/Node3Button';
+import TempData10Days from '../Components/tempData10Days1';
 
 const TemperatureScreen = () => {
 
@@ -77,6 +78,9 @@ const TemperatureScreen = () => {
       <View style={styles.topContainer}>
         <Text style={styles.headerText}>Kumeu River Vineyard</Text>
           <GeneralTempDash />
+      </View>
+      <View>
+        <TempData10Days />
       </View>
       <View style={styles.optionBar}>
         <View style={styles.optionBarContent}>

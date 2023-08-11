@@ -31,13 +31,13 @@ function GeneralTempDash() {
               {/* {sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />} */}
               {sensorData1 !== null ? (
       sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
-    ) : null}
+    ) : <ActivityIndicator size="large" />}
             </Text>
             <Text style={styles.rainCurrent}>
               {/* {sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />} */}
               {sensorData1 !== null ? (
       sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
-    ) : null}
+    ) : <ActivityIndicator size="large" />}
             </Text>
           </View>
           <View style={styles.next15Row}>
