@@ -6,13 +6,23 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 
 //import WeatherAirTemp from './Components/WeatherAirTemp';
-import SensorComponent1 from '../Components/SensorComponent1';
+//import SensorComponent1 from '../Components/SensorComponent1';
+import GeneralTempDash from '../Components/GeneralTempDash';
+import Node1Button from '../Components/Node1Button';
+import Node2Button from '../Components/Node2Button';
+import Node3Button from '../Components/Node3Button';
+import TempData10Days from '../Components/tempData10Days1';
 
 const TemperatureScreen = () => {
 
   //SensorComponent1 which is the first node - handles the incoming data from the node
   const [sensorData1, setSensorData1] = useState(null);
+<<<<<<< HEAD
   //const sensorComponent1Ref = useRef(null);
+=======
+
+  const sensorComponent1Ref = useRef(null);
+>>>>>>> 64e388a0c2b3d112cd1759f877e441bc4d48bccf
   const handleDataReceived1 = (latestData) => {
     setSensorData1(latestData);
   };
@@ -72,6 +82,7 @@ const TemperatureScreen = () => {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.headerText}>Kumeu River Vineyard</Text>
+<<<<<<< HEAD
         <View style={styles.temperatureContainer}>
           <View style={styles.temperatureBackground}>
             {sensorData1 && (
@@ -86,6 +97,12 @@ const TemperatureScreen = () => {
             )}
           </View>
         </View>
+=======
+          <GeneralTempDash />
+      </View>
+      <View>
+        <TempData10Days />
+>>>>>>> 64e388a0c2b3d112cd1759f877e441bc4d48bccf
       </View>
       <View style={styles.optionBar}>
         <View style={styles.optionBarContent}>
@@ -106,6 +123,15 @@ const TemperatureScreen = () => {
                 {index === 0 && (
                   <>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
+                      <Node1Button />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
+                      <Node2Button />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
+                      <Node3Button />
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node1</Text>
                     </TouchableOpacity>
@@ -116,9 +142,7 @@ const TemperatureScreen = () => {
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
                       <Icon name="location" size={100} color="#900" />
                       <Text style={{ fontSize: 30 }}>Node3</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}></TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}></TouchableOpacity>
+                    </TouchableOpacity> */}
                   </>
                 )}
                 {index === 1 && (
@@ -181,28 +205,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  temperatureContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 16,
-  },
-  temperatureBackground: {
-    backgroundColor: '#004E7C',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-  },
-  timeAgo: {
-    fontSize: 22,
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
-  temperature: {
-    fontSize: 120,
-    textAlign: 'center',
-    color: '#FFFFFF',
-  },
   optionBar: {
     borderBottomWidth: 1,
     borderBottomColor: '#8D8D8D',
@@ -247,6 +249,47 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+
+  // temperatureContainer: {
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   marginTop: 16,
+  // },
+  // temperatureBackground: {
+  //   backgroundColor: '#004E7C',
+  //   borderColor: '#FFFFFF',
+  //   borderBottomWidth: 5,
+  //   borderTopWidth: 5,
+  //   borderRightWidth: 5,
+  //   borderLeftWidth: 5,
+  //   paddingVertical: 70,
+  //   borderRadius: 10,
+  //   paddingHorizontal: 120,
+  //   flexDirection: 'row', // Align children horizontally
+  //   //alignItems: 'center', // Align children vertically in the center
+  // },
+  // timeAgo: {
+  //   fontSize: 22,
+  //   //textAlign: 'center',
+  //   color: '#FFFFFF',
+  //   fontWeight: 'bold',
+  //   borderBottomWidth: 5,
+  //   borderTopWidth: 5,
+  //   borderRightWidth: 5,
+  //   borderLeftWidth: 5,
+  //   borderRadius: 10,
+  // },
+  // temperature: {
+  //   fontSize: 60,
+  //   //textAlign: 'center',
+  //   color: '#FFFFFF',
+  //   borderBottomWidth: 5,
+  //   borderTopWidth: 5,
+  //   borderRightWidth: 5,
+  //   borderLeftWidth: 5,
+  //   borderRadius: 10,
+  // },
+
 });
 
 export default TemperatureScreen;

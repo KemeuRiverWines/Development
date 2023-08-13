@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const API_URL = 'http://122.58.68.153:3000/api/data/all';
 
-const SensorComponent1 = ({ onDataReceived }) => {
+const SensorComponent2 = ({ onDataReceived }) => {
     useEffect(() => {
         fetchData();
     }, []);
@@ -12,24 +12,24 @@ const SensorComponent1 = ({ onDataReceived }) => {
             const response = await fetch(API_URL);
             const data = await response.json();
 
-            const sensorOneData = data.filter(entry => entry.node_id === 1);
-            let latestEntry = sensorOneData.length > 0 ? sensorOneData[0] : null;
+            const sensorOneData = data.filter(entry => entry.node_id === 2);
+            let latestEntry1 = sensorOneData.length > 0 ? sensorOneData[0] : null;
 
-            if (latestEntry) {
-                const timestamp = new Date(latestEntry.timestamp);
+            if (latestEntry1) {
+                const timestamp = new Date(latestEntry1.timestamp);
                 const now = new Date();
                 const timeDifference = now.getTime() - timestamp.getTime();
                 const minutesAgo = Math.floor(timeDifference / (1000 * 60));
 
-                latestEntry.timeAgo = minutesAgo === 1 ? '1 Minute ago' : `${minutesAgo} Minutes ago`;
+                latestEntry1.timeAgo = minutesAgo === 1 ? '1 Minute ago' : `${minutesAgo} Minutes ago`;
             } else {
                 // If there's no data available, provide default values or an empty object
-                latestEntry = { temperature: null, rainfall: null, timeAgo: 'No data available' };
+                latestEntry1 = { temperature: null, rainfall: null, timeAgo: 'No data available' };
             }
 
             // Ensure that onDataReceived is always called
-            onDataReceived(latestEntry);
-            //console.log(latestEntry);
+            onDataReceived(latestEntry1);
+            //console.log(latestEntry1);
 
             // console.log('Sensor Request Successful = http://122.58.68.153:3000/api/data/all');
         } catch (error) {
@@ -40,7 +40,7 @@ const SensorComponent1 = ({ onDataReceived }) => {
     return null;
 };
 
-export default SensorComponent1;
+export default SensorComponent2;
 
 
 {/* <Text>Sensor 1 Temp: {sensorData1.temperature}</Text>

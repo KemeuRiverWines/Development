@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const API_URL = 'http://122.58.68.153:3000/api/data/all';
 
-const SensorComponent1 = ({ onDataReceived }) => {
+const SensorComponent2 = ({ onDataReceived }) => {
     useEffect(() => {
         fetchData();
     }, []);
@@ -12,7 +12,7 @@ const SensorComponent1 = ({ onDataReceived }) => {
             const response = await fetch(API_URL);
             const data = await response.json();
 
-            const sensorOneData = data.filter(entry => entry.node_id === 1);
+            const sensorOneData = data.filter(entry => entry.node_id === 3);
             let latestEntry = sensorOneData.length > 0 ? sensorOneData[0] : null;
 
             if (latestEntry) {
@@ -40,7 +40,7 @@ const SensorComponent1 = ({ onDataReceived }) => {
     return null;
 };
 
-export default SensorComponent1;
+export default SensorComponent2;
 
 
 {/* <Text>Sensor 1 Temp: {sensorData1.temperature}</Text>

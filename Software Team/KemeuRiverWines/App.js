@@ -8,7 +8,7 @@ import WeatherWindSpeed from './Components/WeatherWindSpeed';
 import WeatherHumid from './Components/WeatherHumid';
 import WeatherMain from './Components/WeatherMain';
 import SensorComponent1 from './Components/SensorComponent1';
-import TempData10Days1 from './Components/TempData10Days1';
+// import TempData10Days1 from './Components/TempData10Days1';
 
 export default function App() {
   const [pinEntered, setPinEntered] = useState(false);
@@ -72,7 +72,7 @@ export default function App() {
             )}
           </View>
           <View>
-              <TempData10Days1 />
+              {/* <TempData10Days1 /> */}
           </View>
         </>
       )}
