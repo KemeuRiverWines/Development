@@ -12,7 +12,7 @@ const TemperatureScreen = () => {
 
   //SensorComponent1 which is the first node - handles the incoming data from the node
   const [sensorData1, setSensorData1] = useState(null);
-  const sensorComponent1Ref = useRef(null);
+  //const sensorComponent1Ref = useRef(null);
   const handleDataReceived1 = (latestData) => {
     setSensorData1(latestData);
   };
@@ -25,7 +25,7 @@ const TemperatureScreen = () => {
   const [isSwitchOn, setSwitchOn] = useState(false);
 
   const handleNode1Press = () => {
-    navigation.navigate('Test Component');
+    navigation.navigate('Node Control');
   };
 
   const handleNode2Press = () => {
@@ -67,13 +67,13 @@ const TemperatureScreen = () => {
     setSwitchOn((prev) => !prev);
   };
 
+ // <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.headerText}>Kumeu River Vineyard</Text>
         <View style={styles.temperatureContainer}>
           <View style={styles.temperatureBackground}>
-          <SensorComponent1 ref={sensorComponent1Ref} onDataReceived={handleDataReceived1} />
             {sensorData1 && (
               <View>
                 <Text style={styles.temperature}>
