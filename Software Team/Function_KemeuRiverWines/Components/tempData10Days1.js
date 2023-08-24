@@ -48,13 +48,18 @@ const Component = ({ onDataReceived }) => {
 
 
     return (
-        <View>
+        <View style={{ backgroundColor: 'rgba(0, 78, 124, 1)' }}>
             {temperatureData.length > 0 && timestampData.length > 0 && (
-                <VictoryChart>
+                <VictoryChart
+                    style={{
+                        parent: {
+                            backgroundColor: 'rgba(0,78,124,1)',
+                        },
+                    }}>
                     <VictoryLine
                         data={timestampData.map((timestamp, index) => ({ x: timestamp, y: temperatureData[index] }))}
                         style={{
-                            data: { stroke: 'green' }, // Change the line color here
+                            data: { stroke: 'white' }, // Change the line color here
                         }}
                     />
                     <VictoryAxis
@@ -65,16 +70,18 @@ const Component = ({ onDataReceived }) => {
                                 : ''
                         }
                         style={{
-                            tickLabels: { angle: -20 } // Set the angle to -90 for vertical labels
+                            tickLabels: { fill: 'white', angle: -20 }, // Set the angle to -90 for vertical labels
+                            axis: { stroke: 'white' },
+
                         }}
-                        // If you want to show the date as well, you can use the below tickFormat instead
-                        // tickFormat={(timestamp, index, ticks) =>
-                        //     index === 0 || hasHourChanged(ticks[index - 1], timestamp)
-                        //         ? new Date(timestamp).toLocaleString()
-                        //         : ''
-                        // }
+
                     />
-                    <VictoryAxis dependentAxis />
+                    <VictoryAxis dependentAxis
+                        style={{
+                            tickLabels: { fill: 'white' },
+                            axis: { stroke: 'white' },
+                        }}
+                    />
                 </VictoryChart>
             )}
         </View>
@@ -82,3 +89,13 @@ const Component = ({ onDataReceived }) => {
 };
 
 export default Component;
+
+
+
+//under VictoryAxis
+                        // If you want to show the date as well, you can use the below tickFormat instead
+                        // tickFormat={(timestamp, index, ticks) =>
+                        //     index === 0 || hasHourChanged(ticks[index - 1], timestamp)
+                        //         ? new Date(timestamp).toLocaleString()
+                        //         : ''
+                        // }
