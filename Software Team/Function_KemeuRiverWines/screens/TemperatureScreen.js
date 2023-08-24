@@ -11,7 +11,7 @@ import GeneralTempDash from '../Components/GeneralTempDash';
 import Node1Button from '../Components/Node1Button';
 import Node2Button from '../Components/Node2Button';
 import Node3Button from '../Components/Node3Button';
-import TempData10Days from '../Components/tempData10Days1';
+import TempData10Days from '../Components/tempData10DaysDash';
 
 const TemperatureScreen = () => {
 
@@ -31,7 +31,7 @@ const TemperatureScreen = () => {
   const [isSwitchOn, setSwitchOn] = useState(false);
 
   const handleNode1Press = () => {
-    navigation.navigate('Test Component');
+    navigation.navigate('Node1Details');
   };
 
   const handleNode2Press = () => {

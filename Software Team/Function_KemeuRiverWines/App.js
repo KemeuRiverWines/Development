@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TemperatureScreen from './screens/TemperatureScreen';
 import WeatherPage from './screens/WeatherPage';
 import TestComponent from './screens/TestComponent';
+import Node1Details from './screens/Node1Details';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ const App = () => {
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Weather Page" component={WeatherPage} />
           <Stack.Screen name="Test Component" component={TestComponent} />
+          <Stack.Screen name="Node1Details" component={Node1Details} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
