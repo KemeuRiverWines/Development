@@ -69,7 +69,7 @@ function Index() {
 const styles = StyleSheet.create({
   container: {
     width: 450,
-    height: 225
+    height: 220
   },
   rect: {
     // width: 430,

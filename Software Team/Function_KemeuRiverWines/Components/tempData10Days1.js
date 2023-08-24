@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLine, VictoryAxis } from 'victory-native';
 
 const API_URL = 'http://122.57.69.252:3000/api/data/all/temp';
@@ -48,7 +48,10 @@ const Component = ({ onDataReceived }) => {
 
 
     return (
-        <View style={{ backgroundColor: 'rgba(0, 78, 124, 1)' }}>
+        <View
+            // width={300}
+            // height={250}
+            style={{ backgroundColor: 'rgba(0, 78, 124, 1)' }}>
             {temperatureData.length > 0 && timestampData.length > 0 && (
                 <VictoryChart
                     style={{
@@ -59,7 +62,7 @@ const Component = ({ onDataReceived }) => {
                     <VictoryLine
                         data={timestampData.map((timestamp, index) => ({ x: timestamp, y: temperatureData[index] }))}
                         style={{
-                            data: { stroke: 'white' }, // Change the line color here
+                            data: { stroke: 'white' },
                         }}
                     />
                     <VictoryAxis
@@ -90,7 +93,11 @@ const Component = ({ onDataReceived }) => {
 
 export default Component;
 
-
+// const styles = StyleSheet.create({
+//     container: {
+//         height: 100,
+//     }
+// });
 
 //under VictoryAxis
                         // If you want to show the date as well, you can use the below tickFormat instead
