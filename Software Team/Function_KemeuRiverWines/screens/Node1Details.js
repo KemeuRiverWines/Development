@@ -1,8 +1,9 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent1';
+import TempData10Days from '../Components/tempData10DaysNode1';
 
 function Node1Details(props) {
 
@@ -26,88 +27,94 @@ function Node1Details(props) {
                     ) : null}
                 </Text>
             </View>
-            <View style={styles.dataGroup}>
-                <View style={styles.dataRow1}>
-                    <View style={styles.temperatureGroup}>
-                        <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
-                            <Text style={styles.temperatureHeader}>Temperature</Text>
-                            <Text style={styles.temperatureData}>
-                                {sensorData1 !== null ? (
-                                    sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.humidityGroup}>
-                        <View style={styles.rect1}>
-                            <Text style={styles.humidityHeader}>Humidity</Text>
-                            <Text style={styles.humidityData1}>
-                                {sensorData1 !== null ? (
-                                    sensorData1.humidity !== null ? `${sensorData1.humidity}` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.dewPointGroup}>
-                        <View style={styles.rect2}>
-                            <Text style={styles.dewPointHeader}>Dew Point</Text>
-                            <Text style={styles.dewPointData}>
-                                {sensorData1 !== null ? (
-                                    sensorData1.dew_point !== null ? `${sensorData1.dew_point}` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.dataRow2}>
-                    <View style={styles.windSpeedGroup}>
-                        <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
-                            <Text style={styles.windSpeedHeader}>Wind Speed</Text>
-                            <Text style={styles.windSpeedData}>
-                                {sensorData1 !== null ? (
-                                    sensorData1.wind_speed !== null ? `${sensorData1.wind_speed}` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.leafWetnessGroup}>
-                        <View style={styles.rect4}>
-                            <Text style={styles.leafWetness2}>Leaf Wetness</Text>
-                            <Text style={styles.humidityData2}>
-                                {sensorData1 !== null ? (
-                                    sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.rainFallGroup}>
-                        <View style={styles.rect5}>
-                            <Text style={styles.rainFall2}>Rain Fall</Text>
-                            <Text style={styles.dewPointData1}>{sensorData1 !== null ? (
-                                sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
-                            ) : null}</Text>
-                        </View>
-                    </View>
-                </View>
-            </View>
+            <ScrollView style={styles.scrollView}>
             <MapView
-                provider={MapView.PROVIDER_GOOGLE}
-                initialRegion={{
-                    latitude: -36.777676,
-                    longitude: 174.565483,
-                    latitudeDelta: 0.005,
-                    longitudeDelta: 0.0025,
-                }}
-                customMapStyle={[]}
-                style={styles.mapView}
-                mapType="satellite"
-            >
-                <Marker
-                    coordinate={{ latitude: -36.777676, longitude: 174.565483 }}
-                    title="Node 1"
-                    description="Maties Vineyard"
-                />
-            </MapView>
+                    provider={MapView.PROVIDER_GOOGLE}
+                    initialRegion={{
+                        latitude: -36.777676,
+                        longitude: 174.565483,
+                        latitudeDelta: 0.005,
+                        longitudeDelta: 0.0025,
+                    }}
+                    customMapStyle={[]}
+                    style={styles.mapView}
+                    mapType="satellite"
+                >
+                    <Marker
+                        coordinate={{ latitude: -36.777676, longitude: 174.565483 }}
+                        title="Node 1"
+                        description="Maties Vineyard"
+                    />
+                </MapView>
+                <View style={styles.dataGroup}>
+                    <View style={styles.dataRow1}>
+                        <View style={styles.temperatureGroup}>
+                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
+                                <Text style={styles.temperatureHeader}>Temperature</Text>
+                                <Text style={styles.temperatureData}>
+                                    {sensorData1 !== null ? (
+                                        sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.humidityGroup}>
+                            <View style={styles.rect1}>
+                                <Text style={styles.humidityHeader}>Humidity</Text>
+                                <Text style={styles.humidityData1}>
+                                    {sensorData1 !== null ? (
+                                        sensorData1.humidity !== null ? `${sensorData1.humidity}` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.dewPointGroup}>
+                            <View style={styles.rect2}>
+                                <Text style={styles.dewPointHeader}>Dew Point</Text>
+                                <Text style={styles.dewPointData}>
+                                    {sensorData1 !== null ? (
+                                        sensorData1.dew_point !== null ? `${sensorData1.dew_point}` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.dataRow2}>
+                        <View style={styles.windSpeedGroup}>
+                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
+                                <Text style={styles.windSpeedHeader}>Wind Speed</Text>
+                                <Text style={styles.windSpeedData}>
+                                    {sensorData1 !== null ? (
+                                        sensorData1.wind_speed !== null ? `${sensorData1.wind_speed}` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.leafWetnessGroup}>
+                            <View style={styles.rect4}>
+                                <Text style={styles.leafWetness2}>Leaf Wetness</Text>
+                                <Text style={styles.humidityData2}>
+                                    {sensorData1 !== null ? (
+                                        sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.rainFallGroup}>
+                            <View style={styles.rect5}>
+                                <Text style={styles.rainFall2}>Rain Fall</Text>
+                                <Text style={styles.dewPointData1}>{sensorData1 !== null ? (
+                                    sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
+                                ) : null}</Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View>
+                    <TempData10Days />
+                </View>
+
+            </ScrollView>
         </View>
     );
 }
@@ -150,7 +157,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         alignItems: "center",
         margin: 0,
-        marginTop: 60
+        marginTop: 40
     },
     dataRow1: {
         width: 360,
@@ -295,10 +302,14 @@ const styles = StyleSheet.create({
         marginTop: 12
     },
     mapView: {
-        height: 300,
+        height: 200,
         width: 450,
         margin: 0,
-        marginTop: 60
+        marginTop: 30,
+        alignSelf: "center"
+    },
+    scrollView: {
+        alignContent: "center",
     }
 });
 
