@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch } from 'react-native';
 import Swiper from 'react-native-swiper';
 import MapView, { Marker } from 'react-native-maps';
-import Icon from 'react-native-vector-icons/EvilIcons';
+//import Icon from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 
 //import WeatherAirTemp from './Components/WeatherAirTemp';
@@ -79,9 +79,9 @@ const TemperatureScreen = () => {
         <Text style={styles.headerText}>Kumeu River Vineyard</Text>
           <GeneralTempDash />
       </View>
-      <View>
+      {/* <View>
         <TempData10Days />
-      </View>
+      </View> */}
       <View style={styles.optionBar}>
         <View style={styles.optionBarContent}>
           {categoryOptions.map(renderCategoryOption)}

@@ -12,7 +12,7 @@ const SensorComponent1 = ({ onDataReceived }) => {
             const response = await fetch(API_URL);
             const data = await response.json();
 
-            const sensorOneData = data.filter(entry => entry.node_id === 1);
+            const sensorOneData = data.filter(entry => entry.node_id === "eui-70b3d57ed005de54");
             let latestEntry = sensorOneData.length > 0 ? sensorOneData[0] : null;
 
             if (latestEntry) {

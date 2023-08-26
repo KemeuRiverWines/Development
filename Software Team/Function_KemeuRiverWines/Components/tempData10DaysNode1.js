@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
 const API_URL = 'http://122.57.69.252:3000/api/data/all/temp';
-const node_id = 1;
+const node_id = "eui-70b3d57ed005de54";
 
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
@@ -40,12 +40,19 @@ const Component = ({ onDataReceived }) => {
     };
 
     // Helper function to check if the hour has changed
-    const hasHourChanged = (prevTimestamp, currentTimestamp) => {
-        const prevDate = new Date(prevTimestamp);
-        const currentDate = new Date(currentTimestamp);
-        return prevDate.getHours() !== currentDate.getHours();
-    };
+    let lastLabelTimestamp = null;
+    
+    function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
+        currentDate = new Date(currentTimestamp);
 
+            if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 18 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
+                lastLabelTimestamp = currentDate;
+                // console.log(Math.abs(currentDate - lastLabelTimestamp));
+                // console.log(lastLabelTimestamp);
+                return true;
+            }
+            return false;
+        }
 
     return (
         <View>
@@ -70,8 +77,8 @@ const Component = ({ onDataReceived }) => {
                 <VictoryAxis
                     tickValues={timestampData}
                     tickFormat={(timestamp, index, ticks) =>
-                        index === 0 || hasHourChanged(ticks[index - 1], timestamp)
-                            ? new Date(timestamp).toLocaleTimeString()
+                        index === ticks.length - 1 || hasSixHoursChanged(ticks[index + 1], timestamp)
+                            ? new Date(timestamp).toLocaleString()
                             : ''
                     }
                     style={{

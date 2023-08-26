@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLine, VictoryAxis } from 'victory-native';
 
 const API_URL = 'http://122.57.69.252:3000/api/data/all/temp';
-const node_id = 1;
+const node_id = "eui-70b3d57ed005de54";
 
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);

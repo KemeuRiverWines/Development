@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Tempreature Screen">
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
