@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View, Text, ScrollView } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View, Text, ScrollView, Button } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native';
@@ -28,6 +28,7 @@ const MapScreen = () => {
     //======= MARKER 2 ================================================================================
     const handleNode2Press = () => {
         console.log("Node 2 Pressed");
+        navigation.navigate('Node2Details');
     };
 
     const [sensorData2, setSensorData2] = useState(null);
@@ -41,6 +42,7 @@ const MapScreen = () => {
     //======= MARKER 3 ================================================================================
     const handleNode3Press = () => {
         console.log("Node 3 Pressed");
+        navigation.navigate('Node3Details');
     };
 
     const [sensorData3, setSensorData3] = useState(null);
@@ -77,7 +79,7 @@ const MapScreen = () => {
                     showsUserLocation={true}
                 >
                     <Marker coordinate={{ latitude: -36.777639, longitude: 174.565313 }}>
-                        <Callout>
+                        <Callout onPress={handleNode1Press}>
                             <View style={styles.callout}>
                                 <Text>Node 1</Text>
                                 <Text>
@@ -95,11 +97,12 @@ const MapScreen = () => {
                                         sensorData1.humidity !== null ? `Humidity: ${sensorData1.humidity}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
+                                <Button title="See More"/>
                             </View>
                         </Callout>
                     </Marker>
                     <Marker coordinate={{ latitude: -36.775292, longitude: 174.566299 }}>
-                        <Callout>
+                        <Callout onPress={handleNode2Press}>
                             <View style={styles.callout}>
                                 <Text>Node 2</Text>
                                 <Text>
@@ -117,12 +120,13 @@ const MapScreen = () => {
                                         sensorData2.humidity !== null ? `Humidity: ${sensorData2.humidity}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
+                                <Button title="See More"/>
                             </View>
                         </Callout>
                     </Marker>
 
                     <Marker coordinate={{ latitude: -36.775706, longitude: 174.568581 }}>
-                        <Callout>
+                        <Callout onPress={handleNode3Press}>
                             <View style={styles.callout}>
                                 <Text>Node 3</Text>
                                 <Text>
@@ -140,6 +144,7 @@ const MapScreen = () => {
                                         sensorData3.humidity !== null ? `Humidity: ${sensorData3.humidity}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
+                                <Button title="See More"/>
                             </View>
                         </Callout>
                     </Marker>
@@ -184,7 +189,7 @@ const styles = StyleSheet.create({
         marginTop: "2%",
         alignSelf: "center",
         backgroundColor: "grey",
-        borderRadius: 30,
+        borderRadius: 20,
         overflow: "hidden",
     },
     mapView: {
@@ -221,6 +226,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    
 });
 
 export default MapScreen;

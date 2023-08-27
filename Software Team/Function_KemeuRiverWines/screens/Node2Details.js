@@ -1,41 +1,33 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, Touchable} from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-import SensorComponent1 from '../Components/SensorComponent1';
+import SensorComponent1 from '../Components/SensorComponent2';
 import TempData10Days from '../Components/tempData2DaysNode1';
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 function Node1Details(props) {
 
-    const [sensorData1, setSensorData1] = useState(null);
+    const [sensorData2, setsensorData2] = useState(null);
     const handleDataReceived1 = (latestData) => {
         console.log("Sensor Request Done for Node1Details"); // Log the received data
-        setSensorData1(latestData);
+        setsensorData2(latestData);
     };
     useEffect(() => {
-        //console.log("Console Log 1", sensorData1); // This will log the updated value of sensorData1
-    }, [sensorData1]);
+        //console.log("Console Log 1", sensorData2); // This will log the updated value of sensorData2
+    }, [sensorData2]);
 
     return (
         <View style={styles.container}>
             <SensorComponent1 onDataReceived={handleDataReceived1} />
             <View style={styles.header}>
-                <Text style={styles.node1}>Node 1</Text>
+                <Text style={styles.node1}>Node 2</Text>
                 <Text style={styles.lastUpdated}>
-                    {sensorData1 !== null ? (
-                        sensorData1.timeAgo !== null ? `Updated ${sensorData1.timeAgo}` : <ActivityIndicator size="large" />
+                    {sensorData2 !== null ? (
+                        sensorData2.timeAgo !== null ? `Updated ${sensorData2.timeAgo}` : <ActivityIndicator size="large" />
                     ) : null}
                 </Text>
             </View>
             <ScrollView style={styles.scrollView}>
-                <View style={styles.settingsButton}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('SensorControlScreen')}>
-                    <Text style={styles.settingsText}>
-                        Settings
-                    </Text>
-                    </TouchableOpacity>
-                </View>
                 <View style={styles.mapViewContainer}>
                     <MapView
                         provider={MapView.PROVIDER_GOOGLE}
@@ -62,8 +54,8 @@ function Node1Details(props) {
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
                                 <Text style={styles.temperatureHeader}>Temperature</Text>
                                 <Text style={styles.temperatureData}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
+                                    {sensorData2 !== null ? (
+                                        sensorData2.temperature !== null ? `${sensorData2.temperature}°c` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -72,8 +64,8 @@ function Node1Details(props) {
                             <View style={styles.rect1}>
                                 <Text style={styles.humidityHeader}>Humidity</Text>
                                 <Text style={styles.humidityData1}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.humidity !== null ? `${sensorData1.humidity}` : <ActivityIndicator size="large" />
+                                    {sensorData2 !== null ? (
+                                        sensorData2.humidity !== null ? `${sensorData2.humidity}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -82,8 +74,8 @@ function Node1Details(props) {
                             <View style={styles.rect2}>
                                 <Text style={styles.dewPointHeader}>Dew Point</Text>
                                 <Text style={styles.dewPointData}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.dew_point !== null ? `${sensorData1.dew_point}` : <ActivityIndicator size="large" />
+                                    {sensorData2 !== null ? (
+                                        sensorData2.dew_point !== null ? `${sensorData2.dew_point}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -94,8 +86,8 @@ function Node1Details(props) {
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
                                 <Text style={styles.windSpeedHeader}>Wind Speed</Text>
                                 <Text style={styles.windSpeedData}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.wind_speed !== null ? `${sensorData1.wind_speed}` : <ActivityIndicator size="large" />
+                                    {sensorData2 !== null ? (
+                                        sensorData2.wind_speed !== null ? `${sensorData2.wind_speed}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -104,8 +96,8 @@ function Node1Details(props) {
                             <View style={styles.rect4}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}` : <ActivityIndicator size="large" />
+                                    {sensorData2 !== null ? (
+                                        sensorData2.leaf_wetness !== null ? `${sensorData2.leaf_wetness}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -113,8 +105,8 @@ function Node1Details(props) {
                         <View style={styles.rainFallGroup}>
                             <View style={styles.rect5}>
                                 <Text style={styles.rainFall2}>Rain Fall</Text>
-                                <Text style={styles.dewPointData1}>{sensorData1 !== null ? (
-                                    sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
+                                <Text style={styles.dewPointData1}>{sensorData2 !== null ? (
+                                    sensorData2.rainfall !== null ? `${sensorData2.rainfall}` : <ActivityIndicator size="large" />
                                 ) : null}</Text>
                             </View>
                         </View>
@@ -135,20 +127,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
         backgroundColor: "rgba(255,255,255,1)",
-    },
-    settingsButton: {
-        width: 100,
-        height: 50,
-        backgroundColor: "rgba(0,78,124,1)",
-        borderRadius: 20,
-        marginTop: 10,
-        alignSelf: "center",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    settingsText: {
-        color: "white",
-        fontSize: 15,
     },
     header: {
         width: "60%",
@@ -334,7 +312,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: "96%",
         margin: 0,
-        marginTop: 10,
+        marginTop: 30,
         alignSelf: "center",
         overflow: "hidden",
         backgroundColor: "grey",

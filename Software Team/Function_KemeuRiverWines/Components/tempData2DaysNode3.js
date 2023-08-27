@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
 const API_URL = 'http://122.57.69.252:3000/api/data/all/temp';
-const node_id = "eui-70b3d57ed005de54";
+const node_id = 3;
 
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
@@ -19,7 +19,9 @@ const Component = ({ onDataReceived }) => {
             const data = await response.json();
 
             // Filter data for the given node_id
-            const sensorOneData = data.filter(entry => entry.node_id === node_id);
+            const twoDaysAgo = new Date();
+            twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+            const sensorOneData = data.filter(entry => entry.node_id === node_id && new Date(entry.timestamp) >= twoDaysAgo);
 
             // Extract temperature and timestamp values into separate arrays
             const temperatures = sensorOneData.map(entry => entry.temperature);
@@ -41,18 +43,18 @@ const Component = ({ onDataReceived }) => {
 
     // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
-    
+
     function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
         currentDate = new Date(currentTimestamp);
 
-            if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 18 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
-                lastLabelTimestamp = currentDate;
-                // console.log(Math.abs(currentDate - lastLabelTimestamp));
-                // console.log(lastLabelTimestamp);
-                return true;
-            }
-            return false;
+        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 5 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
+            lastLabelTimestamp = currentDate;
+            // console.log(Math.abs(currentDate - lastLabelTimestamp));
+            // console.log(lastLabelTimestamp);
+            return true;
         }
+        return false;
+    }
 
     return (
         <View>
@@ -63,7 +65,7 @@ const Component = ({ onDataReceived }) => {
                     },
                 }}>
                 <VictoryLabel
-                    text="Temperture Data for the last 10 days"
+                    text="Temperture Data for the last 2 days"
                     x={250}
                     y={35}
                     textAnchor="middle"
@@ -78,18 +80,25 @@ const Component = ({ onDataReceived }) => {
                     tickValues={timestampData}
                     tickFormat={(timestamp, index, ticks) =>
                         index === ticks.length - 1 || hasSixHoursChanged(ticks[index + 1], timestamp)
-                            ? new Date(timestamp).toLocaleString()
+                            ? new Date(timestamp).toLocaleString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                            })
                             : ''
                     }
                     style={{
-                        tickLabels: { fill: 'black', angle: -20 }, // Set the angle to -90 for vertical labels
+                        tickLabels: { fill: 'black', angle: -20, dy: 40 }, // Set the angle to -90 for vertical labels
                         axis: { stroke: 'black' },
+                        grid: { stroke: 'lightgrey', strokeWidth: 1.5 },
                     }}
                 />
                 <VictoryAxis dependentAxis
                     style={{
                         tickLabels: { fill: 'black' },
                         axis: { stroke: 'black' },
+                        grid: { stroke: 'lightgrey', strokeWidth: 1.5 },
                     }}
                 />
             </VictoryChart>
