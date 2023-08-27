@@ -35,7 +35,7 @@ const TemperatureScreen = () => {
   };
 
   const handleNode2Press = () => {
-    navigation.navigate('Weather Page');
+    navigation.navigate('SensorControlScreen');
   };
 
   const handleCategoryChange = (index) => {
@@ -103,7 +103,7 @@ const TemperatureScreen = () => {
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode1Press}>
                       <Node1Button />
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
+                    <TouchableOpacity style={[styles.rectangle, { height: 150 }]} onPress={handleNode2Press}>
                       <Node2Button />
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.rectangle, { height: 150 }]}>
