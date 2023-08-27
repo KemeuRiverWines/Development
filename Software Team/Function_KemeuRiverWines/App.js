@@ -10,6 +10,7 @@ import WeatherPage from './screens/WeatherPage';
 import TestComponent from './screens/TestComponent';
 import Node1Details from './screens/Node1Details';
 import SensorControlScreen from './screens/SensorControlScreen';
+import MapScreen from './screens/MapScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,12 +21,14 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Tempreature Screen">
+        <Stack.Navigator initialRouteName="MapScreen">
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Weather Page" component={WeatherPage} />
           <Stack.Screen name="Test Component" component={TestComponent} />
           <Stack.Screen name="Node1Details" component={Node1Details} />
           <Stack.Screen name="SensorControlScreen" component={SensorControlScreen} />
+
+          <Stack.Screen name="MapScreen" component={MapScreen} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
