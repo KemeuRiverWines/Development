@@ -5,6 +5,7 @@ const API_URL = 'http://122.57.69.252:3000/api/data/all';
 const SensorComponent1 = ({ onDataReceived }) => {
     
     useEffect(() => {
+        fetchData();
         const interval = setInterval(() => {
             fetchData();
         }, 30000);

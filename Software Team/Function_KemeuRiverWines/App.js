@@ -8,9 +8,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TemperatureScreen from './screens/TemperatureScreen';
 import WeatherPage from './screens/WeatherPage';
 import TestComponent from './screens/TestComponent';
+
 import Node1Details from './screens/Node1Details';
 import Node2Details from './screens/Node2Details';
 import Node3Details from './screens/Node3Details';
+
+import Node1Forecast from './screens/Node1Forecast';
+
 import SensorControlScreen from './screens/SensorControlScreen';
 import MapScreen from './screens/MapScreen';
 
@@ -21,16 +25,20 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="MapScreen">
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Weather Page" component={WeatherPage} />
           <Stack.Screen name="Test Component" component={TestComponent} />
-          <Stack.Screen name="Node1Details" component={Node1Details} />
-          <Stack.Screen name="Node2Details" component={Node2Details} />
-          <Stack.Screen name="Node3Details" component={Node3Details} />
-          <Stack.Screen name="SensorControlScreen" component={SensorControlScreen} />
+
+          <Stack.Screen name="Node 1 Details" component={Node1Details} options={{headerTitleAlign: "center"}}/>
+          <Stack.Screen name="Node 2 Details" component={Node2Details} options={{headerTitleAlign: "center"}}/>
+          <Stack.Screen name="Node 3 Details" component={Node3Details} options={{headerTitleAlign: "center"}}/>
+
+          <Stack.Screen name="Node 1 Temperature Forecast" component={Node1Forecast} />
+
+          <Stack.Screen name="Sensor Control Screen" component={SensorControlScreen} options={{headerTitleAlign: "center"}} />
 
           <Stack.Screen name="MapScreen" component={MapScreen} options={{headerShown: false}} />
         </Stack.Navigator>

@@ -14,7 +14,7 @@ const MapScreen = () => {
     //======= MARKER 1 ================================================================================
     const handleNode1Press = () => {
         console.log("Node 1 Pressed");
-        navigation.navigate('Node1Details');
+        navigation.navigate('Node 1 Details');
     };
 
     const [sensorData1, setSensorData1] = useState(null);
@@ -28,7 +28,7 @@ const MapScreen = () => {
     //======= MARKER 2 ================================================================================
     const handleNode2Press = () => {
         console.log("Node 2 Pressed");
-        navigation.navigate('Node2Details');
+        navigation.navigate('Node 2 Details');
     };
 
     const [sensorData2, setSensorData2] = useState(null);
@@ -42,7 +42,7 @@ const MapScreen = () => {
     //======= MARKER 3 ================================================================================
     const handleNode3Press = () => {
         console.log("Node 3 Pressed");
-        navigation.navigate('Node3Details');
+        navigation.navigate('Node 3 Details');
     };
 
     const [sensorData3, setSensorData3] = useState(null);

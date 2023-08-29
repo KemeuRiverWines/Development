@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, Touchable} from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, Touchable } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent1';
@@ -29,12 +29,21 @@ function Node1Details(props) {
                 </Text>
             </View>
             <ScrollView style={styles.scrollView}>
-                <View style={styles.settingsButton}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('SensorControlScreen')}>
-                    <Text style={styles.settingsText}>
-                        Settings
-                    </Text>
-                    </TouchableOpacity>
+                <View style={styles.buttons}>
+                    <View style={styles.settingsButton}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Node 1 Temperature Forecast')}>
+                            <Text style={styles.settingsText}>
+                                Forecast Temp
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.settingsButton}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Sensor Control Screen')}>
+                            <Text style={styles.settingsText}>
+                                Settings
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.mapViewContainer}>
                     <MapView
@@ -142,6 +151,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0,78,124,1)",
         borderRadius: 20,
         marginTop: 10,
+        marginHorizontal: 10,
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "center",
@@ -149,6 +159,7 @@ const styles = StyleSheet.create({
     settingsText: {
         color: "white",
         fontSize: 15,
+        textAlign: "center",
     },
     header: {
         width: "60%",
@@ -339,11 +350,17 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         backgroundColor: "grey",
         borderRadius: 20,
-
     },
     scrollView: {
         alignContent: "center",
-    }
+    },
+    buttons: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 10,
+    },
 });
 
 export default Node1Details;
