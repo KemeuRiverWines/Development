@@ -14,6 +14,10 @@ import Node3Details from './screens/Node3Details';
 import SensorControlScreen from './screens/SensorControlScreen';
 import MapScreen from './screens/MapScreen';
 
+import LoginScreen from './screens/LoginScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import ForgotPassword from './screens/ForgotPassword';
+
 const Stack = createStackNavigator();
 
 
@@ -23,7 +27,7 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MapScreen">
+        <Stack.Navigator initialRouteName="LoginScreen">
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Weather Page" component={WeatherPage} />
           <Stack.Screen name="Test Component" component={TestComponent} />
@@ -31,6 +35,9 @@ const App = () => {
           <Stack.Screen name="Node2Details" component={Node2Details} />
           <Stack.Screen name="Node3Details" component={Node3Details} />
           <Stack.Screen name="SensorControlScreen" component={SensorControlScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
           <Stack.Screen name="MapScreen" component={MapScreen} options={{headerShown: false}} />
         </Stack.Navigator>
