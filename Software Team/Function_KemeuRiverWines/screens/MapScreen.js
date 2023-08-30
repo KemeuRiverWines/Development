@@ -8,6 +8,8 @@ import SensorComponent1 from '../Components/SensorComponent1';
 import SensorComponent2 from '../Components/SensorComponent2';
 import SensorComponent3 from '../Components/SensorComponent3';
 
+import MapWithMarkers from "../Components/mapWithMarkers";
+
 const MapScreen = () => {
 
     const navigation = useNavigation();
@@ -54,6 +56,7 @@ const MapScreen = () => {
     }, [sensorData3]);
 
 
+
     return (
         <SafeAreaView style={styles.container}>
 
@@ -61,94 +64,8 @@ const MapScreen = () => {
                 <Text style={styles.headerText}>Kumeu River Wines</Text>
             </View>
 
-            <SensorComponent1 onDataReceived={handleDataReceived1} />
-            <SensorComponent2 onDataReceived={handleDataReceived2} />
-            <SensorComponent3 onDataReceived={handleDataReceived3} />
             <View style={styles.mapContainer}>
-                <MapView
-                    provider={MapView.PROVIDER_GOOGLE}
-                    initialRegion={{
-                        latitude: -36.775676,
-                        longitude: 174.567283,
-                        latitudeDelta: 0.0070,
-                        longitudeDelta: 0.0070,
-                    }}
-                    customMapStyle={[]}
-                    style={styles.mapView}
-                    mapType="satellite"
-                    showsUserLocation={true}
-                >
-                    <Marker coordinate={{ latitude: -36.777639, longitude: 174.565313 }}>
-                        <Callout onPress={handleNode1Press}>
-                            <View style={styles.callout}>
-                                <Text>Node 1</Text>
-                                <Text>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.timeAgo !== null ? `Updated ${sensorData1.timeAgo}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Text>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.temperature !== null ? `Temperature: ${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Text>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.humidity !== null ? `Humidity: ${sensorData1.humidity}%` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Button title="See More"/>
-                            </View>
-                        </Callout>
-                    </Marker>
-                    <Marker coordinate={{ latitude: -36.775292, longitude: 174.566299 }}>
-                        <Callout onPress={handleNode2Press}>
-                            <View style={styles.callout}>
-                                <Text>Node 2</Text>
-                                <Text>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.timeAgo !== null ? `Updated ${sensorData2.timeAgo}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Text>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.temperature !== null ? `Temperature: ${sensorData2.temperature}°c` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Text>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.humidity !== null ? `Humidity: ${sensorData2.humidity}%` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Button title="See More"/>
-                            </View>
-                        </Callout>
-                    </Marker>
-
-                    <Marker coordinate={{ latitude: -36.775706, longitude: 174.568581 }}>
-                        <Callout onPress={handleNode3Press}>
-                            <View style={styles.callout}>
-                                <Text>Node 3</Text>
-                                <Text>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.timeAgo !== null ? `Updated ${sensorData3.timeAgo}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Text>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.temperature !== null ? `Temperature: ${sensorData3.temperature}°c` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Text>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.humidity !== null ? `Humidity: ${sensorData3.humidity}%` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                                <Button title="See More"/>
-                            </View>
-                        </Callout>
-                    </Marker>
-                </MapView>
+                <MapWithMarkers />
             </View>
 
             <View style={styles.footer}>
@@ -226,7 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    
+
 });
 
 export default MapScreen;
