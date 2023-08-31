@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import TempForecastGraphNode1 from '../Components/TempForecastGraphNode1';
+
 const Node1Forecast = () => {
     return (
         <SafeAreaView style={styles.container}>
@@ -24,7 +26,7 @@ const Node1Forecast = () => {
                     </View>
                 </View>
                 <View style={styles.graph}>
-                    <Text style={styles.graphText}>Graph</Text>
+                    <TempForecastGraphNode1 />
                 </View>
             </View>
         </SafeAreaView>
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         // justifyContent: 'center',
         alignItems: 'center',
+        // backgroundColor: 'red',
     },
     dataDisplay: {
         marginTop: "5%",
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
         width: "96%",
         height: "50%",
         marginTop: "10%",
-        backgroundColor: 'green',
+        backgroundColor: 'white',
     },
     graphText: {
         color: 'white',

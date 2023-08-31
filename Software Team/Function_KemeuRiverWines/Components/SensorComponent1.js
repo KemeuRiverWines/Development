@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Alert } from "react-native";
 
 const API_URL = 'http://122.57.69.252:3000/api/data/all';
 
@@ -8,7 +9,7 @@ const SensorComponent1 = ({ onDataReceived }) => {
         fetchData();
         const interval = setInterval(() => {
             fetchData();
-        }, 30000);
+        }, 10000);
         return () => clearInterval(interval);
     }, []);
 
@@ -39,6 +40,7 @@ const SensorComponent1 = ({ onDataReceived }) => {
             // console.log('Sensor Request Successful = http://122.57.69.252:3000/api/data/all');
         } catch (error) {
             console.error('Error fetching data:', error);
+            Alert.alert('Error Fetching Data', 'Please reload the app');
         }
     };
 

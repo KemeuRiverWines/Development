@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, View, Text, ScrollView } from "react-nat
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent3 from '../Components/SensorComponent3';
-import TempData10Days from '../Components/tempData2DaysNode1';
+import TempData10Days from '../Components/TempData2DaysNode3';
 
 function Node1Details(props) {
 
@@ -20,7 +20,7 @@ function Node1Details(props) {
         <View style={styles.container}>
             <SensorComponent3 onDataReceived={handleDataReceived1} />
             <View style={styles.header}>
-                <Text style={styles.node1}>Node 1</Text>
+                <Text style={styles.node1}>Node 3</Text>
                 <Text style={styles.lastUpdated}>
                     {sensorData3 !== null ? (
                         sensorData3.timeAgo !== null ? `Updated ${sensorData3.timeAgo}` : <ActivityIndicator size="large" />
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     },
     temperatureData: {
         color: "white",
-        fontSize: 30,
+        fontSize: 25,
         textAlign: "center",
         marginTop: 12
     },

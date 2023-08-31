@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, Touchabl
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent1';
-import TempData10Days from '../Components/tempData2DaysNode1';
+import TempData10Days from '../Components/TempData2DaysNode1';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function Node1Details(props) {
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     },
     temperatureData: {
         color: "white",
-        fontSize: 30,
+        fontSize: 25,
         textAlign: "center",
         marginTop: 12
     },

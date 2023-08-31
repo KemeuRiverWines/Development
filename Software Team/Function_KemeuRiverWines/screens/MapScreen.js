@@ -4,58 +4,37 @@ import MapView, { Callout, Marker } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native';
 
-import SensorComponent1 from '../Components/SensorComponent1';
-import SensorComponent2 from '../Components/SensorComponent2';
-import SensorComponent3 from '../Components/SensorComponent3';
-
-import MapWithMarkers from "../Components/mapWithMarkers";
+import MapWithMarkers from "../Components/MapWithMarkers";
 
 const MapScreen = () => {
 
+    const [refresh, setRefresh] = useState(false);
+    const [key, setKey] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setKey((prevKey) => prevKey + 1);
+            console.log("Reloaded Map");
+        }, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
     const navigation = useNavigation();
-    //======= MARKER 1 ================================================================================
+    
     const handleNode1Press = () => {
         console.log("Node 1 Pressed");
         navigation.navigate('Node 1 Details');
     };
 
-    const [sensorData1, setSensorData1] = useState(null);
-    const handleDataReceived1 = (latestData) => {
-        console.log("Sensor Request Done for Node1Details"); // Log the received data
-        setSensorData1(latestData);
-    };
-    useEffect(() => {
-    }, [sensorData1]);
-
-    //======= MARKER 2 ================================================================================
     const handleNode2Press = () => {
         console.log("Node 2 Pressed");
         navigation.navigate('Node 2 Details');
     };
 
-    const [sensorData2, setSensorData2] = useState(null);
-    const handleDataReceived2 = (latestData) => {
-        console.log("Sensor Request Done for Node2Details"); // Log the received data
-        setSensorData2(latestData);
-    };
-    useEffect(() => {
-    }, [sensorData2]);
-
-    //======= MARKER 3 ================================================================================
     const handleNode3Press = () => {
         console.log("Node 3 Pressed");
         navigation.navigate('Node 3 Details');
     };
-
-    const [sensorData3, setSensorData3] = useState(null);
-    const handleDataReceived3 = (latestData) => {
-        console.log("Sensor Request Done for Node3Details"); // Log the received data
-        setSensorData3(latestData);
-    };
-    useEffect(() => {
-    }, [sensorData3]);
-
-
 
     return (
         <SafeAreaView style={styles.container}>
@@ -65,7 +44,7 @@ const MapScreen = () => {
             </View>
 
             <View style={styles.mapContainer}>
-                <MapWithMarkers />
+                <MapWithMarkers key={key}/>
             </View>
 
             <View style={styles.footer}>

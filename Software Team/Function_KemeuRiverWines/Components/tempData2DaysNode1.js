@@ -85,13 +85,13 @@ const Component = ({ onDataReceived }) => {
                                 month: '2-digit',
                                 hour: '2-digit',
                                 minute: '2-digit',
-                            })
+                            }).replace(',', '\n')
                             : ''
                     }
                     style={{
-                        tickLabels: { fill: 'black', angle: -20, dy: 40 }, // Set the angle to -90 for vertical labels
+                        tickLabels: { fill: 'black', angle: -20 }, // Set the angle to -90 for vertical labels
                         axis: { stroke: 'black' },
-                        grid: { stroke: 'lightgrey', strokeWidth: 1.5 },
+                        // grid: { stroke: 'lightgrey', strokeWidth: 1.5 },
                     }}
                 />
                 <VictoryAxis dependentAxis
