@@ -67,7 +67,6 @@ app.post('/forgot-password', async (req, res) => {
           return res.status(400).send({ message: 'User not found with the given username' });
       }
 
-      // 设置 nodemailer transporter (此为使用 Gmail 的示例)
       let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
@@ -80,7 +79,7 @@ app.post('/forgot-password', async (req, res) => {
           from: 'yourEmail@gmail.com',
           to: email,
           subject: 'Your Password',
-          text: `Hello ${username}, your password is: ${user.password}` // 注意: 在生产中，不建议明文发送密码
+          text: `Hello ${username}, your password is: ${user.password}`
       };
 
       transporter.sendMail(mailOptions, function(error, info){
