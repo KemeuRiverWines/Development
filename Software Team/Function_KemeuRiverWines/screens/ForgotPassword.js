@@ -7,7 +7,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
   const handleForgotPassword = async () => {
     try {
-      const response = await fetch('http://172.20.10.5:3000/forgot-password', {
+      const response = await fetch('http://192.168.1.90:3000/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -29,9 +29,9 @@ const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={require('../assets/Images/Background.jpg')} style={styles.container}>
+    <ImageBackground source={require('./assets/Images/Background.jpg')} style={styles.container}>
       <View style={styles.overlay}>
-      <Image source={require('../assets/Images/Logo.png')} style={styles.logo} />
+      <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -47,6 +47,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleForgotPassword}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
+      <Text style={styles.bottomText}>Kumeu River made by AUT 2023</Text>
       </View>
     </ImageBackground>
   );
@@ -94,6 +95,10 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
   },
+  bottomText: {
+    fontSize: 14,
+    color: '#000', 
+  }
 });
 
 export default ForgotPasswordScreen;
