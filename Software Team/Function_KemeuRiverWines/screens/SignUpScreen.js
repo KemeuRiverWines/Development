@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, TextInput, Button, StyleSheet, ImageBackground, Image, Text } from 'react-native';
 import axios from 'axios';
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://172.20.10.5:3000/register', {
+      const response = await axios.post('http://192.168.1.90:3000/register', {
         username,
         password,
       });
@@ -20,14 +20,15 @@ const Register = () => {
   };
 
   return (
-    <ImageBackground source={require('../assets/Images/Background.jpg')} style={styles.imageBackground}>
+    <ImageBackground source={require('./assets/Images/Background.jpg')} style={styles.imageBackground}>
       <View style={styles.overlay}>
-        <Image source={require('../assets/Images/Logo.png')} style={styles.logo} />
+        <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
         <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} />
         <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry={true} style={styles.input} />
         <View style={styles.buttonContainer}>
           <Button title="Register" onPress={handleRegister} color="#FFBB01"/>
         </View>
+        <Text style={styles.bottomText}>Kumeu River made by AUT 2023</Text>
       </View>
     </ImageBackground>
   );
@@ -70,6 +71,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     overflow: 'hidden',
   },
+  bottomText: {
+    fontSize: 14,
+    color: '#000', 
+  }
 });
 
 export default Register;
