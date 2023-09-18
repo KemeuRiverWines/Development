@@ -7,7 +7,7 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://172.20.10.5:3000/login', {
+      const response = await fetch('http://192.168.1.90:3000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -45,9 +45,9 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={require('../assets/Images/Background.jpg')} style={styles.container}>
+    <ImageBackground source={require('./assets/Images/Background.jpg')} style={styles.container}>
       <View style={styles.overlay}>
-      <Image source={require('../assets/Images/Logo.png')} style={styles.logo} />
+      <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
       <Text style={styles.title}>Welcome Back!</Text>
 
       <TextInput
@@ -72,6 +72,7 @@ const LoginScreen = ({ navigation }) => {
       <TouchableOpacity onPress={handleForgotPassword}>
         <Text style={styles.forgotPasswordText}>Forgot password?</Text>
       </TouchableOpacity>
+      <Text style={styles.bottomText}>Kumeu River made by AUT 2023</Text>
       </View>
     </ImageBackground>
   );
@@ -138,6 +139,10 @@ const styles = StyleSheet.create({
     color: '#4756DF',
     marginTop: 10,
     textDecorationLine: 'underline',
+  },
+  bottomText: {
+    fontSize: 14,
+    color: '#000', 
   }
 });
 
