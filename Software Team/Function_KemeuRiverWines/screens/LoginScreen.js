@@ -1,79 +1,80 @@
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, ImageBackground, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ImageBackground,
+  Image,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const PinScreen = () => {
+  const [pin, setPin] = useState('');
+  const maxPinLength = 4;
+  const navigation = useNavigation();
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch('http://192.168.1.90:3000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.status === 404) {
-        throw new Error('Endpoint not found.');
-      } else if (response.status === 500) {
-        throw new Error('Server error.');
-      }
-
-      const data = await response.json();
-
-      if (data.success) {
-        // Login successful, navigate to HomeScreen
-        navigation.navigate('TemperatureScreen');
-      } else {
-        // Login failed, display error message
-        Alert.alert("Error", data.message);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      Alert.alert("Error", "There was an issue with the request. Please try again.");
+  const handlePress = (num) => {
+    if (typeof num === 'number' && pin.length < maxPinLength) {
+      setPin(pin + num);
+    } else if (num === 'Forget PIN?') {
+      navigation.navigate('ForgotPassword');
+    } else if (num === 'delete') {
+      handleDelete();
     }
   };
 
-  const handleCreateAccount = () => {
-    navigation.navigate('SignUpScreen');
+  const handleDelete = () => {
+    setPin(pin.slice(0, -1));
   };
 
-  const handleForgotPassword = () => {
-    navigation.navigate('ForgotPassword');
-  };
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // 当这个界面获得焦点时，重置 pin
+      setPin('');
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    if (pin.length === maxPinLength) {
+      if (pin === '0000') {
+        navigation.navigate('TemperatureScreen');
+      } else {
+        Alert.alert('Incorrent PIN!');
+        setPin('');
+      }
+    }
+  }, [pin]);
 
   return (
     <ImageBackground source={require('./assets/Images/Background.jpg')} style={styles.container}>
       <View style={styles.overlay}>
       <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
-      <Text style={styles.title}>Welcome Back!</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        onChangeText={(text) => setUsername(text)}
-        value={username}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-      />
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Sign in</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.signUpButton} onPress={handleCreateAccount}>
-        <Text style={styles.buttonText}>Sign up</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleForgotPassword}>
-        <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-      </TouchableOpacity>
-      <Text style={styles.bottomText}>Kumeu River made by AUT 2023</Text>
+      <Text style={styles.title}>Please Input PIN</Text>
+      <View style={styles.pinContainer}>
+        {Array.from({ length: maxPinLength }).map((_, idx) => (
+          <View
+            key={idx}
+            style={[styles.pinDot, pin.length > idx ? styles.filledDot : null]}
+          />
+        ))}
       </View>
+      <View style={styles.numberPad}>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 'Forget PIN?', 0, 'delete'].map((num) => (
+          <TouchableOpacity
+            key={num.toString()}
+            style={styles.numberButton}
+            onPress={() => handlePress(num)}
+          >
+            <Text style={styles.numberText}>{num}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
     </ImageBackground>
   );
 };
@@ -83,7 +84,42 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+  pinContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 250,
+    marginBottom: 30,
+  },
+  pinDot: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  filledDot: {
+    backgroundColor: 'black',
+  },
+  numberPad: {
+    width: 250,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  numberButton: {
+    width: '30%',
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  numberText: {
+    fontSize: 24,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -97,53 +133,6 @@ const styles = StyleSheet.create({
     height: 100,
     marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 30,
-    color: '#333',
-  },
-  input: {
-    width: '100%',
-    height: 45,
-    borderWidth: 1,
-    borderColor: '#E0E6EE',
-    borderRadius: 8,
-    marginBottom: 15,
-    paddingHorizontal: 15,
-    backgroundColor: 'white',
-  },
-  loginButton: {
-    backgroundColor: '#FFBB01',
-    width: '100%',
-    height: 45,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  signUpButton: {
-    backgroundColor: '#E0E6EE',
-    width: '100%',
-    height: 45,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: '#000000',
-    fontSize: 18,
-  },
-  forgotPasswordText: {
-    color: '#4756DF',
-    marginTop: 10,
-    textDecorationLine: 'underline',
-  },
-  bottomText: {
-    fontSize: 14,
-    color: '#000', 
-  }
 });
 
-export default LoginScreen;
+export default PinScreen;
