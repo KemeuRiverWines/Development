@@ -34,12 +34,6 @@ const ForgotPasswordScreen = ({ navigation }) => {
       <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
       <TextInput
         style={styles.input}
-        placeholder="Username"
-        onChangeText={(text) => setUsername(text)}
-        value={username}
-      />
-      <TextInput
-        style={styles.input}
         placeholder="Email"
         onChangeText={(text) => setEmail(text)}
         value={email}
