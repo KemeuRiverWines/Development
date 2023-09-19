@@ -3,9 +3,9 @@ import { ActivityIndicator, StyleSheet, View, Text, ScrollView } from "react-nat
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent2';
-import TempData10Days from '../Components/TempData2DaysNode2';
+import TempData10Days from '../Components/tempData2DaysNode2';
 
-function Node1Details(props) {
+function Node1Details() {
 
     const [sensorData2, setsensorData2] = useState(null);
     const handleDataReceived1 = (latestData) => {

@@ -1,10 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View, Text, ScrollView, Button } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View, Text, ScrollView, Button, ImageBackground } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native';
 
 import MapWithMarkers from "../Components/MapWithMarkers";
+
+import Background from '../assets/Images/Background.jpg';
 
 const MapScreen = () => {
 
@@ -20,7 +22,7 @@ const MapScreen = () => {
     }, []);
 
     const navigation = useNavigation();
-    
+
     const handleNode1Press = () => {
         console.log("Node 1 Pressed");
         navigation.navigate('Node 1 Details');
@@ -39,25 +41,25 @@ const MapScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
 
-            <View style={styles.header}>
-                <Text style={styles.headerText}>Kumeu River Wines</Text>
-            </View>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Kumeu River Wines</Text>
+                </View>
 
-            <View style={styles.mapContainer}>
-                <MapWithMarkers key={key}/>
-            </View>
+                <View style={styles.mapContainer}>
+                    <MapWithMarkers key={key} />
+                </View>
 
-            <View style={styles.footer}>
-                <TouchableOpacity style={styles.nodeButton} onPress={handleNode1Press}>
-                    <Text style={styles.nodeButtonText}>Node 1</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.nodeButton} onPress={handleNode2Press}>
-                    <Text style={styles.nodeButtonText}>Node 2</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.nodeButton} onPress={handleNode3Press}>
-                    <Text style={styles.nodeButtonText}>Node 3</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.nodeButton} onPress={handleNode1Press}>
+                        <Text style={styles.nodeButtonText}>Node 1</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.nodeButton} onPress={handleNode2Press}>
+                        <Text style={styles.nodeButtonText}>Node 2</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.nodeButton} onPress={handleNode3Press}>
+                        <Text style={styles.nodeButtonText}>Node 3</Text>
+                    </TouchableOpacity>
+                </View>
 
         </SafeAreaView>
     )
@@ -66,6 +68,9 @@ const MapScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: '#fff',
     },
     header: {
         width: "100%",
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
         height: "80%",
         marginTop: "2%",
         alignSelf: "center",
-        backgroundColor: "grey",
+        // backgroundColor: "grey",
         borderRadius: 20,
         overflow: "hidden",
     },

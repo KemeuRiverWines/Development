@@ -18,6 +18,9 @@ import Node1Forecast from './screens/Node1Forecast';
 import SensorControlScreen from './screens/SensorControlScreen';
 import MapScreen from './screens/MapScreen';
 
+import ForgotPassword from './screens/ForgotPassword';
+import LoginScreen from './screens/LoginScreen';
+
 const Stack = createStackNavigator();
 
 
@@ -27,7 +30,7 @@ const App = () => {
     <>
       <StatusBar barStyle="light-content" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MapScreen">
+        <Stack.Navigator initialRouteName="Login Screen">
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Weather Page" component={WeatherPage} />
           <Stack.Screen name="Test Component" component={TestComponent} />
@@ -41,6 +44,10 @@ const App = () => {
           <Stack.Screen name="Sensor Control Screen" component={SensorControlScreen} options={{headerTitleAlign: "center"}} />
 
           <Stack.Screen name="MapScreen" component={MapScreen} options={{headerShown: false}} />
+
+          <Stack.Screen name="Forgot Password" component={ForgotPassword} options={{headerShown: false}} />
+          <Stack.Screen name="Login Screen" component={LoginScreen} options={{headerShown: false}} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </>

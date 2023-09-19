@@ -2,8 +2,8 @@ import React, { Component, useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, Text, ScrollView } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-import SensorComponent3 from '../Components/SensorComponent3';
-import TempData10Days from '../Components/TempData2DaysNode3';
+import SensorComponent3 from '../Components/SensorComponent3.js';
+import TempData10Days from '../Components/tempData2DaysNode3.js';
 
 function Node1Details(props) {
 
