@@ -61,7 +61,7 @@ const Component = ({ onDataReceived }) => {
             <VictoryChart
                 style={{
                     parent: {
-                        backgroundColor: 'white',
+                        backgroundColor: 'rgba(255, 255, 255, 0.7)',
                     },
                 }}>
                 <VictoryLabel

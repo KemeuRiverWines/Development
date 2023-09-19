@@ -1,12 +1,13 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View, Text, ScrollView, Button, ImageBackground } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View, Text, ScrollView, Button, Image } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native';
 
 import MapWithMarkers from "../Components/MapWithMarkers";
 
-import Background from '../assets/Images/Background.jpg';
+import AUTLogo from '../assets/Images/AUTLogo.png';
+import Logo from '../assets/Images/Logo.png';
 
 const MapScreen = () => {
 
@@ -41,25 +42,49 @@ const MapScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
 
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Kumeu River Wines</Text>
-                </View>
+            <View style={styles.header}>
+                <Text style={styles.headerText}>Kumeu River Wines</Text>
+            </View>
 
-                <View style={styles.mapContainer}>
-                    <MapWithMarkers key={key} />
-                </View>
+            <View style={styles.mapContainer}>
+                <MapWithMarkers key={key} />
+            </View>
 
-                <View style={styles.footer}>
-                    <TouchableOpacity style={styles.nodeButton} onPress={handleNode1Press}>
-                        <Text style={styles.nodeButtonText}>Node 1</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.nodeButton} onPress={handleNode2Press}>
-                        <Text style={styles.nodeButtonText}>Node 2</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.nodeButton} onPress={handleNode3Press}>
-                        <Text style={styles.nodeButtonText}>Node 3</Text>
-                    </TouchableOpacity>
-                </View>
+            <View style={styles.footer}>
+                <TouchableOpacity style={styles.nodeButton} onPress={handleNode1Press}>
+                    <Text style={styles.nodeButtonText}>Node 1</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.nodeButton} onPress={handleNode2Press}>
+                    <Text style={styles.nodeButtonText}>Node 2</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.nodeButton} onPress={handleNode3Press}>
+                    <Text style={styles.nodeButtonText}>Node 3</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={{
+                position: 'absolute', // Position it absolutely
+                top: '0.5%', // At the top
+                right: '0.5%', // On the right
+            }}>
+                <Image
+                    source={AUTLogo} // Replace with your image URL
+                    style={{ width: 100, height: 50 }}
+                    resizeMode="contain"
+                />
+            </View>
+
+            <View style={{
+                position: 'absolute', // Position it absolutely
+                top: '0.5%', // At the top
+                left: '0.5%', // On the right
+            }}>
+                <Image
+                    source={Logo} // Replace with your image URL
+                    style={{ width: 100, height: 50 }}
+                    resizeMode="contain"
+                />
+            </View>
 
         </SafeAreaView>
     )

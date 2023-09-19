@@ -1,11 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, Touchable } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, Touchable, ImageBackground, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent1';
-import TempData10Days from '../Components/tempData2DaysNode1';
+import TempData2DaysNode1 from '../Components/tempData2DaysNode1';
 
-import Background from '../assets/Images/Background.jpg';
+import AUTLogo from '../assets/Images/AUTLogo.png';
+import Logo from '../assets/Images/Logo.png';
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -21,7 +22,33 @@ function Node1Details(props) {
     }, [sensorData1]);
 
     return (
+        // <ImageBackground source={Background} style={styles.container}>
         <View style={styles.container}>
+
+            <View style={{
+                position: 'absolute', // Position it absolutely
+                top: '0.5%', // At the top
+                right: '0.5%', // On the right
+            }}>
+                <Image
+                    source={AUTLogo} // Replace with your image URL
+                    style={{ width: 100, height: 50 }}
+                    resizeMode="contain"
+                />
+            </View>
+
+            <View style={{
+                position: 'absolute', // Position it absolutely
+                top: '0.5%', // At the top
+                left: '0.5%', // On the right
+            }}>
+                <Image
+                    source={Logo} // Replace with your image URL
+                    style={{ width: 100, height: 50 }}
+                    resizeMode="contain"
+                />
+            </View>
+
             <SensorComponent1 onDataReceived={handleDataReceived1} />
             <View style={styles.header}>
                 <Text style={styles.node1}>Node 1</Text>
@@ -133,7 +160,7 @@ function Node1Details(props) {
                     </View>
                 </View>
                 <View>
-                    <TempData10Days />
+                    <TempData2DaysNode1 />
                 </View>
 
             </ScrollView>

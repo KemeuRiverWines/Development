@@ -1,9 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, ScrollView } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent2';
 import TempData10Days from '../Components/tempData2DaysNode2';
+
+import AUTLogo from '../assets/Images/AUTLogo.png';
+import Logo from '../assets/Images/Logo.png';
 
 function Node1Details() {
 
@@ -18,6 +21,31 @@ function Node1Details() {
 
     return (
         <View style={styles.container}>
+
+            <View style={{
+                position: 'absolute', // Position it absolutely
+                top: '0.5%', // At the top
+                right: '0.5%', // On the right
+            }}>
+                <Image
+                    source={AUTLogo} // Replace with your image URL
+                    style={{ width: 100, height: 50 }}
+                    resizeMode="contain"
+                />
+            </View>
+
+            <View style={{
+                position: 'absolute', // Position it absolutely
+                top: '0.5%', // At the top
+                left: '0.5%', // On the right
+            }}>
+                <Image
+                    source={Logo} // Replace with your image URL
+                    style={{ width: 100, height: 50 }}
+                    resizeMode="contain"
+                />
+            </View>
+
             <SensorComponent1 onDataReceived={handleDataReceived1} />
             <View style={styles.header}>
                 <Text style={styles.node1}>Node 2</Text>

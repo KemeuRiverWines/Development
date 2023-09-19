@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Background from '../assets/Images/Background.jpg';
 import Logo from '../assets/Images/Logo.png';
+import AUTLogo from '../assets/Images/AUTLogo.png';
 
 const PinScreen = () => {
   const [pin, setPin] = useState('');
@@ -55,6 +56,7 @@ const PinScreen = () => {
   return (
     <ImageBackground source={Background} style={styles.container}>
       <View style={styles.overlay}>
+      <Image source={AUTLogo} style={styles.logo} />
       <Image source={Logo} style={styles.logo} />
       <Text style={styles.title}>Please Input PIN</Text>
       <View style={styles.pinContainer}>
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginBottom: 20,
+    resizeMode: 'contain',
   },
 });
 
