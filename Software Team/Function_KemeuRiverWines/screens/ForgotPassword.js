@@ -29,9 +29,9 @@ const ForgotPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={require('./assets/Images/Background.jpg')} style={styles.container}>
+    <ImageBackground source={require('../assets/Images/Background.jpg')} style={styles.container}>
       <View style={styles.overlay}>
-      <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
+      <Image source={require('../assets/Images/Logo.png')} style={styles.logo} />
       <TextInput
         style={styles.input}
         placeholder="Email"

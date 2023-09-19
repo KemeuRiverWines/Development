@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import Background from '../assets/Images/Background.jpg';
+import Logo from '../assets/Images/Logo.png';
+
 const PinScreen = () => {
   const [pin, setPin] = useState('');
   const maxPinLength = 4;
@@ -32,7 +35,6 @@ const PinScreen = () => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      // 当这个界面获得焦点时，重置 pin
       setPin('');
     });
 
@@ -42,7 +44,7 @@ const PinScreen = () => {
   useEffect(() => {
     if (pin.length === maxPinLength) {
       if (pin === '0000') {
-        navigation.navigate('TemperatureScreen');
+        navigation.navigate('Temperature Screen');
       } else {
         Alert.alert('Incorrent PIN!');
         setPin('');
@@ -51,9 +53,9 @@ const PinScreen = () => {
   }, [pin]);
 
   return (
-    <ImageBackground source={require('./assets/Images/Background.jpg')} style={styles.container}>
+    <ImageBackground source={Background} style={styles.container}>
       <View style={styles.overlay}>
-      <Image source={require('./assets/Images/Logo.png')} style={styles.logo} />
+      <Image source={Logo} style={styles.logo} />
       <Text style={styles.title}>Please Input PIN</Text>
       <View style={styles.pinContainer}>
         {Array.from({ length: maxPinLength }).map((_, idx) => (

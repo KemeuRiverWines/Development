@@ -15,7 +15,7 @@ import SensorControlScreen from './screens/SensorControlScreen';
 import MapScreen from './screens/MapScreen';
 
 import LoginScreen from './screens/LoginScreen';
-import SignUpScreen from './screens/SignUpScreen';
+// import SignUpScreen from './screens/SignUpScreen';
 import ForgotPassword from './screens/ForgotPassword';
 
 const Stack = createStackNavigator();
@@ -36,9 +36,8 @@ const App = () => {
           <Stack.Screen name="Node3Details" component={Node3Details} />
           <Stack.Screen name="SensorControlScreen" component={SensorControlScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}} />
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          {/* <Stack.Screen name="SignUpScreen" component={SignUpScreen} /> */}
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-
           <Stack.Screen name="MapScreen" component={MapScreen} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
