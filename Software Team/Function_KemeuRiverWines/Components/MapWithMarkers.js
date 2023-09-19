@@ -74,6 +74,8 @@ const MapWithMarker = () => {
                 mapType="satellite"
                 showsUserLocation={true}
                 >
+                
+                <Marker coordinate={{ latitude: -36.792995, longitude: 174.551799 }} />
                 <Marker
                     coordinate={{ latitude: -36.777639, longitude: 174.565313 }}>
                     <Callout onPress={handleNode1Press}>

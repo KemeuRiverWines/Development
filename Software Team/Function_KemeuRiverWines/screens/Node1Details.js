@@ -114,7 +114,7 @@ function Node1Details(props) {
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
                                     {sensorData1 !== null ? (
-                                        sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}` : <ActivityIndicator size="large" />
+                                        sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
