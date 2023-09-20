@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent3 from '../Components/SensorComponent3.js';
@@ -55,6 +55,16 @@ function Node1Details(props) {
                     ) : null}
                 </Text>
             </View>
+            <View style={styles.buttons}>
+                    <View style={styles.settingsButton}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Node 3 Temperature Forecast')}>
+                            <Text style={styles.settingsText}>
+                                Forecast Temp
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.mapViewContainer}>
                     <MapView
@@ -345,11 +355,33 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         backgroundColor: "grey",
         borderRadius: 20,
-
     },
     scrollView: {
         alignContent: "center",
-    }
+    },
+    settingsButton: {
+        width: 100,
+        height: 50,
+        backgroundColor: "rgba(0,78,124,1)",
+        borderRadius: 20,
+        marginTop: 10,
+        marginHorizontal: 10,
+        alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    settingsText: {
+        color: "white",
+        fontSize: 15,
+        textAlign: "center",
+    },
+    buttons: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 10,
+    },
 });
 
 export default Node1Details;

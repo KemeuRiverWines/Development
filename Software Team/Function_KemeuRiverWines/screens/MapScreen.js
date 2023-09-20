@@ -62,6 +62,12 @@ const MapScreen = () => {
                 </TouchableOpacity>
             </View>
 
+            <View style={styles.footer2}>
+                <TouchableOpacity style={styles.nodeButtonHistoricData} onPress={() => navigation.navigate('Historic Data')}>
+                    <Text style={styles.nodeButtonText}>Historic Data</Text>
+                </TouchableOpacity>
+            </View>
+
             <View style={{
                 position: 'absolute', // Position it absolutely
                 top: '0.5%', // At the top
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         width: "96%",
-        height: "80%",
+        height: "72%",
         marginTop: "2%",
         alignSelf: "center",
         // backgroundColor: "grey",
@@ -124,15 +130,32 @@ const styles = StyleSheet.create({
     },
     footer: {
         width: "100%",
-        height: "12%",
+        height: "10%",
         marginTop: "2%",
         // backgroundColor: "grey",
         flexDirection: "row",
     },
+    footer2: {
+        width: "100%",
+        height: "10%",
+        // marginTop: "2%",
+        // backgroundColor: "red",
+        flexDirection: "row",
+    },
     nodeButton: {
         width: "30%",
-        height: "75%",
-        marginTop: "1%",
+        height: "90%",
+        // marginTop: "2%",
+        marginLeft: "2%",
+        backgroundColor: "rgba(0,78,124,1)",
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    nodeButtonHistoricData: {
+        width: "95%",
+        height: "90%",
+        // marginTop: "2%",
         marginLeft: "2%",
         backgroundColor: "rgba(0,78,124,1)",
         borderRadius: 20,

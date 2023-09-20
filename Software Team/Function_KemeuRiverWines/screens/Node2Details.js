@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent2';
@@ -8,7 +8,7 @@ import TempData10Days from '../Components/tempData2DaysNode2';
 import AUTLogo from '../assets/Images/AUTLogo.png';
 import Logo from '../assets/Images/Logo.png';
 
-function Node1Details() {
+function Node1Details(props) {
 
     const [sensorData2, setsensorData2] = useState(null);
     const handleDataReceived1 = (latestData) => {
@@ -55,6 +55,16 @@ function Node1Details() {
                     ) : null}
                 </Text>
             </View>
+            <View style={styles.buttons}>
+                    <View style={styles.settingsButton}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Node 2 Temperature Forecast')}>
+                            <Text style={styles.settingsText}>
+                                Forecast Temp
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.mapViewContainer}>
                     <MapView
@@ -345,11 +355,33 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         backgroundColor: "grey",
         borderRadius: 20,
-
     },
     scrollView: {
         alignContent: "center",
-    }
+    },
+    settingsButton: {
+        width: 100,
+        height: 50,
+        backgroundColor: "rgba(0,78,124,1)",
+        borderRadius: 20,
+        marginTop: 10,
+        marginHorizontal: 10,
+        alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    settingsText: {
+        color: "white",
+        fontSize: 15,
+        textAlign: "center",
+    },
+    buttons: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 10,
+    },
 });
 
 export default Node1Details;

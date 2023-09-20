@@ -18,7 +18,6 @@ const Node1Forecast = () => {
         return forecastId;
     };
 
-
     return (
         <SafeAreaView style={styles.container}>
             <View>
