@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const API_URL = 'http://122.57.69.252:3000/api/data/all';
+const API_URL = 'http://115.188.10.251:3000/api/data/all';
 
 const SensorComponent2 = ({ onDataReceived }) => {
     
@@ -36,7 +36,7 @@ const SensorComponent2 = ({ onDataReceived }) => {
             onDataReceived(latestEntry1);
             //console.log(latestEntry1);
 
-            // console.log('Sensor Request Successful = http://122.57.69.252:3000/api/data/all');
+            // console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all');
         } catch (error) {
             console.error('Error fetching data:', error);
         }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const API_URL = 'http://122.57.69.252:3000/api/data/all/temp';
+const API_URL = 'http://115.188.10.251:3000/api/data/all/temp';
 const node_id = 2;
 
 const Component = ({ onDataReceived }) => {
@@ -33,7 +33,7 @@ const Component = ({ onDataReceived }) => {
             setTemperatureData(temperatures);
             setTimestampData(timestamps);
 
-            console.log('Sensor Request Successful = http://122.57.69.252:3000/api/data/all/temp');
+            console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
             // console.log(temperatures);
             // console.log(timestamps);
         } catch (error) {

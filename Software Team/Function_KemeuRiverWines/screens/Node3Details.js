@@ -2,25 +2,66 @@ import React, { Component, useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-import SensorComponent3 from '../Components/SensorComponent3.js';
 import TempData10Days from '../Components/tempData2DaysNode3.js';
+import HortPlusApiRequest from '../Components/HortPlusApiRequest.js';
 
 import AUTLogo from '../assets/Images/AUTLogo.png';
 import Logo from '../assets/Images/Logo.png';
 
-function Node1Details(props) {
+function Node3Details(props) {
 
-    const [sensorData3, setSensorData1] = useState(null);
-    const handleDataReceived1 = (latestData) => {
-        console.log("Sensor Request Done for Node1Details"); // Log the received data
-        setSensorData1(latestData);
-    };
+    const [weatherData, setWeatherData] = useState(null);
+    const [temp, setTemp] = useState(null);
+    const [windSpeed, setWindSpeed] = useState(null);
+    const [leafWetness, setLeafWetness] = useState(null);
+    const [rainfall, setRainfall] = useState(null);
+    const [dewPoint, setDewPoint] = useState(null);
+    const [humidity, setHumidity] = useState(null);
+    const [timeStamp, setTimeStamp] = useState(null);
+
     useEffect(() => {
-        //console.log("Console Log 1", sensorData3); // This will log the updated value of sensorData3
-    }, [sensorData3]);
+        if (temp && dewPoint) {
+            let T = parseFloat(temp);
+            let TD = parseFloat(dewPoint);
+            let Es = 6.11 * Math.pow(10, (7.5*T)/(237.7+T));
+            let E = 6.11 * Math.pow(10, (7.5*TD)/(237.7+TD));
+            let RH = (E/Es) * 100;
+            setHumidity(RH.toFixed(1));
+        }
+    }, [temp, dewPoint]);
+
+    const handleDataReceived = (data) => {
+        setWeatherData(data);
+        if (data.TDDATA && data.TDDATA.length > 0) {
+            lastTemperature = data.TDDATA[data.TDDATA.length - 1];
+            setTemp(parseFloat(lastTemperature).toFixed(1));  // Set the temperature to the last element of TDDATA with 1 decimal place
+        }
+        if (data.WSDATA && data.WSDATA.length > 0) {
+            lastWindSpeed = data.WSDATA[data.WSDATA.length - 1];
+            setWindSpeed(parseFloat(lastWindSpeed).toFixed(1));  // Set the wind speed to the last element of WSDATA with 1 decimal place
+        }
+        if (data.LSDATA && data.LSDATA.length > 0) {
+            lastLeafWetness = data.LSDATA[data.LSDATA.length - 1];
+            setLeafWetness(parseFloat(lastLeafWetness).toFixed(0));  // Set the leaf wetness to the last element of LSDATA with 1 decimal place
+        }
+        if (data.RNDATA && data.RNDATA.length > 0) {
+            lastRainfall = data.RNDATA[data.RNDATA.length - 1];
+            setRainfall(parseFloat(lastRainfall).toFixed(1));  // Set the rainfall to the last element of RNDATA with 1 decimal place
+        }
+        if (data.DPDATA && data.DPDATA.length > 0) {
+            lastDewPoint = data.DPDATA[data.DPDATA.length - 1];
+            setDewPoint(parseFloat(lastDewPoint).toFixed(1));  // Set the dew point to the last element of DPDATA with 1 decimal place
+        }
+        if (data.STOPSTAMP && data.STOPSTAMP.length > 0) {
+            lastTimeStamp = data.STOPSTAMP[data.STOPSTAMP.length - 1];
+            x = new Date(lastTimeStamp * 1000);
+            setTimeStamp(x);  // Set the timestamp to the last element of STOPSTAMP
+        }
+    };
 
     return (
         <View style={styles.container}>
+            <HortPlusApiRequest onDataReceived={handleDataReceived} />
 
             <View style={{
                 position: 'absolute', // Position it absolutely
@@ -46,25 +87,24 @@ function Node1Details(props) {
                 />
             </View>
 
-            <SensorComponent3 onDataReceived={handleDataReceived1} />
             <View style={styles.header}>
-                <Text style={styles.node1}>Node 3</Text>
+                <Text style={styles.node1}>Hort Plus</Text>
                 <Text style={styles.lastUpdated}>
-                    {sensorData3 !== null ? (
-                        sensorData3.timeAgo !== null ? `Updated ${sensorData3.timeAgo}` : <ActivityIndicator size="large" />
+                    {timeStamp !== null ? (
+                        timeStamp !== null ? `${timeStamp.toLocaleString()}` : <ActivityIndicator size="large" />
                     ) : null}
                 </Text>
             </View>
-            <View style={styles.buttons}>
-                    <View style={styles.settingsButton}>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Node 3 Temperature Forecast')}>
-                            <Text style={styles.settingsText}>
-                                Forecast Temp
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
+            {/* <View style={styles.buttons}>
+                <View style={styles.settingsButton}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Node 3 Temperature Forecast')}>
+                        <Text style={styles.settingsText}>
+                            Forecast Temp
+                        </Text>
+                    </TouchableOpacity>
                 </View>
+
+            </View> */}
             <ScrollView style={styles.scrollView}>
                 <View style={styles.mapViewContainer}>
                     <MapView
@@ -92,8 +132,8 @@ function Node1Details(props) {
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
                                 <Text style={styles.temperatureHeader}>Temperature</Text>
                                 <Text style={styles.temperatureData}>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.temperature !== null ? `${sensorData3.temperature}°c` : <ActivityIndicator size="large" />
+                                    {temp !== null ? (
+                                        temp !== null ? `${temp}°c` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -102,8 +142,8 @@ function Node1Details(props) {
                             <View style={styles.rect1}>
                                 <Text style={styles.humidityHeader}>Humidity</Text>
                                 <Text style={styles.humidityData1}>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.humidity !== null ? `${sensorData3.humidity}` : <ActivityIndicator size="large" />
+                                    {humidity !== null ? (
+                                        humidity !== null ? `${humidity}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -112,8 +152,8 @@ function Node1Details(props) {
                             <View style={styles.rect2}>
                                 <Text style={styles.dewPointHeader}>Dew Point</Text>
                                 <Text style={styles.dewPointData}>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.dew_point !== null ? `${sensorData3.dew_point}` : <ActivityIndicator size="large" />
+                                    {dewPoint !== null ? (
+                                        dewPoint !== null ? `${dewPoint}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -124,8 +164,8 @@ function Node1Details(props) {
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
                                 <Text style={styles.windSpeedHeader}>Wind Speed</Text>
                                 <Text style={styles.windSpeedData}>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.wind_speed !== null ? `${sensorData3.wind_speed}` : <ActivityIndicator size="large" />
+                                    {windSpeed !== null ? (
+                                        windSpeed !== null ? `${windSpeed}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -134,8 +174,8 @@ function Node1Details(props) {
                             <View style={styles.rect4}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.leaf_wetness !== null ? `${sensorData3.leaf_wetness}` : <ActivityIndicator size="large" />
+                                    {leafWetness !== null ? (
+                                        leafWetness !== null ? `${leafWetness}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -143,9 +183,11 @@ function Node1Details(props) {
                         <View style={styles.rainFallGroup}>
                             <View style={styles.rect5}>
                                 <Text style={styles.rainFall2}>Rain Fall</Text>
-                                <Text style={styles.dewPointData1}>{sensorData3 !== null ? (
-                                    sensorData3.rainfall !== null ? `${sensorData3.rainfall}` : <ActivityIndicator size="large" />
-                                ) : null}</Text>
+                                <Text style={styles.dewPointData1}>
+                                    {rainfall !== null ? (
+                                        rainfall !== null ? `${rainfall}` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
                             </View>
                         </View>
                     </View>
@@ -226,7 +268,7 @@ const styles = StyleSheet.create({
     },
     temperatureData: {
         color: "white",
-        fontSize: 25,
+        fontSize: 30,
         textAlign: "center",
         marginTop: 12
     },
@@ -384,4 +426,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Node1Details;
+export default Node3Details;

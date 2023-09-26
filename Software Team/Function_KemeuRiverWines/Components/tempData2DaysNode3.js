@@ -2,44 +2,48 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const API_URL = 'http://122.57.69.252:3000/api/data/all/temp';
-const node_id = 3;
 
 const Component = ({ onDataReceived }) => {
-    const [temperatureData, setTemperatureData] = useState([]);
+    
+    const [data, setData] = useState(null);
     const [timestampData, setTimestampData] = useState([]);
+    const [temperatureData, setTemperatureData] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        const now = new Date();
+        now.setHours(now.getHours() + 12);
+        const yesterday = new Date(now.getTime());
+        yesterday.setDate(yesterday.getDate() - 1);
+        yesterday.setHours(yesterday.getHours() + 12);
+        // console.log('Yesterday:', yesterday);
+        // console.log('Now:', now);
+
+        const start = yesterday.toISOString().slice(0, -10) + "00:00";
+        const stop = now.toISOString().slice(0, -10) + "00:00";
+
+        // console.log('Start:', start);
+        // console.log('Stop:', stop);
+
+        const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setData(json);
+                onDataReceived(json);  // Call the function prop here
+                setTimestampData(json.STOPSTAMP);
+                setTemperatureData(json.TDDATA);
+            })
+            .catch((error) => console.error(error));
     }, []);
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-
-            // Filter data for the given node_id
-            const twoDaysAgo = new Date();
-            twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-            const sensorOneData = data.filter(entry => entry.node_id === node_id && new Date(entry.timestamp) >= twoDaysAgo);
-
-            // Extract temperature and timestamp values into separate arrays
-            const temperatures = sensorOneData.map(entry => entry.temperature);
-            const timestamps = sensorOneData.map(entry => entry.timestamp);
-
-            temperatures.reverse();
-            timestamps.reverse();
-
-            setTemperatureData(temperatures);
-            setTimestampData(timestamps);
-
-            console.log('Sensor Request Successful = http://122.57.69.252:3000/api/data/all/temp');
-            // console.log(temperatures);
-            // console.log(timestamps);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+    // console.log(data);    
 
     // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
@@ -107,17 +111,3 @@ const Component = ({ onDataReceived }) => {
 };
 
 export default Component;
-
-// const styles = StyleSheet.create({
-//     container: {
-//         height: 100,
-//     }
-// });
-
-//under VictoryAxis
-                        // If you want to show the date as well, you can use the below tickFormat instead
-                        // tickFormat={(timestamp, index, ticks) =>
-                        //     index === 0 || hasHourChanged(ticks[index - 1], timestamp)
-                        //         ? new Date(timestamp).toLocaleString()
-                        //         : ''
-                        // }

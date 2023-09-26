@@ -58,7 +58,7 @@ const MapScreen = () => {
                     <Text style={styles.nodeButtonText}>Node 2</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.nodeButton} onPress={handleNode3Press}>
-                    <Text style={styles.nodeButtonText}>Node 3</Text>
+                    <Text style={styles.nodeButtonText}>Hort Plus</Text>
                 </TouchableOpacity>
             </View>
 

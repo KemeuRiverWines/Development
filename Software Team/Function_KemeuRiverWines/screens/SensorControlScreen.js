@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import axios from "axios";
 
 const MAX_VALUE_COUNT = 12; //Max values that can be send in a payload
-const API_URL = "http://122.57.69.252:3000/api";
+const API_URL = "http://115.188.10.251:3000/api";
 const MIN_SEND_MINUTE = 1; // Min send delay is 1 min
 const MAX_SEND_MINUTE = 240; //Max Send delay is 4 hours
 
