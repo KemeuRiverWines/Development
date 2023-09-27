@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import SensorComponent1 from './SensorComponent1';
 import SensorComponent2 from './SensorComponent2';
-import SensorComponent3 from './SensorComponent3';
+// import SensorComponent3 from './SensorComponent3';
 
 const MapWithMarker = () => {
 
@@ -42,7 +42,7 @@ const MapWithMarker = () => {
     //======= MARKER 3 ================================================================================
     const handleNode3Press = () => {
         console.log("Node 3 Pressed");
-        navigation.navigate('Node 3 Details');
+        navigation.navigate('Hort Plus Details');
         // this.marker1.Callout.show();
     };
 
@@ -59,7 +59,7 @@ const MapWithMarker = () => {
 
             <SensorComponent1 onDataReceived={handleDataReceived1} />
             <SensorComponent2 onDataReceived={handleDataReceived2} />
-            <SensorComponent3 onDataReceived={handleDataReceived3} />
+            {/* <SensorComponent3 onDataReceived={handleDataReceived3} /> */}
 
             <MapView
                 provider={MapView.PROVIDER_GOOGLE}
@@ -125,25 +125,10 @@ const MapWithMarker = () => {
                     </Callout>
                 </Marker>
                 <Marker
-                    coordinate={{ latitude: -36.775706, longitude: 174.568581 }}>
+                    coordinate={{ latitude: -36.77723, longitude: 174.56915 }}>
                     <Callout onPress={handleNode3Press}>
-                        <View style={styles.callout}>
-                            <Text>Node 3</Text>
-                            <Text>
-                                {sensorData3 !== null ? (
-                                    sensorData3.timeAgo !== null ? `Updated ${sensorData3.timeAgo}` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                            <Text>
-                                {sensorData3 !== null ? (
-                                    sensorData3.temperature !== null ? `Temperature: ${sensorData3.temperature}°c` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
-                            <Text>
-                                {sensorData3 !== null ? (
-                                    sensorData3.humidity !== null ? `Humidity: ${sensorData3.humidity}%` : <ActivityIndicator size="large" />
-                                ) : null}
-                            </Text>
+                        <View>
+                            <Text>HortPlus Node</Text>
                             <Button title="See More" />
                         </View>
                     </Callout>

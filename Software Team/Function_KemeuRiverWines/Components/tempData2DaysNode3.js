@@ -1,63 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
 
-const Component = ({ onDataReceived }) => {
-    
-    const [data, setData] = useState(null);
+const Component = () => {
+
+
     const [timestampData, setTimestampData] = useState([]);
     const [temperatureData, setTemperatureData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const now = new Date();
-        now.setHours(now.getHours() + 12);
-        const yesterday = new Date(now.getTime());
-        yesterday.setDate(yesterday.getDate() - 1);
-        yesterday.setHours(yesterday.getHours() + 12);
-        // console.log('Yesterday:', yesterday);
-        // console.log('Now:', now);
+        setTimeout(() => {
+            const now = new Date();
+            now.setHours(now.getHours() + 12);
+            const fourDaysAgo = new Date(now.getTime());
+            fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
+            fourDaysAgo.setHours(fourDaysAgo.getHours() + 12);
 
-        const start = yesterday.toISOString().slice(0, -10) + "00:00";
-        const stop = now.toISOString().slice(0, -10) + "00:00";
+            const start = fourDaysAgo.toISOString().slice(0, -10) + "00:00";
+            const stop = now.toISOString().slice(0, -10) + "00:00";
 
-        // console.log('Start:', start);
-        // console.log('Stop:', stop);
+            const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
+            console.log(url);
 
-        const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
-
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
-            }
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                setData(json);
-                onDataReceived(json);  // Call the function prop here
-                setTimestampData(json.STOPSTAMP);
-                setTemperatureData(json.TDDATA);
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
+                }
             })
-            .catch((error) => console.error(error));
+                .then((response) => response.json())
+                .then((json) => {
+                    const convertedTimestamps = json.SDATA.map(timestamp => new Date(timestamp * 1000));
+                    setTimestampData(convertedTimestamps);
+                    const convertedTemperatureData = json.TDDATA.map(temp => parseFloat(temp));
+                    setTemperatureData(convertedTemperatureData);
+                    setIsLoading(false);
+                })
+                .catch((error) => console.error(error));
+        }, 2000);
+
     }, []);
 
-    // console.log(data);    
-
-    // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
 
     function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
         currentDate = new Date(currentTimestamp);
-
-        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 5 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
+        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 12 * 60 * 60 * 1000) {
             lastLabelTimestamp = currentDate;
-            // console.log(Math.abs(currentDate - lastLabelTimestamp));
-            // console.log(lastLabelTimestamp);
             return true;
         }
         return false;
+    }
+
+    if (isLoading) {
+        return (
+            <View>
+                <Text>Loading Graph...</Text>
+            </View>
+        );
     }
 
     return (
@@ -69,7 +72,7 @@ const Component = ({ onDataReceived }) => {
                     },
                 }}>
                 <VictoryLabel
-                    text="Temperture Data for the last 2 days"
+                    text="Temperture Data for the last 5 days"
                     x={250}
                     y={35}
                     textAnchor="middle"

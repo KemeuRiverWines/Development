@@ -36,7 +36,7 @@ const MapScreen = () => {
 
     const handleNode3Press = () => {
         console.log("Node 3 Pressed");
-        navigation.navigate('Node 3 Details');
+        navigation.navigate('Hort Plus Details');
     };
 
     return (

@@ -39,7 +39,7 @@ const App = () => {
 
           <Stack.Screen name="Node 1 Details" component={Node1Details} options={{headerTitleAlign: "center"}}/>
           <Stack.Screen name="Node 2 Details" component={Node2Details} options={{headerTitleAlign: "center"}}/>
-          <Stack.Screen name="Node 3 Details" component={Node3Details} options={{headerTitleAlign: "center"}}/>
+          <Stack.Screen name="Hort Plus Details" component={Node3Details} options={{headerTitleAlign: "center"}}/>
 
           <Stack.Screen name="Node 1 Temperature Forecast" component={Node1Forecast} options={{headerTitleAlign: "center"}} />
           <Stack.Screen name="Node 2 Temperature Forecast" component={Node2Forecast} options={{headerTitleAlign: "center"}} />
