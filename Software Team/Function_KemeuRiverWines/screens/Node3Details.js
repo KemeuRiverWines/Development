@@ -110,8 +110,8 @@ function Node3Details(props) {
                     <MapView
                         provider={MapView.PROVIDER_GOOGLE}
                         initialRegion={{
-                            latitude: -36.777676,
-                            longitude: 174.565483,
+                            latitude: -36.77723,
+                            longitude: 174.56915,
                             latitudeDelta: 0.005,
                             longitudeDelta: 0.0025,
                         }}
@@ -120,7 +120,7 @@ function Node3Details(props) {
                         mapType="satellite"
                     >
                         <Marker
-                            coordinate={{ latitude: -36.777676, longitude: 174.565483 }}
+                            coordinate={{ latitude: -36.77723, longitude: 174.56915 }}
                             title="Node 1"
                             description="Maties Vineyard"
                         />
@@ -389,8 +389,8 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     mapViewContainer: {
-        height: 200,
-        width: "96%",
+        height: 150,
+        width: "90%",
         margin: 0,
         marginTop: 30,
         alignSelf: "center",

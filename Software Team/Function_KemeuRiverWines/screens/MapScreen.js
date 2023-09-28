@@ -63,7 +63,7 @@ const MapScreen = () => {
             </View>
 
             <View style={styles.footer2}>
-                <TouchableOpacity style={styles.nodeButtonHistoricData} onPress={() => navigation.navigate('Historic Data')}>
+                <TouchableOpacity style={styles.nodeButtonHistoricData} onPress={() => navigation.navigate('History')}>
                     <Text style={styles.nodeButtonText}>Historic Data</Text>
                 </TouchableOpacity>
             </View>

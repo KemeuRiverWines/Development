@@ -23,6 +23,7 @@ import ForgotPassword from './screens/ForgotPassword';
 import LoginScreen from './screens/LoginScreen';
 
 import HistoricData from './screens/HistoricData';
+import History from './screens/History';
 
 const Stack = createStackNavigator();
 
@@ -30,7 +31,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor="black" barStyle="light-content" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login Screen">
           <Stack.Screen name="Temperature Screen" component={TemperatureScreen} options={{ headerShown: false }} />
@@ -53,6 +54,7 @@ const App = () => {
           <Stack.Screen name="Login Screen" component={LoginScreen} options={{headerShown: false}} />
 
           <Stack.Screen name="Historic Data" component={HistoricData} options={{headerTitleAlign: "center"}} />
+          <Stack.Screen name="History" component={History} options={{headerTitleAlign: "center"}} />
 
         </Stack.Navigator>
       </NavigationContainer>

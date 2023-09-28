@@ -68,6 +68,13 @@ function Node1Details(props) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.settingsButton}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('History')}>
+                            <Text style={styles.settingsText}>
+                                Historical Data
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.settingsButton}>
                         <TouchableOpacity onPress={() => props.navigation.navigate('Sensor Control Screen')}>
                             <Text style={styles.settingsText}>
                                 Settings

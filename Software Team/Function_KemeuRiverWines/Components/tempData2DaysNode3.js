@@ -11,37 +11,34 @@ const Component = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            const now = new Date();
-            now.setHours(now.getHours() + 12);
-            const fourDaysAgo = new Date(now.getTime());
-            fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
-            fourDaysAgo.setHours(fourDaysAgo.getHours() + 12);
+        const now = new Date();
+        now.setHours(now.getHours() + 12);
+        const fourDaysAgo = new Date(now.getTime());
+        fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
+        fourDaysAgo.setHours(fourDaysAgo.getHours() + 12);
 
-            const start = fourDaysAgo.toISOString().slice(0, -10) + "00:00";
-            const stop = now.toISOString().slice(0, -10) + "00:00";
+        const start = fourDaysAgo.toISOString().slice(0, -10) + "00:00";
+        const stop = now.toISOString().slice(0, -10) + "00:00";
 
-            const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
-            console.log(url);
+        const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
+        console.log(url);
 
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
-                }
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                const convertedTimestamps = json.SDATA.map(timestamp => new Date(timestamp * 1000));
+                setTimestampData(convertedTimestamps);
+                const convertedTemperatureData = json.TDDATA.map(temp => parseFloat(temp));
+                setTemperatureData(convertedTemperatureData);
+                setIsLoading(false);
             })
-                .then((response) => response.json())
-                .then((json) => {
-                    const convertedTimestamps = json.SDATA.map(timestamp => new Date(timestamp * 1000));
-                    setTimestampData(convertedTimestamps);
-                    const convertedTemperatureData = json.TDDATA.map(temp => parseFloat(temp));
-                    setTemperatureData(convertedTemperatureData);
-                    setIsLoading(false);
-                })
-                .catch((error) => console.error(error));
-        }, 2000);
-
+            .catch((error) => console.error(error));
     }, []);
 
     let lastLabelTimestamp = null;
@@ -72,7 +69,7 @@ const Component = () => {
                     },
                 }}>
                 <VictoryLabel
-                    text="Temperture Data for the last 5 days"
+                    text="Temperture Data for the last 4 days"
                     x={250}
                     y={35}
                     textAnchor="middle"

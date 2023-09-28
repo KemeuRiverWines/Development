@@ -31,15 +31,15 @@ const Node1Forecast = () => {
                 <View style={styles.dataDisplay}>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 15 Minutes</Text>
-                        <Text style={styles.dataDisplayValue}>{data && data[0].temperature}°c</Text>
+                        {/* <Text style={styles.dataDisplayValue}>{data && data[0].temperature}°c</Text> */}
                     </View>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 60 Minutes</Text>
-                        <Text style={styles.dataDisplayValue}>{data && data[1].temperature}°c</Text>
+                        {/* <Text style={styles.dataDisplayValue}>{data && data[1].temperature}°c</Text> */}
                     </View>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 120 Minutes</Text>
-                        <Text style={styles.dataDisplayValue}>{data && data[2].temperature}°c</Text>
+                        {/* <Text style={styles.dataDisplayValue}>{data && data[2].temperature}°c</Text> */}
                     </View>
                 </View>
                 <View style={styles.graph}>
