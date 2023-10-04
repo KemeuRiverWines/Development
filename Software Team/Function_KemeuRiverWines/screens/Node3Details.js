@@ -18,14 +18,16 @@ function Node3Details(props) {
     const [dewPoint, setDewPoint] = useState(null);
     const [humidity, setHumidity] = useState(null);
     const [timeStamp, setTimeStamp] = useState(null);
+    const [selectedDataType, setSelectedDataType] = useState('TDDATA');
+
 
     useEffect(() => {
         if (temp && dewPoint) {
             let T = parseFloat(temp);
             let TD = parseFloat(dewPoint);
-            let Es = 6.11 * Math.pow(10, (7.5*T)/(237.7+T));
-            let E = 6.11 * Math.pow(10, (7.5*TD)/(237.7+TD));
-            let RH = (E/Es) * 100;
+            let Es = 6.11 * Math.pow(10, (7.5 * T) / (237.7 + T));
+            let E = 6.11 * Math.pow(10, (7.5 * TD) / (237.7 + TD));
+            let RH = (E / Es) * 100;
             setHumidity(RH.toFixed(1));
         }
     }, [temp, dewPoint]);
@@ -95,16 +97,7 @@ function Node3Details(props) {
                     ) : null}
                 </Text>
             </View>
-            {/* <View style={styles.buttons}>
-                <View style={styles.settingsButton}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Node 3 Temperature Forecast')}>
-                        <Text style={styles.settingsText}>
-                            Forecast Temp
-                        </Text>
-                    </TouchableOpacity>
-                </View>
 
-            </View> */}
             <ScrollView style={styles.scrollView}>
                 <View style={styles.mapViewContainer}>
                     <MapView
@@ -128,16 +121,19 @@ function Node3Details(props) {
                 </View>
                 <View style={styles.dataGroup}>
                     <View style={styles.dataRow1}>
-                        <View style={styles.temperatureGroup}>
-                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
-                                <Text style={styles.temperatureHeader}>Temperature</Text>
-                                <Text style={styles.temperatureData}>
-                                    {temp !== null ? (
-                                        temp !== null ? `${temp}°c` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                        <TouchableOpacity onPress={() => {setSelectedDataType('TDDATA'); console.log()}}>
+                            <View style={styles.temperatureGroup}>
+                                <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
+                                    <Text style={styles.temperatureHeader}>Temperature</Text>
+                                    <Text style={styles.temperatureData}>
+                                        {temp !== null ? (
+                                            temp !== null ? `${temp}°c` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {setSelectedDataType('RHDATA'); console.log("RHDATA Selected")}}>
                         <View style={styles.humidityGroup}>
                             <View style={styles.rect1}>
                                 <Text style={styles.humidityHeader}>Humidity</Text>
@@ -148,6 +144,8 @@ function Node3Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {setSelectedDataType('DPDATA'); console.log("DPDATA Selected")}}>
                         <View style={styles.dewPointGroup}>
                             <View style={styles.rect2}>
                                 <Text style={styles.dewPointHeader}>Dew Point</Text>
@@ -158,8 +156,10 @@ function Node3Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.dataRow2}>
+                        <TouchableOpacity onPress={() => {setSelectedDataType('WSDATA'); console.log("WSDATA Selected")}}>
                         <View style={styles.windSpeedGroup}>
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
                                 <Text style={styles.windSpeedHeader}>Wind Speed</Text>
@@ -170,6 +170,8 @@ function Node3Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {setSelectedDataType('LSDATA'); console.log("LSDATA Selected")}}>
                         <View style={styles.leafWetnessGroup}>
                             <View style={styles.rect4}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
@@ -180,6 +182,8 @@ function Node3Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {setSelectedDataType('RNDATA'); console.log("RNDATA Selected")}}>
                         <View style={styles.rainFallGroup}>
                             <View style={styles.rect5}>
                                 <Text style={styles.rainFall2}>Rain Fall</Text>
@@ -190,10 +194,11 @@ function Node3Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View>
-                    <TempData10Days />
+                    <TempData10Days selectedDataType={selectedDataType}/>
                 </View>
 
             </ScrollView>
