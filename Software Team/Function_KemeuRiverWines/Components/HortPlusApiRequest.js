@@ -9,14 +9,9 @@ const WeatherAPIComponent = ({ onDataReceived }) => {
         const yesterday = new Date(now.getTime());
         yesterday.setDate(yesterday.getDate() - 1);
         yesterday.setHours(yesterday.getHours() + 12);
-        // console.log('Yesterday:', yesterday);
-        // console.log('Now:', now);
 
         const start = yesterday.toISOString().slice(0, -10) + "00:00";
         const stop = now.toISOString().slice(0, -10) + "00:00";
-
-        // console.log('Start:', start);
-        // console.log('Stop:', stop);
 
         const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
 
@@ -30,7 +25,7 @@ const WeatherAPIComponent = ({ onDataReceived }) => {
             .then((response) => response.json())
             .then((json) => {
                 setData(json);
-                onDataReceived(json);  // Call the function prop here
+                onDataReceived(json);
             })
             .catch((error) => console.error(error));
     }, []);
