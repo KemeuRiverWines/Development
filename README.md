@@ -1,6 +1,7 @@
 ### Developers 
 - **Salman Ali**
 - **Mingxuan Gao**
+- **Max Sommerville**
 
 >### Patch notes 06/10/23
 >#### Changes 
