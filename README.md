@@ -24,3 +24,4 @@
 >   - Forgot pin button does not do anything 
 >   - Map marker in node 2 is in the incorrect location 
 >   - Hort Plus screen does not display loading circle when loading the data
+>   - App Logo is off center and needs adjusting 
