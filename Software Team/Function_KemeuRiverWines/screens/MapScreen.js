@@ -62,12 +62,6 @@ const MapScreen = () => {
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.footer2}>
-                <TouchableOpacity style={styles.nodeButtonHistoricData} onPress={() => navigation.navigate('History')}>
-                    <Text style={styles.nodeButtonText}>Historic Data</Text>
-                </TouchableOpacity>
-            </View>
-
             <View style={{
                 position: 'absolute', // Position it absolutely
                 top: '0.5%', // At the top
@@ -117,7 +111,7 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         width: "96%",
-        height: "72%",
+        height: "82%",
         marginTop: "2%",
         alignSelf: "center",
         // backgroundColor: "grey",

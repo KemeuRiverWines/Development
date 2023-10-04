@@ -22,6 +22,7 @@ const History = () => {
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
