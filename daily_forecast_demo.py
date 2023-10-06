@@ -9,6 +9,7 @@ import logging
 import psycopg2
 from datetime import timedelta, datetime
 import pytz
+import re
 
 # Define constants
 KUMEU_DATA_PATH = '/home/kumeu/train_data.xlsx'
@@ -28,7 +29,70 @@ def load_data(file_path):
     data = pd.read_excel(file_path, index_col='DateTime', parse_dates=True)
     return data
 
-def
+def get_weather_data():
+    # Current date
+    now = datetime.now()
+    yesterday = now - timedelta(days=1)
+
+    # Calculate the date 25 days ago
+    start_date = yesterday - timedelta(days=24)
+
+    # Set time to 00:00:00 for start_date and 23:00:00 for yesterday
+    start_date = start_date.replace(hour=0, minute=0, second=0)
+    yesterday = yesterday.replace(hour=23, minute=0, second=0)
+
+    # Format dates in ISO format
+    start = start_date.strftime('%Y-%m-%dT%H:%M:%S')
+    stop = yesterday.strftime('%Y-%m-%dT%H:%M:%S')
+
+    url = f"http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start={start}&stop={stop}"
+
+    headers = {
+        'Accept': 'application/json',
+        'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
+    }
+
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        return None
+
+def process_weather_data(data):
+    # Function to extract date and time from string
+    def extract_datetime(dt_str):
+        # Remove ordinal indicators
+        dt_str = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', dt_str)
+
+        # Extract date and time information using regex
+        match = re.search(r'(\w{3} \d{1,2} \w{3} \d{4})\n(\d{1,2}(am|pm)( - \d{1,2}(am|pm))?)', dt_str)
+        if match:
+            date_str = match.group(1)
+            time_str = match.group(2).split(' - ')[0]
+
+            # Convert to datetime format
+            dt = datetime.strptime(f'{date_str} {time_str}', '%a %d %b %Y %I%p')
+
+            return dt
+        else:
+            return None
+
+    # Extract the 'ALT' (Air Temp.) and 'TRG' (Timestamp) lists from 'TDDATA_'
+    timestamp_data = data['TDDATA_']['ALT']
+    temp_data = data['TDDATA']
+    leafwetness_data = data['LSDATA']
+    humidity_data = data['RHDATA']
+    windspeed_data = data['WSDATA']
+
+    # Create a DataFrame with 'DateTime' and 'Air_temp' columns
+    df = pd.DataFrame({'DateTime': timestamp_data, 'Air_temp': temp_data, 'Leaf_wetness': leafwetness_data, 'Relative_humidity': humidity_data,'Wind_speed': windspeed_data})
+    
+    df['DateTime'] = df['DateTime'].apply(extract_datetime)
+    
+    return df
+
 
 # Handle missing values by performing linear interpolation
 def handle_missing_values(data):
@@ -158,8 +222,10 @@ def init():
 # Handles AI forecasting
 def main():
     try:
-        print("\nAutomating data processing for dummy data...\n")
-        new_data = load_data(NEW_DATA_PATH)
+        print("\nAutomating data processing for historical data...\n")
+        new_data = get_weather_data()
+        if new_data is not None:
+            new_data = process_weather_data(new_data)
         new_data = handle_missing_values(new_data)
         new_data = select_columns(new_data, SELECTED_COLUMNS)
         return new_data  # Return the processed data
@@ -178,8 +244,8 @@ def run_ai(target_date):
             print("Initial configurations haven't been optimized. Restarting System!")
             init()
 
-        dummy_data = prepare_data(new_data, target_date, TARGET_COLUMN)
-        return generate_forecasts(dummy_data)
+        new_data = prepare_data(new_data, target_date, TARGET_COLUMN)
+        return generate_forecasts(new_data)
 
     except Exception as e:
         handle_general_error(e)
