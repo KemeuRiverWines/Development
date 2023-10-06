@@ -28,6 +28,8 @@ def load_data(file_path):
     data = pd.read_excel(file_path, index_col='DateTime', parse_dates=True)
     return data
 
+def
+
 # Handle missing values by performing linear interpolation
 def handle_missing_values(data):
     print("Checking missing values...")
@@ -266,24 +268,21 @@ def connect_to_db():
 
 # Set the time zone to New Zealand
 nz_tz = pytz.timezone('Pacific/Auckland')
-
 # Get the current time in New Zealand time zone
 current_time = datetime.now(nz_tz)
-
 # Extract and format the date
-formatted_date = current_time.strftime('%Y-%m-%d')
-target_date = formatted_date # From May to August YY-MM-DD
+current_date = current_time.strftime('%Y-%m-%d')
 
 if __name__ == "__main__":
     print("AI Script started.")
-    prediction = run_ai(target_date)
-    formatted_date = datetime.strptime(target_date, "%Y-%m-%d")
+    prediction = run_ai(current_date)
+    current_date = datetime.strptime(target_date, "%Y-%m-%d")
 	
     # Create a DatetimeIndex with 5-minute intervals for the entire day
-    subhourly_range = pd.date_range(start=formatted_date, end=formatted_date + pd.DateOffset(days=1) - pd.Timedelta(minutes=5), freq="5T")
+    subhourly_range = pd.date_range(start=current_date, end=current_date + pd.DateOffset(days=1) - pd.Timedelta(minutes=5), freq="5T")
 
     # Create a DataFrame with the hourly data and index
-    hourly_range = pd.date_range(start=formatted_date, periods=len(prediction), freq="H")
+    hourly_range = pd.date_range(start=current_date, periods=len(prediction), freq="H")
     forecast_df = pd.DataFrame({"Temperature": prediction}, index=hourly_range)
 
     # Reindex the DataFrame to match the subhourly DatetimeIndex and interpolate
@@ -296,41 +295,3 @@ if __name__ == "__main__":
         print("AI Script finished.")
     else:
         print("AI Script encountered an error.")
-
-
-"""
-import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error
-from datetime import datetime, time
-
-predicted_data = prediction
-# Convert the string to a datetime object
-target_date_obj = datetime.strptime(target_date, '%Y-%m-%d')
-
-# Format the date as "2023 14th of June"
-formatted_date = target_date_obj.strftime('%d %B %Y')
-
-# Create hourly timestamp
-timestamps = [time(hour) for hour in range(0, 24)]
-formatted_timestamps = [ts.strftime('%H:%M') for ts in timestamps]
-
-plt.figure(figsize=(18, 6))
-plt.grid(True, which='both', axis='both', color='grey', linewidth=0.5)
-
-# Plotting the graph
-plt.plot(formatted_timestamps, actual_data, label='Actual Temperature', color='red')
-plt.plot(formatted_timestamps, predicted_data, label='Predicted Temperature', color='blue', alpha=0.5)
-plt.xlabel('Time')
-plt.ylabel('Temperature')
-plt.title(f'Actual vs. Predicted Temperature at {formatted_date}')
-plt.legend()
-
-# Set y-tick frequency to show 1 degree difference
-y_ticks = np.arange(int(min(min(actual_data), min(predicted_data))), int(max(max(actual_data), max(predicted_data))) + 1, 1)
-plt.yticks(y_ticks)
-
-plt.show()
-
-rmse = np.sqrt(mean_squared_error(actual_data, predicted_data))
-print("Root Mean Squared Error (RMSE):", rmse)
-"""
