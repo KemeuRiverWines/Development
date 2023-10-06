@@ -11,30 +11,30 @@ const SensorComponent2 = ({ onDataReceived }) => {
         }, 60000);
         return () => clearInterval(interval);
     }, []);
-
+    
     const fetchData = async () => {
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
 
             const sensorOneData = data.filter(entry => entry.node_id === "eui-70b3d57ed006182e");
-            let latestEntry = sensorOneData.length > 0 ? sensorOneData[0] : null;
+            let latestEntry1 = sensorOneData.length > 0 ? sensorOneData[0] : null;
 
-            if (latestEntry) {
-                const timestamp = new Date(latestEntry.timestamp);
+            if (latestEntry1) {
+                const timestamp = new Date(latestEntry1.timestamp);
                 const now = new Date();
                 const timeDifference = now.getTime() - timestamp.getTime();
                 const minutesAgo = Math.floor(timeDifference / (1000 * 60));
 
-                latestEntry.timeAgo = minutesAgo === 1 ? '1 Minute ago' : `${minutesAgo} Minutes ago`;
+                latestEntry1.timeAgo = minutesAgo === 1 ? '1 Minute ago' : `${minutesAgo} Minutes ago`;
             } else {
                 // If there's no data available, provide default values or an empty object
-                latestEntry = { temperature: null, rainfall: null, timeAgo: 'No data available' };
+                latestEntry1 = { temperature: null, rainfall: null, timeAgo: 'No data available' };
             }
 
             // Ensure that onDataReceived is always called
-            onDataReceived(latestEntry);
-            //console.log(latestEntry);
+            onDataReceived(latestEntry1);
+            //console.log(latestEntry1);
 
             // console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all');
         } catch (error) {

@@ -36,7 +36,7 @@ const MapScreen = () => {
 
     const handleNode3Press = () => {
         console.log("Node 3 Pressed");
-        navigation.navigate('Hort Plus Details');
+        navigation.navigate('Node 3 Details');
     };
 
     return (
@@ -58,7 +58,13 @@ const MapScreen = () => {
                     <Text style={styles.nodeButtonText}>Node 2</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.nodeButton} onPress={handleNode3Press}>
-                    <Text style={styles.nodeButtonText}>Hort Plus</Text>
+                    <Text style={styles.nodeButtonText}>Node 3</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.footer2}>
+                <TouchableOpacity style={styles.nodeButtonHistoricData} onPress={() => navigation.navigate('Hort Plus Details')}>
+                    <Text style={styles.nodeButtonText}>Hort Plus Data</Text>
                 </TouchableOpacity>
             </View>
 
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         width: "96%",
-        height: "82%",
+        height: "72%",
         marginTop: "2%",
         alignSelf: "center",
         // backgroundColor: "grey",

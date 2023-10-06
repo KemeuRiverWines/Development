@@ -11,6 +11,7 @@ import TestComponent from './screens/TestComponent';
 import Node1Details from './screens/Node1Details';
 import Node2Details from './screens/Node2Details';
 import Node3Details from './screens/Node3Details';
+import HortPlusDetails from './screens/HortPlusDetails';
 
 import Node1Forecast from './screens/Node1Forecast';
 import Node2Forecast from './screens/Node2Forecast';
@@ -40,7 +41,9 @@ const App = () => {
 
           <Stack.Screen name="Node 1 Details" component={Node1Details} options={{headerTitleAlign: "center"}}/>
           <Stack.Screen name="Node 2 Details" component={Node2Details} options={{headerTitleAlign: "center"}}/>
-          <Stack.Screen name="Hort Plus Details" component={Node3Details} options={{headerTitleAlign: "center"}}/>
+          <Stack.Screen name="Node 3 Details" component={Node3Details} options={{headerTitleAlign: "center"}}/>
+
+          <Stack.Screen name="Hort Plus Details" component={HortPlusDetails} options={{headerTitleAlign: "center"}}/>
 
           <Stack.Screen name="Node 1 Temperature Forecast" component={Node1Forecast} options={{headerTitleAlign: "center"}} />
           <Stack.Screen name="Node 2 Temperature Forecast" component={Node2Forecast} options={{headerTitleAlign: "center"}} />

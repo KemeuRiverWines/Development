@@ -1,126 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
+const API_URL = 'http://115.188.10.251:3000/api/data/all/temp';
+const node_id = 'eui-70b3d57ed006182e';
 
-const Component = ({ selectedDataType }) => {
-
-    const [isLoading, setIsLoading] = useState(true);
-    const [timestampData, setTimestampData] = useState([]);
+const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
-    const [rainfallData, setRainfallData] = useState([]);
-    const [humidityData, setHumidityData] = useState([]);
-    const [leafWetnessData, setLeafWetnessData] = useState([]);
-    const [windSpeedData, setWindSpeedData] = useState([]);
-    const [dewPointData, setDewPointData] = useState([]);
+    const [timestampData, setTimestampData] = useState([]);
 
     useEffect(() => {
-        const now = new Date();
-        now.setHours(now.getHours() + 12);
-        const fourDaysAgo = new Date(now.getTime());
-        fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
-        fourDaysAgo.setHours(fourDaysAgo.getHours() + 12);
-
-        const start = fourDaysAgo.toISOString().slice(0, -10) + "00:00";
-        const stop = now.toISOString().slice(0, -10) + "00:00";
-
-        const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
-        console.log(url);
-
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
-            }
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                //Process Time Data
-                const convertedTimestamps = json.SDATA.map(timestamp => new Date(timestamp * 1000));
-                setTimestampData(convertedTimestamps);
-
-                //Process Temperature Data
-                const convertedTemperatureData = json.TDDATA.map(temp => parseFloat(temp));
-                setTemperatureData(convertedTemperatureData);
-
-                //Process Rainfall Data
-                const convertedRainfallData = json.RNDATA.map(data => parseFloat(data));
-                setRainfallData(convertedRainfallData);
-            
-                //Process Humidity Data
-                const convertedHumidityData = json.RHDATA.map(data => parseFloat(data));
-                setHumidityData(convertedHumidityData);
-            
-                //Process Leaf Wetness Data
-                const convertedLeafWetnessData = json.LSDATA.map(data => parseFloat(data));
-                setLeafWetnessData(convertedLeafWetnessData);
-            
-                //Process Wind Speed Data
-                const convertedWindSpeedData = json.WSDATA.map(data => parseFloat(data));
-                setWindSpeedData(convertedWindSpeedData);
-            
-                //Process Dew Point Data
-                const convertedDewPointData = json.DPDATA.map(data => parseFloat(data));
-                setDewPointData(convertedDewPointData);
-
-                // console.log(temperatureData);
-                // console.log(humidityData);
-                // console.log(rainfallData);
-                // console.log(leafWetnessData);
-                // console.log(windSpeedData);
-                // console.log(dewPointData);
-
-                setIsLoading(false);
-            })
-            .catch((error) => console.error(error));
+        fetchData();
     }, []);
 
+    const fetchData = async () => {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+
+            // Filter data for the given node_id
+            const twoDaysAgo = new Date();
+            twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+            const sensorOneData = data.filter(entry => entry.node_id === node_id && new Date(entry.timestamp) >= twoDaysAgo);
+
+            // Extract temperature and timestamp values into separate arrays
+            const temperatures = sensorOneData.map(entry => entry.temperature);
+            const timestamps = sensorOneData.map(entry => entry.timestamp);
+
+            temperatures.reverse();
+            timestamps.reverse();
+
+            setTemperatureData(temperatures);
+            setTimestampData(timestamps);
+
+            console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
+            // console.log(temperatures);
+            // console.log(timestamps);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
 
     function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
         currentDate = new Date(currentTimestamp);
-        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 12 * 60 * 60 * 1000) {
+
+        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 5 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
             lastLabelTimestamp = currentDate;
+            // console.log(Math.abs(currentDate - lastLabelTimestamp));
+            // console.log(lastLabelTimestamp);
             return true;
         }
         return false;
-    }
-
-    if (isLoading) {
-        return (
-            <View>
-                <Text>Loading Graph...</Text>
-            </View>
-        );
-    }
-
-    let dataToDisplay;
-    switch (selectedDataType) {
-        case 'TDDATA':
-            dataToDisplay = temperatureData;
-            textToDisplay = 'Temperature Data for the last 4 days';
-            break;
-        case 'RHDATA':
-            dataToDisplay = humidityData;
-            textToDisplay = 'Humidity Data for the last 4 days';
-            break;
-        case 'DPDATA':
-            dataToDisplay = dewPointData;
-            textToDisplay = 'Dew Point Data for the last 4 days';
-            break;
-        case 'WSDATA':
-            dataToDisplay = windSpeedData;
-            textToDisplay = 'Wind Speed Data for the last 4 days';
-            break;
-        case 'LSDATA':
-            dataToDisplay = leafWetnessData;
-            textToDisplay = 'Leaf Wetness Data for the last 4 days';
-            break;
-        case 'RNDATA':
-            dataToDisplay = rainfallData;
-            textToDisplay = 'Rainfall Data for the last 4 days';
-            break;
     }
 
     return (
@@ -132,13 +65,13 @@ const Component = ({ selectedDataType }) => {
                     },
                 }}>
                 <VictoryLabel
-                    text={textToDisplay}
+                    text="Temperture Data for the last 2 days"
                     x={250}
                     y={35}
                     textAnchor="middle"
                 />
                 <VictoryLine
-                    data={timestampData.map((timestamp, index) => ({ x: timestamp, y: dataToDisplay[index] }))}
+                    data={timestampData.map((timestamp, index) => ({ x: timestamp, y: temperatureData[index] }))}
                     style={{
                         data: { stroke: 'green' },
                     }}

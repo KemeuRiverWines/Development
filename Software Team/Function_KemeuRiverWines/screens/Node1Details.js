@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     mapViewContainer: {
-        height: 200,
+        height: 150,
         width: "96%",
         margin: 0,
         marginTop: 10,
