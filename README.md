@@ -2,12 +2,11 @@
 - **Salman Ali**
 - **Mingxuan Gao**
 - **Max Sommerville**
-
->### Patch notes 04/10/23
+- ****
+---------------------------------------------------------------------------------------------------
+>### Patch notes 05/10/23
 >#### Changes 
->   - Added feature to hort plus page that allows user to select which data they would like to display in the chart below 
->   - Removed main historic button in main screen after log on
->   - Modified the Screen mapping for the histoic screen to the button located in Node 1 screen
+>   - Edited Node 2 & 3 ID
 >
 >#### Todo list 
 >   - Create a option that allows the user to select which time range they would like to view in the chart summary
@@ -25,10 +24,12 @@
 >   - Map marker in node 2 is in the incorrect location 
 >   - Hort Plus screen does not display loading circle when loading the data
 >   - App Logo is off center and needs adjusting 
-
->### Patch notes 05/10/23
+---------------------------------------------------------------------------------------------------
+>### Patch notes 04/10/23
 >#### Changes 
->   - Edited Node 2 & 3 ID
+>   - Added feature to hort plus page that allows user to select which data they would like to display in the chart below 
+>   - Removed main historic button in main screen after log on
+>   - Modified the Screen mapping for the histoic screen to the button located in Node 1 screen
 >
 >#### Todo list 
 >   - Create a option that allows the user to select which time range they would like to view in the chart summary
