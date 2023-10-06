@@ -10,10 +10,10 @@ import psycopg2
 from datetime import timedelta, datetime
 import pytz
 import re
+import requests
 
 # Define constants
 KUMEU_DATA_PATH = '/home/kumeu/train_data.xlsx'
-NEW_DATA_PATH = '/home/kumeu/recent_test_data.xlsx'
 SELECTED_COLUMNS = ['Air_temp', 'Leaf_wetness', 'Relative_humidity', 'Wind_speed']
 TARGET_COLUMN = 'Air_temp'
 AM_MODEL_PATH = "/home/kumeu/uv_am_model.keras"
@@ -90,7 +90,11 @@ def process_weather_data(data):
     df = pd.DataFrame({'DateTime': timestamp_data, 'Air_temp': temp_data, 'Leaf_wetness': leafwetness_data, 'Relative_humidity': humidity_data,'Wind_speed': windspeed_data})
     
     df['DateTime'] = df['DateTime'].apply(extract_datetime)
-    
+    df.set_index('DateTime', inplace=True)
+	# Convert all columns to float
+    for col in df.columns:
+        if df[col].dtype != np.float64:
+            df[col] = df[col].astype(float)
     return df
 
 
@@ -121,7 +125,6 @@ def prepare_data(data, target_date, target_column):
     # Filter data based on the calculated start and end dates
     dummy_data = data.loc[:end_date].tail(600)
     print("Data prepared...\n")
-    print(dummy_data.tail(20))
     return dummy_data
 
 # Retrieve the train data's min and max that were used during model training
@@ -342,7 +345,7 @@ current_date = current_time.strftime('%Y-%m-%d')
 if __name__ == "__main__":
     print("AI Script started.")
     prediction = run_ai(current_date)
-    current_date = datetime.strptime(target_date, "%Y-%m-%d")
+    current_date = datetime.strptime(current_date, "%Y-%m-%d")
 	
     # Create a DatetimeIndex with 5-minute intervals for the entire day
     subhourly_range = pd.date_range(start=current_date, end=current_date + pd.DateOffset(days=1) - pd.Timedelta(minutes=5), freq="5T")
