@@ -47,7 +47,7 @@ const Component = ({ onDataReceived }) => {
     function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
         currentDate = new Date(currentTimestamp);
 
-        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 5 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
+        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 10 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
             lastLabelTimestamp = currentDate;
             // console.log(Math.abs(currentDate - lastLabelTimestamp));
             // console.log(lastLabelTimestamp);
