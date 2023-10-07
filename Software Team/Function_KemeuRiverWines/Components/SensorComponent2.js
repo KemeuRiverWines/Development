@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 
-const API_URL = 'http://115.188.10.251:3000/api/data/all';
+const SERVER_URL = '115.188.10.251:3000';
+const node_id = "eui-70b3d57ed00618ec";
+const currentDate = new Date();
+const dateTenDaysAgo = new Date(currentDate).setDate(currentDate.getDate() - 10);
+const dateISO = dateTenDaysAgo.toISOString();
+const sensors = "temperature,humidity,leaf_wetness,wind_speed,wind_direction,rainfall";
+const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time={dateISO}`;
 
 const SensorComponent2 = ({ onDataReceived }) => {
     
@@ -17,7 +23,7 @@ const SensorComponent2 = ({ onDataReceived }) => {
             const response = await fetch(API_URL);
             const data = await response.json();
 
-            const sensorOneData = data.filter(entry => entry.node_id === "eui-70b3d57ed00618ec");
+            const sensorOneData = data.sensorData;
             let latestEntry1 = sensorOneData.length > 0 ? sensorOneData[0] : null;
 
             if (latestEntry1) {
