@@ -88,8 +88,8 @@ function Node1Details(props) {
                         initialRegion={{
                             latitude: -36.777676,
                             longitude: 174.565483,
-                            latitudeDelta: 0.005,
-                            longitudeDelta: 0.0025,
+                            latitudeDelta: 0.0025,
+                            longitudeDelta: 0.0005,
                         }}
                         customMapStyle={[]}
                         style={styles.mapView}

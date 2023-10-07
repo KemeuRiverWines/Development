@@ -70,17 +70,17 @@ function Node1Details(props) {
                     <MapView
                         provider={MapView.PROVIDER_GOOGLE}
                         initialRegion={{
-                            latitude: -36.777676,
-                            longitude: 174.565483,
-                            latitudeDelta: 0.005,
-                            longitudeDelta: 0.0025,
+                            latitude: -36.774704, 
+                            longitude: 174.568005,
+                            latitudeDelta: 0.0025,
+                            longitudeDelta: 0.0005,
                         }}
                         customMapStyle={[]}
                         style={styles.mapView}
                         mapType="satellite"
                     >
                         <Marker
-                            coordinate={{ latitude: -36.777676, longitude: 174.565483 }}
+                            coordinate={{ latitude: -36.774704, longitude: 174.568005 }}
                             title="Node 1"
                             description="Maties Vineyard"
                         />
