@@ -109,7 +109,7 @@ function Node1Details(props) {
                                 <Text style={styles.temperatureHeader}>Temperature</Text>
                                 <Text style={styles.temperatureData}>
                                     {sensorData1 !== null ? (
-                                        sensorData1.temperature !== null ? `${sensorData1.temperature}°c` : <ActivityIndicator size="large" />
+                                        sensorData1.temperature !== null ? `${parseFloat(sensorData1.temperature).toFixed(1)}°c` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -169,7 +169,6 @@ function Node1Details(props) {
                 <View>
                     <TempData2DaysNode1 />
                 </View>
-
             </ScrollView>
         </View>
     );
@@ -252,13 +251,13 @@ const styles = StyleSheet.create({
     temperatureHeader: {
         color: "white",
         textAlign: "center",
-        height: 17,
-        width: 100,
+        // height: 17,
+        // width: 100,
         marginTop: 11
     },
     temperatureData: {
         color: "white",
-        fontSize: 25,
+        fontSize: 30,
         textAlign: "center",
         marginTop: 12
     },

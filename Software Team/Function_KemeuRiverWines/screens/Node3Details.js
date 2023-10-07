@@ -93,7 +93,7 @@ function Node1Details(props) {
                                 <Text style={styles.temperatureHeader}>Temperature</Text>
                                 <Text style={styles.temperatureData}>
                                     {sensorData2 !== null ? (
-                                        sensorData2.temperature !== null ? `${sensorData2.temperature}°c` : <ActivityIndicator size="large" />
+                                        sensorData2.temperature !== null ? `${parseFloat(sensorData2.temperature).toFixed(1)}°c` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -135,7 +135,7 @@ function Node1Details(props) {
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
                                     {sensorData2 !== null ? (
-                                        sensorData2.leaf_wetness !== null ? `${sensorData2.leaf_wetness}` : <ActivityIndicator size="large" />
+                                        sensorData2.leaf_wetness !== null ? `${sensorData2.leaf_wetness}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -153,7 +153,6 @@ function Node1Details(props) {
                 <View>
                     <TempData10Days />
                 </View>
-
             </ScrollView>
         </View>
     );
@@ -220,13 +219,13 @@ const styles = StyleSheet.create({
     temperatureHeader: {
         color: "white",
         textAlign: "center",
-        height: 17,
-        width: 100,
+        // height: 17,
+        // width: 100,
         marginTop: 11
     },
     temperatureData: {
         color: "white",
-        fontSize: 25,
+        fontSize: 30,
         textAlign: "center",
         marginTop: 12
     },
