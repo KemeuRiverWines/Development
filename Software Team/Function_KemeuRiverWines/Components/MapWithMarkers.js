@@ -41,8 +41,8 @@ const MapWithMarker = () => {
 
     //======= MARKER 3 ================================================================================
     const handleNode3Press = () => {
-        console.log("Hort Plus Pressed");
-        navigation.navigate('Hort Plus Details');
+        console.log("Node 3 Pressed");
+        navigation.navigate('Node 3 Details');
         // this.marker1.Callout.show();
     };
 

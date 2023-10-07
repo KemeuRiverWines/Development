@@ -10,14 +10,14 @@ import Logo from '../assets/Images/Logo.png';
 
 function Node1Details(props) {
 
-    const [sensorData2, setsensorData2] = useState(null);
+    const [sensorData3, setsensorData3] = useState(null);
     const handleDataReceived1 = (latestData) => {
         console.log("Sensor Request Done for Node1Details"); // Log the received data
-        setsensorData2(latestData);
+        setsensorData3(latestData);
     };
     useEffect(() => {
-        //console.log("Console Log 1", sensorData2); // This will log the updated value of sensorData2
-    }, [sensorData2]);
+        //console.log("Console Log 1", sensorData3); // This will log the updated value of sensorData3
+    }, [sensorData3]);
 
     return (
         <View style={styles.container}>
@@ -50,8 +50,8 @@ function Node1Details(props) {
             <View style={styles.header}>
                 <Text style={styles.node1}>Node 3</Text>
                 <Text style={styles.lastUpdated}>
-                    {sensorData2 !== null ? (
-                        sensorData2.timeAgo !== null ? `Updated ${sensorData2.timeAgo}` : <ActivityIndicator size="large" />
+                    {sensorData3 !== null ? (
+                        sensorData3.timeAgo !== null ? `Updated ${sensorData3.timeAgo}` : <ActivityIndicator size="large" />
                     ) : null}
                 </Text>
             </View>
@@ -92,8 +92,8 @@ function Node1Details(props) {
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
                                 <Text style={styles.temperatureHeader}>Temperature</Text>
                                 <Text style={styles.temperatureData}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.temperature !== null ? `${parseFloat(sensorData2.temperature).toFixed(1)}°c` : <ActivityIndicator size="large" />
+                                    {sensorData3 !== null ? (
+                                        sensorData3.temperature !== null ? `${parseFloat(sensorData3.temperature).toFixed(1)}°c` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -102,8 +102,8 @@ function Node1Details(props) {
                             <View style={styles.rect1}>
                                 <Text style={styles.humidityHeader}>Humidity</Text>
                                 <Text style={styles.humidityData1}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.humidity !== null ? `${sensorData2.humidity}` : <ActivityIndicator size="large" />
+                                    {sensorData3 !== null ? (
+                                        sensorData3.humidity !== null ? `${sensorData3.humidity}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -112,8 +112,8 @@ function Node1Details(props) {
                             <View style={styles.rect2}>
                                 <Text style={styles.dewPointHeader}>Dew Point</Text>
                                 <Text style={styles.dewPointData}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.dew_point !== null ? `${sensorData2.dew_point}` : <ActivityIndicator size="large" />
+                                    {sensorData3 !== null ? (
+                                        sensorData3.dew_point !== null ? `${sensorData3.dew_point}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -124,8 +124,8 @@ function Node1Details(props) {
                             <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
                                 <Text style={styles.windSpeedHeader}>Wind Speed</Text>
                                 <Text style={styles.windSpeedData}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.wind_speed !== null ? `${sensorData2.wind_speed}` : <ActivityIndicator size="large" />
+                                    {sensorData3 !== null ? (
+                                        sensorData3.wind_speed !== null ? `${sensorData3.wind_speed}` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -134,8 +134,8 @@ function Node1Details(props) {
                             <View style={styles.rect4}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.leaf_wetness !== null ? `${sensorData2.leaf_wetness}%` : <ActivityIndicator size="large" />
+                                    {sensorData3 !== null ? (
+                                        sensorData3.leaf_wetness !== null ? `${sensorData3.leaf_wetness}%` : <ActivityIndicator size="large" />
                                     ) : null}
                                 </Text>
                             </View>
@@ -143,8 +143,8 @@ function Node1Details(props) {
                         <View style={styles.rainFallGroup}>
                             <View style={styles.rect5}>
                                 <Text style={styles.rainFall2}>Rain Fall</Text>
-                                <Text style={styles.dewPointData1}>{sensorData2 !== null ? (
-                                    sensorData2.rainfall !== null ? `${sensorData2.rainfall}` : <ActivityIndicator size="large" />
+                                <Text style={styles.dewPointData1}>{sensorData3 !== null ? (
+                                    sensorData3.rainfall !== null ? `${sensorData3.rainfall}` : <ActivityIndicator size="large" />
                                 ) : null}</Text>
                             </View>
                         </View>
