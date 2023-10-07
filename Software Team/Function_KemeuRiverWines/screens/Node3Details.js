@@ -21,7 +21,6 @@ function Node1Details(props) {
 
     return (
         <View style={styles.container}>
-
             <View style={{
                 position: 'absolute', // Position it absolutely
                 top: '0.5%', // At the top
@@ -33,7 +32,6 @@ function Node1Details(props) {
                     resizeMode="contain"
                 />
             </View>
-
             <View style={{
                 position: 'absolute', // Position it absolutely
                 top: '0.5%', // At the top
@@ -45,7 +43,6 @@ function Node1Details(props) {
                     resizeMode="contain"
                 />
             </View>
-
             <SensorComponent1 onDataReceived={handleDataReceived1} />
             <View style={styles.header}>
                 <Text style={styles.node1}>Node 3</Text>
@@ -56,21 +53,20 @@ function Node1Details(props) {
                 </Text>
             </View>
             <View style={styles.buttons}>
-                    <View style={styles.settingsButton}>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Node 2 Temperature Forecast')}>
-                            <Text style={styles.settingsText}>
-                                Forecast Temp
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
+                <View style={styles.settingsButton}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Node 2 Temperature Forecast')}>
+                        <Text style={styles.settingsText}>
+                            Forecast Temp
+                        </Text>
+                    </TouchableOpacity>
                 </View>
+            </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.mapViewContainer}>
                     <MapView
                         provider={MapView.PROVIDER_GOOGLE}
                         initialRegion={{
-                            latitude: -36.774704, 
+                            latitude: -36.774704,
                             longitude: 174.568005,
                             latitudeDelta: 0.0025,
                             longitudeDelta: 0.0005,
@@ -118,18 +114,6 @@ function Node1Details(props) {
                                 </Text>
                             </View>
                         </View>
-                    </View>
-                    <View style={styles.dataRow2}>
-                        <View style={styles.windSpeedGroup}>
-                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
-                                <Text style={styles.windSpeedHeader}>Wind Speed</Text>
-                                <Text style={styles.windSpeedData}>
-                                    {sensorData3 !== null ? (
-                                        sensorData3.wind_speed !== null ? `${sensorData3.wind_speed}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
-                            </View>
-                        </View>
                         <View style={styles.leafWetnessGroup}>
                             <View style={styles.rect4}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
@@ -140,15 +124,27 @@ function Node1Details(props) {
                                 </Text>
                             </View>
                         </View>
-                        <View style={styles.rainFallGroup}>
+                    </View>
+                    {/* <View style={styles.dataRow2}> */}
+                    {/* <View style={styles.windSpeedGroup}>
+                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
+                                <Text style={styles.windSpeedHeader}>Wind Speed</Text>
+                                <Text style={styles.windSpeedData}>
+                                    {sensorData3 !== null ? (
+                                        sensorData3.wind_speed !== null ? `${sensorData3.wind_speed}` : <ActivityIndicator size="large" />
+                                    ) : null}
+                                </Text>
+                            </View>
+                        </View> */}
+                    {/* <View style={styles.rainFallGroup}>
                             <View style={styles.rect5}>
                                 <Text style={styles.rainFall2}>Rain Fall</Text>
                                 <Text style={styles.dewPointData1}>{sensorData3 !== null ? (
                                     sensorData3.rainfall !== null ? `${sensorData3.rainfall}` : <ActivityIndicator size="large" />
                                 ) : null}</Text>
                             </View>
-                        </View>
-                    </View>
+                        </View> */}
+                    {/* </View> */}
                 </View>
                 <View>
                     <TempData10Days />
@@ -193,7 +189,7 @@ const styles = StyleSheet.create({
     },
     dataGroup: {
         width: 360,
-        height: 241,
+        height: "auto",
         alignSelf: "center",
         alignItems: "center",
         margin: 0,
@@ -349,7 +345,7 @@ const styles = StyleSheet.create({
         height: 150,
         width: "96%",
         margin: 0,
-        marginTop: 30,
+        marginTop: 10,
         alignSelf: "center",
         overflow: "hidden",
         backgroundColor: "grey",
