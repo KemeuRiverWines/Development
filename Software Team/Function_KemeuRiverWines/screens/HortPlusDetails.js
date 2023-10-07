@@ -123,7 +123,7 @@ function Node3Details(props) {
                     <View style={styles.dataRow1}>
                         <TouchableOpacity onPress={() => {setSelectedDataType('TDDATA'); console.log()}}>
                             <View style={styles.temperatureGroup}>
-                                <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
+                                <View style={[styles.rect, selectedDataType === 'TDDATA' ? styles.selected : {}]}>
                                     <Text style={styles.temperatureHeader}>Temperature</Text>
                                     <Text style={styles.temperatureData}>
                                         {temp !== null ? (
@@ -135,7 +135,7 @@ function Node3Details(props) {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {setSelectedDataType('RHDATA'); console.log("RHDATA Selected")}}>
                         <View style={styles.humidityGroup}>
-                            <View style={styles.rect1}>
+                            <View style={[styles.rect1, selectedDataType === 'RHDATA' ? styles.selected : {}]}>
                                 <Text style={styles.humidityHeader}>Humidity</Text>
                                 <Text style={styles.humidityData1}>
                                     {humidity !== null ? (
@@ -147,7 +147,7 @@ function Node3Details(props) {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {setSelectedDataType('DPDATA'); console.log("DPDATA Selected")}}>
                         <View style={styles.dewPointGroup}>
-                            <View style={styles.rect2}>
+                            <View style={[styles.rect2 , selectedDataType === 'DPDATA' ? styles.selected : {}]}>
                                 <Text style={styles.dewPointHeader}>Dew Point</Text>
                                 <Text style={styles.dewPointData}>
                                     {dewPoint !== null ? (
@@ -161,7 +161,7 @@ function Node3Details(props) {
                     <View style={styles.dataRow2}>
                         <TouchableOpacity onPress={() => {setSelectedDataType('WSDATA'); console.log("WSDATA Selected")}}>
                         <View style={styles.windSpeedGroup}>
-                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect3}>
+                            <View style={[styles.rect3, selectedDataType === 'WSDATA' ? styles.selected : {}]}>
                                 <Text style={styles.windSpeedHeader}>Wind Speed</Text>
                                 <Text style={styles.windSpeedData}>
                                     {windSpeed !== null ? (
@@ -173,7 +173,7 @@ function Node3Details(props) {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {setSelectedDataType('LSDATA'); console.log("LSDATA Selected")}}>
                         <View style={styles.leafWetnessGroup}>
-                            <View style={styles.rect4}>
+                            <View style={[styles.rect4, selectedDataType === 'LSDATA' ? styles.selected : {}]}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
                                     {leafWetness !== null ? (
@@ -185,7 +185,7 @@ function Node3Details(props) {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {setSelectedDataType('RNDATA'); console.log("RNDATA Selected")}}>
                         <View style={styles.rainFallGroup}>
-                            <View style={styles.rect5}>
+                            <View style={[styles.rect5, selectedDataType === 'RNDATA' ? styles.selected : {}]}>
                                 <Text style={styles.rainFall2}>Rain Fall</Text>
                                 <Text style={styles.dewPointData1}>
                                     {rainfall !== null ? (
@@ -221,6 +221,9 @@ const styles = StyleSheet.create({
         // marginTop: 60,
         alignItems: "center",
         borderRadius: 20,
+    },
+    selected: {
+        backgroundColor: 'rgba(1,49,77,1)',
     },
     node1: {
         color: "white",
