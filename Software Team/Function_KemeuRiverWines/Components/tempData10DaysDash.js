@@ -4,7 +4,13 @@ import { VictoryChart, VictoryLine, VictoryAxis } from 'victory-native';
 
 const API_URL = 'http://115.188.10.251:3000/api/data/all/temp';
 const node_id = "eui-70b3d57ed005de54";
-
+/*MAX UPDATE FOR NEW API
+const SERVER_URL = "155.188.10.251:3000";
+const node_id = "eui-70b3d57ed005de54";
+const SENSOR = "temperature";
+const DAYS = 10;
+const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors/${SENSOR}/${DAYS}`;
+*/
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
     const [timestampData, setTimestampData] = useState([]);
@@ -19,7 +25,7 @@ const Component = ({ onDataReceived }) => {
             const data = await response.json();
 
             // Filter data for the given node_id
-            const sensorOneData = data.filter(entry => entry.node_id === node_id);
+            const sensorOneData = data.sensorData;
 
             // Extract temperature and timestamp values into separate arrays
             const temperatures = sensorOneData.map(entry => entry.temperature);
