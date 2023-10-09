@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
 const SERVER_URL = "115.188.10.251:3000";
@@ -11,6 +11,7 @@ const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors/${SENSOR}/
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
     const [timestampData, setTimestampData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetchData();
@@ -36,8 +37,9 @@ const Component = ({ onDataReceived }) => {
             setTimestampData(timestamps);
 
             console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
-            // console.log(temperatures);
-            // console.log(timestamps);
+
+            setIsLoading(false);
+
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -56,6 +58,14 @@ const Component = ({ onDataReceived }) => {
             return true;
         }
         return false;
+    }
+
+    if (isLoading) {
+        return (
+            <View>
+                <ActivityIndicator size='large' />
+            </View>
+        );
     }
 
     return (
