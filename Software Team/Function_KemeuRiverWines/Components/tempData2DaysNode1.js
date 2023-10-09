@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const SERVER_URL = "155.188.10.251:3000";
+const SERVER_URL = "115.188.10.251:3000";
 const node_id = "eui-70b3d57ed005de54";
 const SENSOR = "temperature";
 const DAYS = 2;
@@ -18,6 +18,9 @@ const Component = ({ onDataReceived }) => {
 
     const fetchData = async () => {
         try {
+            
+            console.log(API_URL);
+
             const response = await fetch(API_URL);
             const data = await response.json();
             
@@ -107,17 +110,3 @@ const Component = ({ onDataReceived }) => {
 };
 
 export default Component;
-
-// const styles = StyleSheet.create({
-//     container: {
-//         height: 100,
-//     }
-// });
-
-//under VictoryAxis
-                        // If you want to show the date as well, you can use the below tickFormat instead
-                        // tickFormat={(timestamp, index, ticks) =>
-                        //     index === 0 || hasHourChanged(ticks[index - 1], timestamp)
-                        //         ? new Date(timestamp).toLocaleString()
-                        //         : ''
-                        // }

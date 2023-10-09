@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-
-const SERVER_URL = "155.188.10.251:3000";
+const SERVER_URL = "115.188.10.251:3000";
 const node_id = 'eui-70b3d57ed006182e';
 const SENSOR = "temperature";
 const DAYS = 2;
