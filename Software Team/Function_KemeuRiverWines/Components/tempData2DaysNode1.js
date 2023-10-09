@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const API_URL = 'http://115.188.10.251:3000/api/data/all/temp';
+const SERVER_URL = "115.188.10.251:3000";
 const node_id = "eui-70b3d57ed005de54";
+const SENSOR = "temperature";
+const DAYS = 2;
+const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors/${SENSOR}/${DAYS}`;
 
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
@@ -15,13 +18,13 @@ const Component = ({ onDataReceived }) => {
 
     const fetchData = async () => {
         try {
+            
+            console.log(API_URL);
+
             const response = await fetch(API_URL);
             const data = await response.json();
-
-            // Filter data for the given node_id
-            const twoDaysAgo = new Date();
-            twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-            const sensorOneData = data.filter(entry => entry.node_id === node_id && new Date(entry.timestamp) >= twoDaysAgo);
+            
+            const sensorOneData = data.sensorData;
 
             // Extract temperature and timestamp values into separate arrays
             const temperatures = sensorOneData.map(entry => entry.temperature);
@@ -107,17 +110,3 @@ const Component = ({ onDataReceived }) => {
 };
 
 export default Component;
-
-// const styles = StyleSheet.create({
-//     container: {
-//         height: 100,
-//     }
-// });
-
-//under VictoryAxis
-                        // If you want to show the date as well, you can use the below tickFormat instead
-                        // tickFormat={(timestamp, index, ticks) =>
-                        //     index === 0 || hasHourChanged(ticks[index - 1], timestamp)
-                        //         ? new Date(timestamp).toLocaleString()
-                        //         : ''
-                        // }
