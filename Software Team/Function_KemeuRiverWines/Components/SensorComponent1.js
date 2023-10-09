@@ -9,14 +9,6 @@ const dateISO = dateTenDaysAgo.toISOString();
 const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
 const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
-const SERVER_URL = '115.188.10.251:3000';
-const node_id = "eui-70b3d57ed005de54";
-const currentDate = new Date();
-const dateTenDaysAgo = new Date(currentDate).setDate(currentDate.getDate() - 10);
-const dateISO = dateTenDaysAgo.toISOString();
-const sensors = "temperature,humidity,leaf_wetness,wind_speed,wind_direction,rainfall";
-const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time={dateISO}`;
-
 const SensorComponent1 = ({ onDataReceived }) => {
     
     useEffect(() => {
