@@ -408,6 +408,7 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         alignContent: "center",
+        width: "100%"
     },
     settingsButton: {
         width: 100,

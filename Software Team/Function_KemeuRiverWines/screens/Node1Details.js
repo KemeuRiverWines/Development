@@ -389,6 +389,7 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         alignContent: "center",
+        width: "100%"
     },
     buttons: {
         flexDirection: "row",
