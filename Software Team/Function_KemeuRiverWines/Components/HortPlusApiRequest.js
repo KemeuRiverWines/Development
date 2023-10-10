@@ -26,6 +26,7 @@ const WeatherAPIComponent = ({ onDataReceived }) => {
             .then((json) => {
                 setData(json);
                 onDataReceived(json);
+                // console.log(json);
             })
             .catch((error) => console.error(error));
     }, []);

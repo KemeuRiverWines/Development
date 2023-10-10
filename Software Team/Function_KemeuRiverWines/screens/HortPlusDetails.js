@@ -2,8 +2,9 @@ import React, { Component, useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-import TempData10Days from '../Components/HortPlusGraph.js';
 import HortPlusApiRequest from '../Components/HortPlusApiRequest.js';
+import TempData10Days from '../Components/HortPlusGraph.js';
+import HortPlusGraph from '../Components/HortPlusTable.js';
 
 import AUTLogo from '../assets/Images/AUTLogo.png';
 import Logo from '../assets/Images/Logo.png';
@@ -19,7 +20,6 @@ function Node3Details(props) {
     const [humidity, setHumidity] = useState(null);
     const [timeStamp, setTimeStamp] = useState(null);
     const [selectedDataType, setSelectedDataType] = useState('TDDATA');
-
 
     useEffect(() => {
         if (temp && dewPoint) {
@@ -200,7 +200,9 @@ function Node3Details(props) {
                 <View>
                     <TempData10Days selectedDataType={selectedDataType}/>
                 </View>
-
+                <View>
+                    <HortPlusGraph selectedDataType={selectedDataType}/>
+                </View>
             </ScrollView>
         </View>
     );

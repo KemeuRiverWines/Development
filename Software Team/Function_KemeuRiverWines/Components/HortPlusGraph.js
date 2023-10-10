@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
 
@@ -64,13 +64,6 @@ const Component = ({ selectedDataType }) => {
                 const convertedDewPointData = json.DPDATA.map(data => parseFloat(data));
                 setDewPointData(convertedDewPointData);
 
-                // console.log(temperatureData);
-                // console.log(humidityData);
-                // console.log(rainfallData);
-                // console.log(leafWetnessData);
-                // console.log(windSpeedData);
-                // console.log(dewPointData);
-
                 setIsLoading(false);
             })
             .catch((error) => console.error(error));
@@ -90,7 +83,7 @@ const Component = ({ selectedDataType }) => {
     if (isLoading) {
         return (
             <View>
-                <Text>Loading Graph...</Text>
+                <ActivityIndicator size='large' />
             </View>
         );
     }
