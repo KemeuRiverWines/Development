@@ -5,6 +5,30 @@
 - ****
 
 ---------------------------------------------------------------------------------------------------
+>### Patch notes 10/10/23
+>#### Changes 
+>   - Updated front end API calls to back end due to server updates
+>   - Fixed bugs with new API calls
+>   - Fixed Branch Merging Bugs
+>   - Updated all graphs, now displays loading circle, inc hortplus screen
+>   - Fixed UI bugs when hort plus screen is loading, inc other node screens 
+>   - Added Table display in hort plus screen
+>   - Adjusted UI margins in Hortplus screen 
+>
+>#### Todo list 
+>   - Create a option that allows the user to select which time range they would like to view in the chart summary
+>   - Migrate the functionality of the Hort plus screen to Node 1 & 2 Screens 
+>   - Further development on the historical screen in Node 1 & 2
+>   - Further development on the forecast screen in Node 1 & 2 
+>   - Further development on the setting screens for Node 1 & 2
+>   - Add feautre that allows user to change the pin 
+>
+>#### Known Bugs 
+>   - Setting screen in node 1 not working
+>   - Forecast screen in node 1 crashes the app
+>   - Forgot pin button does not do anything 
+>
+---------------------------------------------------------------------------------------------------
 >### Patch notes 07/10/23
 >#### Changes 
 >   - Updated node 1 and node 2 screens in regards to API calls 
