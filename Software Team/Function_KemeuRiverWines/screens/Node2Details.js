@@ -90,53 +90,53 @@ function Node1Details(props) {
                 </View>
                 <View style={styles.dataGroup}>
                     <View style={styles.dataRow1}>
-                    <TouchableOpacity onPress={() => { setSelectedDataType('TEMPERATURE'); console.log("TEMPERATURE SELECTED") }}>
-                        <View style={styles.temperatureGroup}>
-                            <View style={[styles.rect, selectedDataType === 'TEMPERATURE' ? styles.selected : {}]}>
-                                <Text style={styles.temperatureHeader}>Temperature</Text>
-                                <Text style={styles.temperatureData}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.temperature !== null ? `${parseFloat(sensorData2.temperature).toFixed(1)}°c` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                        <TouchableOpacity onPress={() => { setSelectedDataType('TEMPERATURE'); console.log("TEMPERATURE SELECTED") }}>
+                            <View style={styles.temperatureGroup}>
+                                <View style={[styles.rect, selectedDataType === 'TEMPERATURE' ? styles.selected : {}]}>
+                                    <Text style={styles.temperatureHeader}>Temperature</Text>
+                                    <Text style={styles.temperatureData}>
+                                        {sensorData2 !== null ? (
+                                            sensorData2.temperature !== null ? `${parseFloat(sensorData2.temperature).toFixed(1)}°c` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { setSelectedDataType('HUMIDITY'); console.log("HUMIDITY SELECTED") }}>
-                        <View style={styles.humidityGroup}>
-                            <View style={[styles.rect1, selectedDataType === 'HUMIDITY' ? styles.selected : {}]}>
-                                <Text style={styles.humidityHeader}>Humidity</Text>
-                                <Text style={styles.humidityData1}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.humidity !== null ? `${sensorData2.humidity}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                            <View style={styles.humidityGroup}>
+                                <View style={[styles.rect1, selectedDataType === 'HUMIDITY' ? styles.selected : {}]}>
+                                    <Text style={styles.humidityHeader}>Humidity</Text>
+                                    <Text style={styles.humidityData1}>
+                                        {sensorData2 !== null ? (
+                                            sensorData2.humidity !== null ? `${sensorData2.humidity}` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { setSelectedDataType('DEWPOINT'); console.log("DEWPOINT SELECTED") }}>
-                        <View style={styles.dewPointGroup}>
-                            <View style={[styles.rect2, selectedDataType === 'DEWPOINT' ? styles.selected : {}]}>
-                                <Text style={styles.dewPointHeader}>Dew Point</Text>
-                                <Text style={styles.dewPointData}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.dew_point !== null ? `${sensorData2.dew_point}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                            <View style={styles.dewPointGroup}>
+                                <View style={[styles.rect2, selectedDataType === 'DEWPOINT' ? styles.selected : {}]}>
+                                    <Text style={styles.dewPointHeader}>Dew Point</Text>
+                                    <Text style={styles.dewPointData}>
+                                        {sensorData2 !== null ? (
+                                            sensorData2.dew_point !== null ? `${sensorData2.dew_point}` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { setSelectedDataType('LEAFWETNESS'); console.log("LEAFWETNESS SELECTED") }}>
-                        <View style={styles.leafWetnessGroup}>
-                            <View style={[styles.rect4, selectedDataType === 'LEAFWETNESS' ? styles.selected : {}]}>
-                                <Text style={styles.leafWetness2}>Leaf Wetness</Text>
-                                <Text style={styles.humidityData2}>
-                                    {sensorData2 !== null ? (
-                                        sensorData2.leaf_wetness !== null ? `${sensorData2.leaf_wetness}%` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                            <View style={styles.leafWetnessGroup}>
+                                <View style={[styles.rect4, selectedDataType === 'LEAFWETNESS' ? styles.selected : {}]}>
+                                    <Text style={styles.leafWetness2}>Leaf Wetness</Text>
+                                    <Text style={styles.humidityData2}>
+                                        {sensorData2 !== null ? (
+                                            sensorData2.leaf_wetness !== null ? `${sensorData2.leaf_wetness}%` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                     </View>
                     {/* <View style={styles.dataRow2}> */}
@@ -161,7 +161,7 @@ function Node1Details(props) {
                     {/* </View> */}
                 </View>
                 <View>
-                    <TempData10Days selectedDataType={selectedDataType}/>
+                    <TempData10Days selectedDataType={selectedDataType} />
                 </View>
             </ScrollView>
         </View>
