@@ -4,6 +4,7 @@ import MapView, { Marker } from "react-native-maps";
 
 import SensorComponent1 from '../Components/SensorComponent1';
 import TempData2DaysNode1 from '../Components/tempData2DaysNode1';
+import NodeTable from '../Components/NodeTable';
 
 import AUTLogo from '../assets/Images/AUTLogo.png';
 import Logo from '../assets/Images/Logo.png';
@@ -180,6 +181,9 @@ function Node1Details(props) {
                 </View>
                 <View>
                     <TempData2DaysNode1 selectedDataType={selectedDataType} />
+                </View>
+                <View>
+                    <NodeTable selectedDataType={selectedDataType} nodeID={"eui-70b3d57ed005de54"} />
                 </View>
             </ScrollView>
         </View>
