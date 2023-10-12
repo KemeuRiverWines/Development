@@ -15,58 +15,69 @@ const Component = ({ selectedDataType }) => {
     const [dewPointData, setDewPointData] = useState([]);
 
     useEffect(() => {
-        const now = new Date();
-        now.setHours(now.getHours() + 12);
-        const fourDaysAgo = new Date(now.getTime());
-        fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
-        fourDaysAgo.setHours(fourDaysAgo.getHours() + 12);
-
-        const start = fourDaysAgo.toISOString().slice(0, -10) + "00:00";
-        const stop = now.toISOString().slice(0, -10) + "00:00";
-
-        const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
-        console.log(url);
-
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
-            }
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                //Process Time Data
-                const convertedTimestamps = json.SDATA.map(timestamp => new Date(timestamp * 1000));
-                setTimestampData(convertedTimestamps);
-
-                //Process Temperature Data
-                const convertedTemperatureData = json.TDDATA.map(temp => parseFloat(temp));
-                setTemperatureData(convertedTemperatureData);
-
-                //Process Rainfall Data
-                const convertedRainfallData = json.RNDATA.map(data => parseFloat(data));
-                setRainfallData(convertedRainfallData);
-            
-                //Process Humidity Data
-                const convertedHumidityData = json.RHDATA.map(data => parseFloat(data));
-                setHumidityData(convertedHumidityData);
-            
-                //Process Leaf Wetness Data
-                const convertedLeafWetnessData = json.LSDATA.map(data => parseFloat(data));
-                setLeafWetnessData(convertedLeafWetnessData);
-            
-                //Process Wind Speed Data
-                const convertedWindSpeedData = json.WSDATA.map(data => parseFloat(data));
-                setWindSpeedData(convertedWindSpeedData);
-            
-                //Process Dew Point Data
-                const convertedDewPointData = json.DPDATA.map(data => parseFloat(data));
-                setDewPointData(convertedDewPointData);
-
-                setIsLoading(false);
+        try {
+            const now = new Date();
+            now.setHours(now.getHours() + 12);
+            const fourDaysAgo = new Date(now.getTime());
+            fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
+            fourDaysAgo.setHours(fourDaysAgo.getHours() + 12);
+    
+            const start = fourDaysAgo.toISOString().slice(0, -10) + "00:00";
+            const stop = now.toISOString().slice(0, -10) + "00:00";
+    
+            const url = `http://api.metwatch.nz/api/legacy/weather/hourly?station=KMU&start=${start}&stop=${stop}`;
+            console.log(url);
+    
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'x-api-key': 'iWe1rParl8d226JqFJeM0ZpZcKfl6rbvmdtKay2TCOW8NHSKGefEpF0HsAQ0OTKBuZtAAB0xLOlw93Q2'
+                }
             })
-            .catch((error) => console.error(error));
+                .then((response) => response.json())
+                .then((json) => {
+
+                    if (Number.isNaN(json.TDDATA[0])) {
+                        throw new Error('First value of TDDATA is NaN');
+                    }
+                    //Process Time Data
+                    const convertedTimestamps = json.SDATA.map(timestamp => new Date(timestamp * 1000));
+                    setTimestampData(convertedTimestamps);
+    
+                    //Process Temperature Data
+                    const convertedTemperatureData = json.TDDATA.map(temp => parseFloat(temp));
+                    setTemperatureData(convertedTemperatureData);
+    
+                    //Process Rainfall Data
+                    const convertedRainfallData = json.RNDATA.map(data => parseFloat(data));
+                    setRainfallData(convertedRainfallData);
+                
+                    //Process Humidity Data
+                    const convertedHumidityData = json.RHDATA.map(data => parseFloat(data));
+                    setHumidityData(convertedHumidityData);
+                
+                    //Process Leaf Wetness Data
+                    const convertedLeafWetnessData = json.LSDATA.map(data => parseFloat(data));
+                    setLeafWetnessData(convertedLeafWetnessData);
+                
+                    //Process Wind Speed Data
+                    const convertedWindSpeedData = json.WSDATA.map(data => parseFloat(data));
+                    setWindSpeedData(convertedWindSpeedData);
+                
+                    //Process Dew Point Data
+                    const convertedDewPointData = json.DPDATA.map(data => parseFloat(data));
+                    setDewPointData(convertedDewPointData);
+    
+                    setIsLoading(false);
+                })
+                .catch((error) => console.error(error));
+                
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            Alert.alert('Error Fetching Data', 'Hort Plus currently processing data for last hour, Please try again in a few minutes');
+            navigation.navigate('MapScreen');
+        }
     }, []);
 
     let lastLabelTimestamp = null;

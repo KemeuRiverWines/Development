@@ -28,6 +28,12 @@ const WeatherAPIComponent = ({ onDataReceived }) => {
             })
                 .then((response) => response.json())
                 .then((json) => {
+
+                    const isAnyValueNaN = Object.values(json).some(val => Number.isNaN(val));
+                    if (isAnyValueNaN) {
+                        throw new Error('Received data contains NaN');
+                    }
+                    
                     setData(json);
                     onDataReceived(json);
                     // console.log(json);
