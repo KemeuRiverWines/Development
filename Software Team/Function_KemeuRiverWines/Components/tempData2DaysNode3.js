@@ -12,8 +12,13 @@ const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_poin
 const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
 const Component = ({ onDataReceived }) => {
-    const [temperatureData, setTemperatureData] = useState([]);
     const [timestampData, setTimestampData] = useState([]);
+    const [temperatureData, setTemperatureData] = useState([]);
+    const [humidityData, setHumidityData] = useState([]);
+    const [leafWetnessData, setLeafWetnessData] = useState([]);
+    // const [windSpeedData, setWindSpeedData] = useState([]);
+    const [dewPointData, setDewPointData] = useState([]);
+    // const [rainfallData, setRainfallData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -28,14 +33,24 @@ const Component = ({ onDataReceived }) => {
             const sensorOneData = data.sensorData;
 
             // Extract temperature and timestamp values into separate arrays
-            const temperatures = sensorOneData.map(entry => entry.temperature);
             const timestamps = sensorOneData.map(entry => entry.timestamp);
+            const temperatures = sensorOneData.map(entry => entry.temperature);
+            const humidity = sensorOneData.map(entry => entry.humidity);
+            const leafWetness = sensorOneData.map(entry => entry.leaf_wetness);
+            // const windSpeed = sensorOneData.map(entry => entry.wind_speed);
+            const dewPoint = sensorOneData.map(entry => entry.dew_point);
+            // const rainfall = sensorOneData.map(entry => entry.rainfall);
 
             // temperatures.reverse();
             // timestamps.reverse();
 
-            setTemperatureData(temperatures);
             setTimestampData(timestamps);
+            setTemperatureData(temperatures);
+            setHumidityData(humidity);
+            setLeafWetnessData(leafWetness);
+            // setWindSpeedData(windSpeed);
+            setDewPointData(dewPoint);
+            // setRainfallData(rainfall);
 
             console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
 
