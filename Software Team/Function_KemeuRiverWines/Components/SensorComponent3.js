@@ -28,7 +28,7 @@ const SensorComponent3 = ({ onDataReceived }) => {
             const data = await response.json();
 
             const sensorOneData = data.sensorData;
-            let latestEntry = sensorOneData.length > 0 ? sensorOneData[0] : null;
+            let latestEntry = sensorOneData.length > 0 ? sensorOneData[sensorOneData.length-1] : null;
 
             if (latestEntry) {
                 const timestamp = new Date(latestEntry.timestamp);

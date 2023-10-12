@@ -5,6 +5,29 @@
 - ****
 
 ---------------------------------------------------------------------------------------------------
+>### Patch notes 12/10/23
+>#### Changes 
+>   - Fixed Time Stamp Issue
+>   - Updated API Calls for Graphs in Node Screens
+>   - Added Functionailty for Data Selection for all Nodes
+>   - Updated HortPlus Error Handling 
+>   - Added Table view for all Nodes 
+>   - UI Fixes to Node Screens
+>
+>#### Todo list 
+>   - Create a option that allows the user to select which time range they would like to view in the chart summary
+>   - Change the Rain fall Graph to Bars instead of a line
+>   - Further development on the historical screen in Node screen
+>   - Further development on the forecast screen in Node screens
+>   - Add feautre that allows user to change the pin 
+>
+>#### Known Bugs 
+>   - Setting screen in node 1 is not operational
+>   - Forecast screens are not operational
+>   - Forgot pin button is not operational
+>   - For the first 10 minutes of every hour the hortplus screen crashes the app
+>
+---------------------------------------------------------------------------------------------------
 >### Patch notes 10/10/23
 >#### Changes 
 >   - Updated front end API calls to back end due to server updates

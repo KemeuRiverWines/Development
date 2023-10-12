@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const SERVER_URL = "115.188.10.251:3000";
-const node_id = 'eui-70b3d57ed006182e';
-const SENSOR = "temperature";
-const DAYS = 2;
-const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors/${SENSOR}/${DAYS}`;
+const SERVER_URL = '115.188.10.251:3000';
+const node_id = "eui-70b3d57ed006182e";
+const current_Date = new Date();
+const dateTenDaysAgo = new Date();
+dateTenDaysAgo.setDate(current_Date.getDate() - 2);
+const dateISO = dateTenDaysAgo.toISOString();
+const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
+const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
-const Component = ({ onDataReceived }) => {
-    const [temperatureData, setTemperatureData] = useState([]);
+const Component = ({ selectedDataType, onDataReceived }) => {
     const [timestampData, setTimestampData] = useState([]);
+    const [temperatureData, setTemperatureData] = useState([]);
+    const [humidityData, setHumidityData] = useState([]);
+    const [leafWetnessData, setLeafWetnessData] = useState([]);
+    // const [windSpeedData, setWindSpeedData] = useState([]);
+    const [dewPointData, setDewPointData] = useState([]);
+    // const [rainfallData, setRainfallData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -25,14 +33,24 @@ const Component = ({ onDataReceived }) => {
             const sensorOneData = data.sensorData;
 
             // Extract temperature and timestamp values into separate arrays
-            const temperatures = sensorOneData.map(entry => entry.temperature);
             const timestamps = sensorOneData.map(entry => entry.timestamp);
+            const temperatures = sensorOneData.map(entry => entry.temperature);
+            const humidity = sensorOneData.map(entry => entry.humidity);
+            const leafWetness = sensorOneData.map(entry => entry.leaf_wetness);
+            // const windSpeed = sensorOneData.map(entry => entry.wind_speed);
+            const dewPoint = sensorOneData.map(entry => entry.dew_point);
+            // const rainfall = sensorOneData.map(entry => entry.rainfall);
 
-            temperatures.reverse();
-            timestamps.reverse();
+            // temperatures.reverse();
+            // timestamps.reverse();
 
-            setTemperatureData(temperatures);
             setTimestampData(timestamps);
+            setTemperatureData(temperatures);
+            setHumidityData(humidity);
+            setLeafWetnessData(leafWetness);
+            // setWindSpeedData(windSpeed);
+            setDewPointData(dewPoint);
+            // setRainfallData(rainfall);
 
             console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
 
@@ -66,6 +84,25 @@ const Component = ({ onDataReceived }) => {
         );
     }
 
+    switch (selectedDataType) {
+        case 'TEMPERATURE':
+            dataToDisplay = temperatureData;
+            textToDisplay = 'Temperature Data for the last 2 days';
+            break;
+        case 'HUMIDITY':
+            dataToDisplay = humidityData;
+            textToDisplay = 'Humidity Data for the last 2 days';
+            break;
+        case 'DEWPOINT':
+            dataToDisplay = dewPointData;
+            textToDisplay = 'Dew Point Data for the last 2 days';
+            break;
+        case 'LEAFWETNESS':
+            dataToDisplay = leafWetnessData;
+            textToDisplay = 'Leaf Wetness Data for the last 2 days';
+            break;
+    }
+
     return (
         <View>
             <VictoryChart
@@ -75,13 +112,13 @@ const Component = ({ onDataReceived }) => {
                     },
                 }}>
                 <VictoryLabel
-                    text="Temperture Data for the last 2 days"
+                    text={textToDisplay}
                     x={250}
                     y={35}
                     textAnchor="middle"
                 />
                 <VictoryLine
-                    data={timestampData.map((timestamp, index) => ({ x: timestamp, y: temperatureData[index] }))}
+                    data={timestampData.map((timestamp, index) => ({ x: timestamp, y: dataToDisplay[index] }))}
                     style={{
                         data: { stroke: 'green' },
                     }}
