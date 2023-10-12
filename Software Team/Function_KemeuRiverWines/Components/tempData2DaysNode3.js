@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const SERVER_URL = "115.188.10.251:3000";
-const node_id = 'eui-70b3d57ed006182e';
-const SENSOR = "temperature";
-const DAYS = 2;
-const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors/${SENSOR}/${DAYS}`;
+const SERVER_URL = '115.188.10.251:3000';
+const node_id = "eui-70b3d57ed006182e";
+const current_Date = new Date();
+const dateTenDaysAgo = new Date();
+dateTenDaysAgo.setDate(current_Date.getDate() - 2);
+const dateISO = dateTenDaysAgo.toISOString();
+const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
+const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
@@ -28,8 +31,8 @@ const Component = ({ onDataReceived }) => {
             const temperatures = sensorOneData.map(entry => entry.temperature);
             const timestamps = sensorOneData.map(entry => entry.timestamp);
 
-            temperatures.reverse();
-            timestamps.reverse();
+            // temperatures.reverse();
+            // timestamps.reverse();
 
             setTemperatureData(temperatures);
             setTimestampData(timestamps);
