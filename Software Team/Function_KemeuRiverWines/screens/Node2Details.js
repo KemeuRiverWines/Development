@@ -10,6 +10,8 @@ import Logo from '../assets/Images/Logo.png';
 
 function Node1Details(props) {
 
+    const [selectedDataType, setSelectedDataType] = useState("TEMPERATURE");
+
     const [sensorData2, setsensorData2] = useState(null);
     const handleDataReceived1 = (latestData) => {
         console.log("Sensor Request Done for Node1Details"); // Log the received data
@@ -88,8 +90,9 @@ function Node1Details(props) {
                 </View>
                 <View style={styles.dataGroup}>
                     <View style={styles.dataRow1}>
+                    <TouchableOpacity onPress={() => { setSelectedDataType('TEMPERATURE'); console.log("TEMPERATURE SELECTED") }}>
                         <View style={styles.temperatureGroup}>
-                            <View gradientImage="Gradient_WU95P46.png" style={styles.rect}>
+                            <View style={[styles.rect, selectedDataType === 'TEMPERATURE' ? styles.selected : {}]}>
                                 <Text style={styles.temperatureHeader}>Temperature</Text>
                                 <Text style={styles.temperatureData}>
                                     {sensorData2 !== null ? (
@@ -98,8 +101,10 @@ function Node1Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { setSelectedDataType('HUMIDITY'); console.log("HUMIDITY SELECTED") }}>
                         <View style={styles.humidityGroup}>
-                            <View style={styles.rect1}>
+                            <View style={[styles.rect1, selectedDataType === 'HUMIDITY' ? styles.selected : {}]}>
                                 <Text style={styles.humidityHeader}>Humidity</Text>
                                 <Text style={styles.humidityData1}>
                                     {sensorData2 !== null ? (
@@ -108,8 +113,10 @@ function Node1Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { setSelectedDataType('DEWPOINT'); console.log("DEWPOINT SELECTED") }}>
                         <View style={styles.dewPointGroup}>
-                            <View style={styles.rect2}>
+                            <View style={[styles.rect2, selectedDataType === 'DEWPOINT' ? styles.selected : {}]}>
                                 <Text style={styles.dewPointHeader}>Dew Point</Text>
                                 <Text style={styles.dewPointData}>
                                     {sensorData2 !== null ? (
@@ -118,8 +125,10 @@ function Node1Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { setSelectedDataType('LEAFWETNESS'); console.log("LEAFWETNESS SELECTED") }}>
                         <View style={styles.leafWetnessGroup}>
-                            <View style={styles.rect4}>
+                            <View style={[styles.rect4, selectedDataType === 'LEAFWETNESS' ? styles.selected : {}]}>
                                 <Text style={styles.leafWetness2}>Leaf Wetness</Text>
                                 <Text style={styles.humidityData2}>
                                     {sensorData2 !== null ? (
@@ -128,6 +137,7 @@ function Node1Details(props) {
                                 </Text>
                             </View>
                         </View>
+                        </TouchableOpacity>
                     </View>
                     {/* <View style={styles.dataRow2}> */}
                     {/* <View style={styles.windSpeedGroup}>
@@ -151,7 +161,7 @@ function Node1Details(props) {
                     {/* </View> */}
                 </View>
                 <View>
-                    <TempData10Days />
+                    <TempData10Days selectedDataType={selectedDataType}/>
                 </View>
             </ScrollView>
         </View>
@@ -182,6 +192,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 8,
         // marginLeft: 26
+    },
+    selected: {
+        backgroundColor: 'rgba(1,49,77,1)',
     },
     lastUpdated: {
         color: "white",
