@@ -408,7 +408,8 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         alignContent: "center",
-        width: "100%"
+        width: "100%",
+        marginTop: 10,
     },
     buttons: {
         flexDirection: "row",

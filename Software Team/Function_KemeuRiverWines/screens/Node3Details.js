@@ -55,6 +55,7 @@ function Node1Details(props) {
                     ) : null}
                 </Text>
             </View>
+            <ScrollView style={styles.scrollView}>
             <View style={styles.buttons}>
                 <View style={styles.settingsButton}>
                     <TouchableOpacity onPress={() => props.navigation.navigate('Node 2 Temperature Forecast')}>
@@ -64,7 +65,6 @@ function Node1Details(props) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <ScrollView style={styles.scrollView}>
                 <View style={styles.mapViewContainer}>
                     <MapView
                         provider={MapView.PROVIDER_GOOGLE}
@@ -370,7 +370,8 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         alignContent: "center",
-        width: "100%"
+        width: "100%",
+        marginTop: 10,
     },
     settingsButton: {
         width: 100,
