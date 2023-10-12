@@ -11,7 +11,7 @@ const dateISO = dateTenDaysAgo.toISOString();
 const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
 const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
-const Component = ({ onDataReceived }) => {
+const Component = ({ selectedDataType, onDataReceived }) => {
 
     const [timestampData, setTimestampData] = useState([]);
     const [temperatureData, setTemperatureData] = useState([]);
@@ -28,7 +28,7 @@ const Component = ({ onDataReceived }) => {
 
     const fetchData = async () => {
         try {
-            
+
             console.log(API_URL);
 
             const response = await fetch(API_URL);
@@ -44,7 +44,7 @@ const Component = ({ onDataReceived }) => {
             const windSpeed = sensorOneData.map(entry => entry.wind_speed);
             const dewPoint = sensorOneData.map(entry => entry.dew_point);
             const rainfall = sensorOneData.map(entry => entry.rainfall);
-            
+
             // temperatures.reverse();
             // timestamps.reverse();
 
@@ -88,6 +88,33 @@ const Component = ({ onDataReceived }) => {
         );
     }
 
+    switch (selectedDataType) {
+        case 'TEMPERATURE':
+            dataToDisplay = temperatureData;
+            textToDisplay = 'Temperature Data for the last 2 days';
+            break;
+        case 'HUMIDITY':
+            dataToDisplay = humidityData;
+            textToDisplay = 'Humidity Data for the last 2 days';
+            break;
+        case 'DEWPOINT':
+            dataToDisplay = dewPointData;
+            textToDisplay = 'Dew Point Data for the last 2 days';
+            break;
+        case 'WINDSPEED':
+            dataToDisplay = windSpeedData;
+            textToDisplay = 'Wind Speed Data for the last 2 days';
+            break;
+        case 'LEAFWETNESS':
+            dataToDisplay = leafWetnessData;
+            textToDisplay = 'Leaf Wetness Data for the last 2 days';
+            break;
+        case 'RAINFALL':
+            dataToDisplay = rainfallData;
+            textToDisplay = 'Rainfall Data for the last 2 days';
+            break;
+    }
+
     return (
         <View>
             <VictoryChart
@@ -97,13 +124,13 @@ const Component = ({ onDataReceived }) => {
                     },
                 }}>
                 <VictoryLabel
-                    text="Temperture Data for the last 2 days"
+                    text={textToDisplay}
                     x={250}
                     y={35}
                     textAnchor="middle"
                 />
                 <VictoryLine
-                    data={timestampData.map((timestamp, index) => ({ x: timestamp, y: temperatureData[index] }))}
+                    data={timestampData.map((timestamp, index) => ({ x: timestamp, y: dataToDisplay[index] }))}
                     style={{
                         data: { stroke: 'green' },
                     }}
