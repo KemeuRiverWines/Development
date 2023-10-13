@@ -58,8 +58,6 @@ const Component = ({ selectedDataType, selectedDays }) => {
             setDewPointData(dewPoint);
             setRainfallData(rainfall);
 
-            console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
-
             setIsLoading(false);
 
         } catch (error) {
