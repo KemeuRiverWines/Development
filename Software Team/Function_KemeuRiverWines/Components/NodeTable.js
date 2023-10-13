@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Table, Row } from 'react-native-table-component';
 import moment from 'moment-timezone';
 
-const Component = ({ selectedDataType, nodeID }) => {
+const Component = ({ selectedDataType, selectedDays, nodeID }) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -18,18 +18,21 @@ const Component = ({ selectedDataType, nodeID }) => {
     const SERVER_URL = '115.188.10.251:3000';
     const node_id = nodeID;
     const current_Date = new Date();
-    const dateTenDaysAgo = new Date();
-    dateTenDaysAgo.setDate(current_Date.getDate() - 2);
-    const dateISO = dateTenDaysAgo.toISOString();
+    const dateSelectedDaysAgo = new Date();
+    dateSelectedDaysAgo.setDate(current_Date.getDate() - selectedDays);
+    const dateISO = dateSelectedDaysAgo.toISOString();
     const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
     const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [selectedDataType, selectedDays]);
 
     const fetchData = async () => {
         try {
+
+            setIsLoading(true);
+
             const response = await fetch(API_URL);
             const data = await response.json();
 
@@ -68,7 +71,7 @@ const Component = ({ selectedDataType, nodeID }) => {
     if (isLoading) {
         return (
             <View>
-                <Text>Loading Table...</Text>
+                <ActivityIndicator size='large' />
             </View>
         );
     }
