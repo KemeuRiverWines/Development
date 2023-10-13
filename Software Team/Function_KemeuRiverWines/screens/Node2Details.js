@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import Slider from "@react-native-community/slider";
 
 import SensorComponent1 from '../Components/SensorComponent2';
 import TempData10Days from '../Components/tempData2DaysNode2';
@@ -12,6 +13,8 @@ import Logo from '../assets/Images/Logo.png';
 function Node1Details(props) {
 
     const [selectedDataType, setSelectedDataType] = useState("TEMPERATURE");
+    const [sliderValue, setSliderValue] = useState(4);
+    const [finalSilderValue, setFinalSliderValue] = useState(4);
 
     const [sensorData2, setsensorData2] = useState(null);
     const handleDataReceived1 = (latestData) => {
@@ -161,10 +164,31 @@ function Node1Details(props) {
                     {/* </View> */}
                 </View>
                 <View>
-                    <TempData10Days selectedDataType={selectedDataType} />
+                    <Text style={{ alignContent: "center", alignSelf: "center" , fontWeight: "bold", marginTop: 10, marginBottom: 10 }}>Data for the last: {sliderValue} days</Text>
+                    <Slider
+                        style={{ width: "80%", height: 20, alignContent: "center", alignSelf: "center" }}
+                        minimumValue={1}
+                        maximumValue={10}
+                        value={finalSilderValue}
+                        step={1}
+                        minimumTrackTintColor="#000000"
+                        maximumTrackTintColor="#000000"
+                        thumbTintColor="rgba(0,78,124,1)"
+                        onValueChange={(value) => {
+                            console.log(`Value changed to ${value}`);
+                            setSliderValue(value);
+                        }}
+                        onSlidingComplete={(value) => {
+                            console.log(`Sliding completed with final value ${value}`);
+                            setFinalSliderValue(value);
+                        }}
+                    />
                 </View>
                 <View>
-                    <NodeTable selectedDataType={selectedDataType} nodeID={"eui-70b3d57ed00618ec"} />
+                    <TempData10Days selectedDataType={selectedDataType} selectedDays={finalSilderValue}/>
+                </View>
+                <View>
+                    <NodeTable selectedDataType={selectedDataType} selectedDays={finalSilderValue} nodeID={"eui-70b3d57ed00618ec"} />
                 </View>
             </ScrollView>
         </View>

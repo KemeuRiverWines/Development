@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, Text, ScrollView, Button, TouchableOpacity, ImageBackground, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import Slider from "@react-native-community/slider";
 
 import SensorComponent1 from '../Components/SensorComponent1';
 import TempData2DaysNode1 from '../Components/tempData2DaysNode1';
@@ -12,6 +13,8 @@ import Logo from '../assets/Images/Logo.png';
 function Node1Details(props) {
 
     const [selectedDataType, setSelectedDataType] = useState("TEMPERATURE");
+    const [sliderValue, setSliderValue] = useState(4);
+    const [finalSilderValue, setFinalSliderValue] = useState(4);
 
     const [sensorData1, setSensorData1] = useState(null);
     const handleDataReceived1 = (latestData) => {
@@ -75,13 +78,13 @@ function Node1Details(props) {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.settingsButton}>
+                    {/* <View style={styles.settingsButton}>
                         <TouchableOpacity onPress={() => props.navigation.navigate('Sensor Control Screen')}>
                             <Text style={styles.settingsText}>
                                 Settings
                             </Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
                 <View style={styles.mapViewContainer}>
                     <MapView
@@ -144,46 +147,67 @@ function Node1Details(props) {
                     </View>
                     <View style={styles.dataRow2}>
                         <TouchableOpacity onPress={() => { setSelectedDataType('WINDSPEED'); console.log("WINDSPEED SELECTED") }}>
-                        <View style={styles.windSpeedGroup}>
-                            <View style={[styles.rect3, selectedDataType === 'WINDSPEED' ? styles.selected : {}]}>
-                                <Text style={styles.windSpeedHeader}>Wind Speed</Text>
-                                <Text style={styles.windSpeedData}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.wind_speed !== null ? `${sensorData1.wind_speed}` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                            <View style={styles.windSpeedGroup}>
+                                <View style={[styles.rect3, selectedDataType === 'WINDSPEED' ? styles.selected : {}]}>
+                                    <Text style={styles.windSpeedHeader}>Wind Speed</Text>
+                                    <Text style={styles.windSpeedData}>
+                                        {sensorData1 !== null ? (
+                                            sensorData1.wind_speed !== null ? `${sensorData1.wind_speed}` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { setSelectedDataType('LEAFWETNESS'); console.log("LEAFWETNESS SELECTED") }}>
-                        <View style={styles.leafWetnessGroup}>
-                            <View style={[styles.rect4, selectedDataType === 'LEAFWETNESS' ? styles.selected : {}]}>
-                                <Text style={styles.leafWetness2}>Leaf Wetness</Text>
-                                <Text style={styles.humidityData2}>
-                                    {sensorData1 !== null ? (
-                                        sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}%` : <ActivityIndicator size="large" />
-                                    ) : null}
-                                </Text>
+                            <View style={styles.leafWetnessGroup}>
+                                <View style={[styles.rect4, selectedDataType === 'LEAFWETNESS' ? styles.selected : {}]}>
+                                    <Text style={styles.leafWetness2}>Leaf Wetness</Text>
+                                    <Text style={styles.humidityData2}>
+                                        {sensorData1 !== null ? (
+                                            sensorData1.leaf_wetness !== null ? `${sensorData1.leaf_wetness}%` : <ActivityIndicator size="large" />
+                                        ) : null}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { setSelectedDataType('RAINFALL'); console.log("RAINFALL SELECTED") }}>
-                        <View style={styles.rainFallGroup}>
-                            <View style={[styles.rect5, selectedDataType === 'RAINFALL' ? styles.selected : {}]}>
-                                <Text style={styles.rainFall2}>Rain Fall</Text>
-                                <Text style={styles.dewPointData1}>{sensorData1 !== null ? (
-                                    sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
-                                ) : null}</Text>
+                            <View style={styles.rainFallGroup}>
+                                <View style={[styles.rect5, selectedDataType === 'RAINFALL' ? styles.selected : {}]}>
+                                    <Text style={styles.rainFall2}>Rain Fall</Text>
+                                    <Text style={styles.dewPointData1}>{sensorData1 !== null ? (
+                                        sensorData1.rainfall !== null ? `${sensorData1.rainfall}` : <ActivityIndicator size="large" />
+                                    ) : null}</Text>
+                                </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View>
-                    <TempData2DaysNode1 selectedDataType={selectedDataType} />
+                    <Text style={{ alignContent: "center", alignSelf: "center" , fontWeight: "bold", marginBottom: 10 }}>Data for the last: {sliderValue} days</Text>
+                    <Slider
+                        style={{ width: "80%", height: 20, alignContent: "center", alignSelf: "center" }}
+                        minimumValue={1}
+                        maximumValue={10}
+                        value={finalSilderValue}
+                        step={1}
+                        minimumTrackTintColor="#000000"
+                        maximumTrackTintColor="#000000"
+                        thumbTintColor="rgba(0,78,124,1)"
+                        onValueChange={(value) => {
+                            console.log(`Value changed to ${value}`);
+                            setSliderValue(value);
+                        }}
+                        onSlidingComplete={(value) => {
+                            console.log(`Sliding completed with final value ${value}`);
+                            setFinalSliderValue(value);
+                        }}
+                    />
                 </View>
                 <View>
-                    <NodeTable selectedDataType={selectedDataType} nodeID={"eui-70b3d57ed005de54"} />
+                    <TempData2DaysNode1 selectedDataType={selectedDataType} selectedDays={finalSilderValue} />
+                </View>
+                <View>
+                    <NodeTable selectedDataType={selectedDataType} selectedDays={finalSilderValue} nodeID={"eui-70b3d57ed005de54"} />
                 </View>
             </ScrollView>
         </View>
