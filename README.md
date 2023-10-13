@@ -4,7 +4,24 @@
 - **Max Sommerville**
 - ****
 
----------------------------------------------------------------------------------------------------
+>### Patch notes 13/10/23
+>#### Changes 
+>   - Added the Slider Functionality that allows the user to select which data range they want displayed in the graph and table on all node screens
+>   - Updated labels to work with all possiable date ranges
+>   - Removed Settings button/screen in node 1
+>
+>#### Todo list 
+>   - Change the Rain fall Graph to Bars instead of a line
+>   - Further development on the historical screen in Node screen
+>   - Further development on the forecast screen in Node screens
+>   - Add feautre that allows user to change the pin 
+>
+>#### Known Bugs 
+>   - Forecast screens are not operational
+>   - Forgot pin button is not operational
+>   - For the first 10 minutes of every hour the hortplus screen crashes the app
+>
+--------------------------------------------
 >### Patch notes 12/10/23
 >#### Changes 
 >   - Fixed Time Stamp Issue
@@ -27,7 +44,7 @@
 >   - Forgot pin button is not operational
 >   - For the first 10 minutes of every hour the hortplus screen crashes the app
 >
----------------------------------------------------------------------------------------------------
+--------------------------------------------
 >### Patch notes 10/10/23
 >#### Changes 
 >   - Updated front end API calls to back end due to server updates
@@ -51,7 +68,7 @@
 >   - Forecast screen in node 1 crashes the app
 >   - Forgot pin button does not do anything 
 >
----------------------------------------------------------------------------------------------------
+--------------------------------------------
 >### Patch notes 07/10/23
 >#### Changes 
 >   - Updated node 1 and node 2 screens in regards to API calls 
@@ -78,7 +95,8 @@
 >   - Forecast screen in node 1 crashes the app
 >   - Forgot pin button does not do anything 
 >   - Hort Plus screen does not display loading circle when loading the data
----------------------------------------------------------------------------------------------------
+>
+--------------------------------------------
 >### Patch notes 05/10/23
 >#### Changes 
 >   - Edited Node 2 & 3 ID
@@ -98,8 +116,9 @@
 >   - Forgot pin button does not do anything 
 >   - Map marker in node 2 is in the incorrect location 
 >   - Hort Plus screen does not display loading circle when loading the data
->   - App Logo is off center and needs adjusting 
----------------------------------------------------------------------------------------------------
+>   - App Logo is off center and needs adjusting
+>
+--------------------------------------------
 >### Patch notes 04/10/23
 >#### Changes 
 >   - Added feature to hort plus page that allows user to select which data they would like to display in the chart below 
