@@ -164,7 +164,7 @@ function Node1Details(props) {
                     {/* </View> */}
                 </View>
                 <View>
-                    <Text style={{ alignContent: "center", alignSelf: "center" , fontWeight: "bold", marginBottom: 10 }}>Data for the last: {sliderValue} days</Text>
+                    <Text style={{ alignContent: "center", alignSelf: "center" , fontWeight: "bold", marginTop: 10, marginBottom: 10 }}>Data for the last: {sliderValue} days</Text>
                     <Slider
                         style={{ width: "80%", height: 20, alignContent: "center", alignSelf: "center" }}
                         minimumValue={1}

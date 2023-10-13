@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const SERVER_URL = '115.188.10.251:3000';
-const node_id = "eui-70b3d57ed006182e";
-const current_Date = new Date();
-const dateTenDaysAgo = new Date();
-dateTenDaysAgo.setDate(current_Date.getDate() - 2);
-const dateISO = dateTenDaysAgo.toISOString();
-const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
-const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
+const Component = ({ selectedDataType, selectedDays }) => {
 
-const Component = ({ selectedDataType, onDataReceived }) => {
+    const SERVER_URL = '115.188.10.251:3000';
+    const node_id = "eui-70b3d57ed00618ec";
+    const current_Date = new Date();
+    const dateSelectedDaysAgo = new Date();
+    dateSelectedDaysAgo.setDate(current_Date.getDate() - selectedDays);
+    const dateISO = dateSelectedDaysAgo.toISOString();
+    const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
+    const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
+
     const [timestampData, setTimestampData] = useState([]);
     const [temperatureData, setTemperatureData] = useState([]);
     const [humidityData, setHumidityData] = useState([]);
@@ -23,10 +24,15 @@ const Component = ({ selectedDataType, onDataReceived }) => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [selectedDataType, selectedDays]);
 
     const fetchData = async () => {
         try {
+
+            setIsLoading(true);
+
+            console.log(API_URL);
+
             const response = await fetch(API_URL);
             const data = await response.json();
 
@@ -52,8 +58,6 @@ const Component = ({ selectedDataType, onDataReceived }) => {
             setDewPointData(dewPoint);
             // setRainfallData(rainfall);
 
-            console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
-
             setIsLoading(false);
 
         } catch (error) {
@@ -64,10 +68,43 @@ const Component = ({ selectedDataType, onDataReceived }) => {
     // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
 
+    switch (selectedDays) {
+        case 1:
+            Interval = 500;
+            break;
+        case 2:
+            Interval = 1000;
+            break;
+        case 3:
+            Interval = 1500;
+            break;
+        case 4:
+            Interval = 2000;
+            break;
+        case 5:
+            Interval = 2500;
+            break;
+        case 6:
+            Interval = 3000;
+            break;
+        case 7:
+            Interval = 3500;
+            break;
+        case 8:
+            Interval = 4000;
+            break;
+        case 9:
+            Interval = 4500;
+            break;
+        case 10:
+            Interval = 5000;
+            break;
+    }
+
     function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
         currentDate = new Date(currentTimestamp);
 
-        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 10 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
+        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 10 * 60 * 60 * Interval) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
             lastLabelTimestamp = currentDate;
             // console.log(Math.abs(currentDate - lastLabelTimestamp));
             // console.log(lastLabelTimestamp);
@@ -87,19 +124,15 @@ const Component = ({ selectedDataType, onDataReceived }) => {
     switch (selectedDataType) {
         case 'TEMPERATURE':
             dataToDisplay = temperatureData;
-            textToDisplay = 'Temperature Data for the last 2 days';
             break;
         case 'HUMIDITY':
             dataToDisplay = humidityData;
-            textToDisplay = 'Humidity Data for the last 2 days';
             break;
         case 'DEWPOINT':
             dataToDisplay = dewPointData;
-            textToDisplay = 'Dew Point Data for the last 2 days';
             break;
         case 'LEAFWETNESS':
             dataToDisplay = leafWetnessData;
-            textToDisplay = 'Leaf Wetness Data for the last 2 days';
             break;
     }
 
@@ -111,12 +144,6 @@ const Component = ({ selectedDataType, onDataReceived }) => {
                         backgroundColor: 'white',
                     },
                 }}>
-                <VictoryLabel
-                    text={textToDisplay}
-                    x={250}
-                    y={35}
-                    textAnchor="middle"
-                />
                 <VictoryLine
                     data={timestampData.map((timestamp, index) => ({ x: timestamp, y: dataToDisplay[index] }))}
                     style={{
@@ -136,9 +163,8 @@ const Component = ({ selectedDataType, onDataReceived }) => {
                             : ''
                     }
                     style={{
-                        tickLabels: { fill: 'black', angle: -20 }, // Set the angle to -90 for vertical labels
+                        tickLabels: { fill: 'black', angle: -0 }, // Set the angle to -90 for vertical labels
                         axis: { stroke: 'black' },
-                        // grid: { stroke: 'lightgrey', strokeWidth: 1.5 },
                     }}
                 />
                 <VictoryAxis dependentAxis
