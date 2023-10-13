@@ -70,10 +70,43 @@ const Component = ({ selectedDataType, selectedDays }) => {
     // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
 
+    switch (selectedDays) {
+        case 1:
+            Interval = 500;
+            break;
+        case 2:
+            Interval = 1000;
+            break;
+        case 3:
+            Interval = 1500;
+            break;
+        case 4:
+            Interval = 2000;
+            break;
+        case 5:
+            Interval = 2500;
+            break;
+        case 6:
+            Interval = 3000;
+            break;
+        case 7:
+            Interval = 3500;
+            break;
+        case 8:
+            Interval = 4000;
+            break;
+        case 9:
+            Interval = 4500;
+            break;
+        case 10:
+            Interval = 5000;
+            break;
+    }
+
     function hasSixHoursChanged(previousTimestamp, currentTimestamp) {
         currentDate = new Date(currentTimestamp);
 
-        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 10 * 60 * 60 * 1000) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
+        if (lastLabelTimestamp === null || Math.abs(currentDate - lastLabelTimestamp) >= 10 * 60 * 60 * Interval) { //CHANGE THIS TO WHAT EVER TO CHANGE INTERVALS OF LABELS
             lastLabelTimestamp = currentDate;
             // console.log(Math.abs(currentDate - lastLabelTimestamp));
             // console.log(lastLabelTimestamp);
@@ -139,7 +172,7 @@ const Component = ({ selectedDataType, selectedDays }) => {
                             : ''
                     }
                     style={{
-                        tickLabels: { fill: 'black', angle: -20 }, // Set the angle to -90 for vertical labels
+                        tickLabels: { fill: 'black', angle: -0 }, // Set the angle to -90 for vertical labels
                         axis: { stroke: 'black' },
                     }}
                 />
