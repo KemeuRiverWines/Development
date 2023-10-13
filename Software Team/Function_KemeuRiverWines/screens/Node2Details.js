@@ -57,7 +57,9 @@ function Node1Details(props) {
                 <Text style={styles.node1}>Node 2</Text>
                 <Text style={styles.lastUpdated}>
                     {sensorData2 !== null ? (
-                        sensorData2.timeAgo !== null ? `Updated ${sensorData2.timeAgo}` : <ActivityIndicator size="large" />
+                        sensorData2.timestamp !== null ?
+                            new Date(sensorData2.timestamp).toLocaleString("en-NZ", { timeZone: "Pacific/Auckland", hour12: true, hour: '2-digit', minute:'2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })
+                            : <ActivityIndicator size="large" />
                     ) : null}
                 </Text>
             </View>
