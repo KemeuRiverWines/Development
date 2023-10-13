@@ -185,7 +185,7 @@ function Node1Details(props) {
                     <TempData10Days selectedDataType={selectedDataType} selectedDays={finalSilderValue}/>
                 </View>
                 <View>
-                    <NodeTable selectedDataType={selectedDataType} nodeID={"eui-70b3d57ed006182e"} />
+                    <NodeTable selectedDataType={selectedDataType} selectedDays={finalSilderValue} nodeID={"eui-70b3d57ed006182e"} />
                 </View>
             </ScrollView>
         </View>
