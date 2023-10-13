@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-const SERVER_URL = '115.188.10.251:3000';
-const node_id = "eui-70b3d57ed005de54";
-const current_Date = new Date();
-const dateTenDaysAgo = new Date();
-dateTenDaysAgo.setDate(current_Date.getDate() - 2);
-const dateISO = dateTenDaysAgo.toISOString();
-const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
-const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
+const Component = ({ selectedDataType, selectedDays }) => {
 
-const Component = ({ selectedDataType, onDataReceived }) => {
+    const SERVER_URL = '115.188.10.251:3000';
+    const node_id = "eui-70b3d57ed005de54";
+    const current_Date = new Date();
+    const dateSelectedDaysAgo = new Date();
+    dateSelectedDaysAgo.setDate(current_Date.getDate() - selectedDays);
+    const dateISO = dateSelectedDaysAgo.toISOString();
+    const sensors = "timestamp,temperature,humidity,leaf_wetness,wind_speed,dew_point,rainfall";
+    const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors?sensors=${sensors}&time=${dateISO}`;
 
     const [timestampData, setTimestampData] = useState([]);
     const [temperatureData, setTemperatureData] = useState([]);
@@ -24,10 +24,12 @@ const Component = ({ selectedDataType, onDataReceived }) => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [selectedDataType, selectedDays]);
 
     const fetchData = async () => {
         try {
+
+            setIsLoading(true);
 
             console.log(API_URL);
 
@@ -91,27 +93,21 @@ const Component = ({ selectedDataType, onDataReceived }) => {
     switch (selectedDataType) {
         case 'TEMPERATURE':
             dataToDisplay = temperatureData;
-            textToDisplay = 'Temperature Data for the last 2 days';
             break;
         case 'HUMIDITY':
             dataToDisplay = humidityData;
-            textToDisplay = 'Humidity Data for the last 2 days';
             break;
         case 'DEWPOINT':
             dataToDisplay = dewPointData;
-            textToDisplay = 'Dew Point Data for the last 2 days';
             break;
         case 'WINDSPEED':
             dataToDisplay = windSpeedData;
-            textToDisplay = 'Wind Speed Data for the last 2 days';
             break;
         case 'LEAFWETNESS':
             dataToDisplay = leafWetnessData;
-            textToDisplay = 'Leaf Wetness Data for the last 2 days';
             break;
         case 'RAINFALL':
             dataToDisplay = rainfallData;
-            textToDisplay = 'Rainfall Data for the last 2 days';
             break;
     }
 
@@ -120,15 +116,10 @@ const Component = ({ selectedDataType, onDataReceived }) => {
             <VictoryChart
                 style={{
                     parent: {
-                        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                        backgroundColor: 'transparent',
+                        // marginTop: -20,
                     },
                 }}>
-                <VictoryLabel
-                    text={textToDisplay}
-                    x={250}
-                    y={35}
-                    textAnchor="middle"
-                />
                 <VictoryLine
                     data={timestampData.map((timestamp, index) => ({ x: timestamp, y: dataToDisplay[index] }))}
                     style={{
@@ -150,7 +141,6 @@ const Component = ({ selectedDataType, onDataReceived }) => {
                     style={{
                         tickLabels: { fill: 'black', angle: -20 }, // Set the angle to -90 for vertical labels
                         axis: { stroke: 'black' },
-                        // grid: { stroke: 'lightgrey', strokeWidth: 1.5 },
                     }}
                 />
                 <VictoryAxis dependentAxis
