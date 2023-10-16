@@ -5,9 +5,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import TempForecastGraphNode1 from '../Components/TempForecastGraphNode1';
 import ForecastComponent from '../Components/ForecastComponent';
 
+const decimalPlaces = 1;
+
 const Node1Forecast = () => {
 
     const [data, setData] = useState(null);
+    const handleFetch = (fetchData) => {
+        setData(fetchData);
+    };
 
     const getForecastId = () => {
         const currentTime = new Date();
@@ -18,11 +23,12 @@ const Node1Forecast = () => {
         return forecastId;
     };
 
+    let forecastId = getForecastId();
+
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <ForecastComponent onData={setData} />
-                {/* {data && <Text>{JSON.stringify(data)}</Text>} */}
+                <ForecastComponent onFetch={handleFetch} />
             </View>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Node 1 Temperature Forecast</Text>
@@ -31,15 +37,15 @@ const Node1Forecast = () => {
                 <View style={styles.dataDisplay}>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 15 Minutes</Text>
-                        {/* <Text style={styles.dataDisplayValue}>{data && data[0].temperature}°c</Text> */}
+                        <Text style={styles.dataDisplayValue}>{data && data[forecastId].temperature.toFixed(decimalPlaces)}°c</Text>
                     </View>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 60 Minutes</Text>
-                        {/* <Text style={styles.dataDisplayValue}>{data && data[1].temperature}°c</Text> */}
+                        <Text style={styles.dataDisplayValue}>{data && data[forecastId+3].temperature.toFixed(decimalPlaces)}°c</Text>
                     </View>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 120 Minutes</Text>
-                        {/* <Text style={styles.dataDisplayValue}>{data && data[2].temperature}°c</Text> */}
+                        <Text style={styles.dataDisplayValue}>{data && data[forecastId+7].temperature.toFixed(decimalPlaces)}°c</Text>
                     </View>
                 </View>
                 <View style={styles.graph}>

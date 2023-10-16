@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-native';
 
-
-const SERVER_URL = "155.188.10.251:3000";
-const node_id = "eui-70b3d57ed005de54";
-const SENSOR = "temperature";
-const DAYS = 2;
-const API_URL = `http://${SERVER_URL}/api/nodeData/${node_id}/sensors/${SENSOR}/${DAYS}`;
+const API_URL = `http://115.188.10.251:3000/api/forecast/data/all/allforecast`;
 
 const Component = ({ onDataReceived }) => {
     const [temperatureData, setTemperatureData] = useState([]);
@@ -21,26 +16,31 @@ const Component = ({ onDataReceived }) => {
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
-            
-            const sensorOneData = data.sensorData;
+    
+            // If data is an array
+            if (Array.isArray(data)) {
+                // Extract temperature and timestamp values into separate arrays
+                const temperatures = data.map(entry => entry.temperature);
+                const timestamps = data.map(entry => new Date(entry.timestamp).toLocaleString());
+    
+                temperatures.reverse();
+                timestamps.reverse();
+    
+                setTemperatureData(temperatures);
+                setTimestampData(timestamps);
 
-            // Extract temperature and timestamp values into separate arrays
-            const temperatures = sensorOneData.map(entry => entry.temperature);
-            const timestamps = sensorOneData.map(entry => entry.timestamp);
-
-            temperatures.reverse();
-            timestamps.reverse();
-
-            setTemperatureData(temperatures);
-            setTimestampData(timestamps);
-
-            console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
-            // console.log(temperatures);
-            // console.log(timestamps);
+                console.log(timestampData);
+                console.log(temperatureData);
+    
+                console.log('Sensor Request Successful = http://115.188.10.251:3000/api/data/all/temp');
+            } else {
+                console.error('Unexpected data format:', data);
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+    
 
     // Helper function to check if the hour has changed
     let lastLabelTimestamp = null;
