@@ -66,7 +66,7 @@ function Node1Details(props) {
             <ScrollView style={styles.scrollView}>
             <View style={styles.buttons}>
                 <View style={styles.settingsButton}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Node 2 Temperature Forecast')}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Temperature Forecast')}>
                         <Text style={styles.settingsText}>
                             Forecast Temp
                         </Text>
