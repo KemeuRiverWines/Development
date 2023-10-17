@@ -19,7 +19,7 @@ const Node1Forecast = () => {
         const minutesSinceMidnight =
             currentTime.getHours() * 60 + currentTime.getMinutes();
         const forecastId = Math.floor(minutesSinceMidnight / 5) + 1;
-        console.log(forecastId);
+        console.log("Forecast ID - ", forecastId);
         return forecastId;
     };
 
@@ -31,7 +31,7 @@ const Node1Forecast = () => {
                 <ForecastComponent onFetch={handleFetch} />
             </View>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Node 1 Temperature Forecast</Text>
+                <Text style={styles.headerText}>Temperature Forecast</Text>
             </View>
             <View style={styles.body}>
                 <View style={styles.dataDisplay}>
