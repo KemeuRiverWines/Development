@@ -44,7 +44,7 @@ const PinScreen = () => {
 
   useEffect(() => {
     if (pin.length === maxPinLength) {
-      if (pin === '0000') {
+      if (pin === '0892') {
         navigation.navigate('MapScreen');
       } else {
         Alert.alert('Incorrent PIN!');
