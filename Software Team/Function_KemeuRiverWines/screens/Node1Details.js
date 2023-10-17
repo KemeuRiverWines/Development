@@ -58,14 +58,16 @@ function Node1Details(props) {
                 <Text style={styles.node1}>Node 1</Text>
                 <Text style={styles.lastUpdated}>
                     {sensorData1 !== null ? (
-                        sensorData1.timeAgo !== null ? `Updated ${sensorData1.timeAgo}` : <ActivityIndicator size="large" />
+                        sensorData1.timestamp !== null ?
+                            new Date(sensorData1.timestamp).toLocaleString("en-NZ", { timeZone: "Pacific/Auckland", hour12: true, hour: '2-digit', minute:'2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })
+                            : <ActivityIndicator size="large" />
                     ) : null}
                 </Text>
             </View>
             <ScrollView style={styles.scrollView}>
                 <View style={styles.buttons}>
                     <View style={styles.settingsButton}>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Node 1 Temperature Forecast')}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Temperature Forecast')}>
                             <Text style={styles.settingsText}>
                                 Forecast Temp
                             </Text>
@@ -183,7 +185,7 @@ function Node1Details(props) {
                     </View>
                 </View>
                 <View>
-                    <Text style={{ alignContent: "center", alignSelf: "center" , fontWeight: "bold", marginBottom: 10 }}>Data for the last: {sliderValue} days</Text>
+                    <Text style={{ alignContent: "center", alignSelf: "center", fontWeight: "bold", marginBottom: 10 }}>Data for the last: {sliderValue} days</Text>
                     <Slider
                         style={{ width: "80%", height: 20, alignContent: "center", alignSelf: "center" }}
                         minimumValue={1}

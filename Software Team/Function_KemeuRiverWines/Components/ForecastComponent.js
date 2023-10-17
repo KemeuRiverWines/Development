@@ -1,29 +1,16 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 
-const FetchDataComponent = ({ onData }) => {
+const Component = ({ onFetch }) => {
+    const [data, setData] = useState(null);
+
     useEffect(() => {
-        fetch('http://115.188.10.251:3000/api/data/all/allforecast')
+        fetch('http://115.188.10.251:3000/api/forecast/data/all/allforecast')
             .then(response => response.json())
             .then(data => {
-                const currentTime = new Date();
-                const currentTimeUTC = new Date(
-                    currentTime.getUTCFullYear(),
-                    currentTime.getUTCMonth(),
-                    currentTime.getUTCDate(),
-                    currentTime.getUTCHours(),
-                    currentTime.getUTCMinutes(),
-                    currentTime.getUTCSeconds()
-                );
-                const filteredData = data.filter(
-                    forecast => new Date(forecast.timestamp) >= currentTimeUTC
-                );
-                const formattedData = filteredData.map(forecast => ({
-                    ...forecast,
-                    temperature: parseFloat(forecast.temperature.toFixed(2)),
-                }));
-                // console.log(formattedData);
-                onData(formattedData);
+                setData(data);
+                onFetch(data);
+                // console.log(data);
             })
             .catch(error => console.error(error));
     }, []);
@@ -31,8 +18,4 @@ const FetchDataComponent = ({ onData }) => {
     return null;
 };
 
-FetchDataComponent.propTypes = {
-    onData: PropTypes.func.isRequired,
-};
-
-export default FetchDataComponent;
+export default Component;

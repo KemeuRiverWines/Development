@@ -5,7 +5,7 @@ import { Table, Row } from 'react-native-table-component';
 
 const History = () => {
   const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    labels: ['15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
     datasets: [
       {
         data: [20, 22, 21, 25, 24, 23],

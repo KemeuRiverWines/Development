@@ -122,7 +122,6 @@ const Component = ({ selectedDataType, selectedDays, nodeID }) => {
 			</Table>
 		</View>
 	)
-
 }
 
 const styles = StyleSheet.create({

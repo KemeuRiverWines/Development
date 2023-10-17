@@ -54,14 +54,16 @@ function Node1Details(props) {
                 <Text style={styles.node1}>Node 3</Text>
                 <Text style={styles.lastUpdated}>
                     {sensorData3 !== null ? (
-                        sensorData3.timeAgo !== null ? `Updated ${sensorData3.timeAgo}` : <ActivityIndicator size="large" />
+                        sensorData3.timestamp !== null ?
+                            new Date(sensorData3.timestamp).toLocaleString("en-NZ", { timeZone: "Pacific/Auckland", hour12: true, hour: '2-digit', minute:'2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })
+                            : <ActivityIndicator size="large" />
                     ) : null}
                 </Text>
             </View>
             <ScrollView style={styles.scrollView}>
             <View style={styles.buttons}>
                 <View style={styles.settingsButton}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Node 2 Temperature Forecast')}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Temperature Forecast')}>
                         <Text style={styles.settingsText}>
                             Forecast Temp
                         </Text>
