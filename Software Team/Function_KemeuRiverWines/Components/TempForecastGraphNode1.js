@@ -4,7 +4,7 @@ import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-na
 
 const API_URL = `http://115.188.10.251:3000/api/forecast/data/all/allforecast`;
 
-const Component = ({ onDataReceived }) => {
+const Component = () => {
     const [temperatureData, setTemperatureData] = useState([]);
     const [timestampData, setTimestampData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

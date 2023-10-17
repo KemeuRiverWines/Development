@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import TempForecastGraphNode1 from '../Components/TempForecastGraphNode1';
 import ForecastComponent from '../Components/ForecastComponent';
+import TempForecastTable from '../Components/TempForecastTable';
 
 const decimalPlaces = 1;
 
@@ -41,16 +42,21 @@ const Node1Forecast = () => {
                     </View>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 60 Minutes</Text>
-                        <Text style={styles.dataDisplayValue}>{data && data[forecastId+3].temperature.toFixed(decimalPlaces)}°c</Text>
+                        <Text style={styles.dataDisplayValue}>{data && data[forecastId + 3].temperature.toFixed(decimalPlaces)}°c</Text>
                     </View>
                     <View style={styles.dataDisplayBox}>
                         <Text style={styles.dataDisplayText}>In 120 Minutes</Text>
-                        <Text style={styles.dataDisplayValue}>{data && data[forecastId+7].temperature.toFixed(decimalPlaces)}°c</Text>
+                        <Text style={styles.dataDisplayValue}>{data && data[forecastId + 7].temperature.toFixed(decimalPlaces)}°c</Text>
                     </View>
                 </View>
-                <View style={styles.graph}>
-                    <TempForecastGraphNode1 />
-                </View>
+                    <View style={styles.graph}>
+                        <TempForecastGraphNode1 />
+                    </View>
+                <ScrollView style={styles.scrollView}>
+                    <View>
+                        <TempForecastTable />
+                    </View>
+                </ScrollView>
             </View>
         </SafeAreaView>
     );
@@ -81,6 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         // justifyContent: 'center',
         alignItems: 'center',
+        width: "100%",
         // backgroundColor: 'red',
     },
     dataDisplay: {
@@ -111,16 +118,21 @@ const styles = StyleSheet.create({
         marginTop: "10%",
     },
     graph: {
-        width: "96%",
-        height: "50%",
+        width: "100%",
+        height: "auto",
         marginTop: "10%",
         backgroundColor: 'white',
+        marginTop: "1%",
     },
     graphText: {
         color: 'white',
         fontSize: 40,
         textAlign: 'center',
         marginTop: "10%",
+    },
+    scrollView: {
+        backgroundColor: 'white',
+        width: "100%",
     },
 });
 
