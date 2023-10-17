@@ -4,6 +4,19 @@
 - **Max Sommerville**
 - ****
 
+>### Patch notes 17/10/23
+>#### Changes 
+>   - Updated Last Update to the TimeStamp of when the data came in
+>   - Updates to Historic Data Screen
+>   - Added Forecast Screen Functionailty 
+>
+>#### Todo list 
+>   - Further development on the historical screen in Node screen
+>
+>#### Known Bugs 
+>   - For the first 10 minutes of every hour the hortplus screen crashes the app
+>
+--------------------------------------------
 >### Patch notes 13/10/23
 >#### Changes 
 >   - Added the Slider Functionality that allows the user to select which data range they want displayed in the graph and table on all node screens
