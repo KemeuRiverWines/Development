@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import { Alert } from "react-native";
-
 
 const SERVER_URL = '115.188.10.251:3000';
 const node_id = "eui-70b3d57ed006182e";
