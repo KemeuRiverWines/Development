@@ -4,6 +4,17 @@
 - **Max Sommerville**
 - ****
 
+>### Patch notes 26/10/23
+>#### Changes 
+>   - Updated source data for Node 3 Graph 
+>
+>#### Todo list 
+>   - Further development on the historical screen in Node screen
+>
+>#### Known Bugs 
+>   - For the first 10 minutes of every hour the hortplus screen crashes the app
+>
+--------------------------------------------
 >### Patch notes 17/10/23
 >#### Changes 
 >   - Updated Last Update to the TimeStamp of when the data came in
