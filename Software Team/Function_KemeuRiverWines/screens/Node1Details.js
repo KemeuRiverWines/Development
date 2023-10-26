@@ -195,14 +195,8 @@ function Node1Details(props) {
                         minimumTrackTintColor="#000000"
                         maximumTrackTintColor="#000000"
                         thumbTintColor="rgba(0,78,124,1)"
-                        onValueChange={(value) => {
-                            console.log(`Value changed to ${value}`);
-                            setSliderValue(value);
-                        }}
-                        onSlidingComplete={(value) => {
-                            console.log(`Sliding completed with final value ${value}`);
-                            setFinalSliderValue(value);
-                        }}
+                        onValueChange={setSliderValue}
+                        onSlidingComplete={setFinalSliderValue}
                     />
                 </View>
                 <View>
