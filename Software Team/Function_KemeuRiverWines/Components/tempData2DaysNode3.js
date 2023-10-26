@@ -5,7 +5,7 @@ import { VictoryChart, VictoryLabel, VictoryLine, VictoryAxis } from 'victory-na
 const Component = ({ selectedDataType, selectedDays }) => {
 
     const SERVER_URL = '115.188.10.251:3000';
-    const node_id = "eui-70b3d57ed00618ec";
+    const node_id = "eui-70b3d57ed006182e";
     const current_Date = new Date();
     const dateSelectedDaysAgo = new Date();
     dateSelectedDaysAgo.setDate(current_Date.getDate() - selectedDays);
